@@ -1,9 +1,13 @@
 import React from 'react'
-import './App.css'
+import LoginPage from './component/LoginPage/LoginPage'
 
 const App = () => {
   return (
-    <div>App</div>
+    <div className="flex justify-center it p-[150px]">
+
+      <LoginPage/>
+    </div>
+    
   )
 }
 
