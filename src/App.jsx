@@ -7,3 +7,4 @@ const App = () => {
   <Complaint/>
   )
 }
+export default App;
