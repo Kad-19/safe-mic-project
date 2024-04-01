@@ -1,6 +1,6 @@
 import Circles from "../Circular units/Circles";
 function Complaint(){
-    return <div className=" grid grid-cols-1 m-12 h-1/2 items-center">
+    return <div className=" grid grid-cols-1 m-12 items-center h-svh">
     
     <div className="mb-16">
     <h1 className=" text-6xl">
@@ -15,7 +15,7 @@ function Complaint(){
     <h1 className="text-3xl">
         What do you want to report?
     </h1>
-    <div className="flex justify-between"> 
+    <div className="flex flex-wrap justify-between overflow-wrap"> 
         <Circles title={"Assault"} detail={" this will be the text inside the circleand another text and another"}/>
         <Circles title={"Assault"} detail={" this will be the text inside the circleand another text and another"}/>
         <Circles title={"Assault"} detail={" this will be the text inside the circleand another text and another"}/>
