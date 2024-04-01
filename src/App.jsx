@@ -1,14 +1,14 @@
-import React from 'react'
-import LoginPage from './component/LoginPage/LoginPage'
+import React from "react";
+import LoginPage from "./component/LoginPage/LoginPage";
+import Navbar from "./component/Navbar/Navbar";
 
 const App = () => {
   return (
-    <div className="flex justify-center it p-[150px]">
-
-      <LoginPage/>
+    <div className="">
+      {/* <Navbar /> */}
+      {/* <LoginPage/> */}
     </div>
-    
-  )
-}
+  );
+};
 
-export default App
+export default App;
