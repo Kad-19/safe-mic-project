@@ -5,8 +5,13 @@ import Navbar from "./component/Navbar/Navbar";
 import Complaint from './component/Complaint/Complaint'
 const App = () => {
   return (
+  <div> 
+    <div className="flex justify-center items-center rounded md p8 m-20"><LoginPage/>
+    <Reg/></div>
+    
+   
+  </div>
   
-  <Reg/>
 
   )
 }
