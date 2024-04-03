@@ -1,11 +1,13 @@
 import React from "react";
-import LoginPage from "./component/LoginPage"
-import Reg from "./component/Reg";
+import LoginPage from "./component/LoginPage/LoginPage"
+import Reg from "./component/LoginPage/Reg";
 import Navbar from "./component/Navbar/Navbar";
 import Complaint from './component/Complaint/Complaint'
 const App = () => {
   return (
-  <Complaint/>
+  
+  <Reg/>
+
   )
 }
 export default App;
