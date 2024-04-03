@@ -1,16 +1,11 @@
-import React from 'react'
-import LoginPage from './component/LoginPage'
-import Reg from './component/Reg'
-
+import React from "react";
+import LoginPage from "./component/LoginPage"
+import Reg from "./component/Reg";
+import Navbar from "./component/Navbar/Navbar";
+import Complaint from './component/Complaint/Complaint'
 const App = () => {
   return (
-    <div className="flex justify-center it p-[150px]">
-
-      <LoginPage/>
-      <Reg/>
-    </div>
-    
+  <Complaint/>
   )
 }
-
-export default App
+export default App;
