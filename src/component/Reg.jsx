@@ -47,5 +47,4 @@ const Reg = () => {
   </div>
   )
 }
-
 export default Reg
