@@ -5,6 +5,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 const Reg = () => {
   const [action,SetAction]= useState("sign up")
   return (
+    <div className="flex justify-center items-center rounded md p8 m-20">
     <div className="flex bg-slate-300 border-slate-500 rounded pt-10 pl-10 pr-40 pb-32 shadow-lg    backdrop-blur-sm bg-opacity-50 text-sm/[40px] ">
     <form action="">
       
@@ -44,6 +45,7 @@ const Reg = () => {
         <p> Already have Account? <span  className='text-blue-500 cursor-pointer'  >Login</span></p>
       </div>
     </form>
+  </div>
   </div>
   )
 }

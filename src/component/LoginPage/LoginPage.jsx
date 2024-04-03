@@ -5,6 +5,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 
 const LoginPage = () => {
   return (
+  <div className="flex justify-center items-center rounded md p8 m-20">
     <div className="flex bg-slate-300 border-slate-500 rounded pt-10 pl-10 pr-40 pb-32 shadow-lg backdrop-blur-sm bg-opacity-50 text-sm/[40px] ">
       <form action="">
         <h1 className="text-[32px] pb-10 ">Your Account</h1>
@@ -36,6 +37,7 @@ const LoginPage = () => {
         </div>
       </form>
     </div>
+  </div>
   );
 }
 

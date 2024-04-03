@@ -3,13 +3,13 @@ import LoginPage from "./component/LoginPage/LoginPage"
 import Reg from "./component/LoginPage/Reg";
 import Navbar from "./component/Navbar/Navbar";
 import Complaint from './component/Complaint/Complaint'
+import AllRouting from "./component/AllRouting/AllRouting";
 const App = () => {
   return (
   <div> 
-    <div className="flex justify-center items-center rounded md p8 m-20"><LoginPage/>
-    <Reg/></div>
-    
-   
+    <Navbar/>
+    <AllRouting/>
+     
   </div>
   
 
