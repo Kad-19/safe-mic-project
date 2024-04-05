@@ -7,9 +7,9 @@ const App = () => {
   return (
   <div> 
     <Navbar/>
-    {/* <AllRouting/> */}
+    <AllRouting/>
     <OneToOneChat/>
-    {/* <GroupChat/> */}
+  
   </div>
   )
 }
