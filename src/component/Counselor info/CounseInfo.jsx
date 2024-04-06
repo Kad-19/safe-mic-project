@@ -4,7 +4,7 @@ import React from 'react'
 const CounseInfo = () => {
   return (
     <div className="m-24 ">
-      <div className="flex flex- items-center text-[18px]">
+      <div className="flex flex-items-center text-[18px]">
         <div className="flex justify-center items-center h-64 w-64 bg-gray-300 rounded-full mb-6"></div>
           <div className="flex flex-col items-center ml-12">
             <button type="submit" className="w-64 rounded-full bg-white text-black hover:bg-gray-300 py-2 transition-colors duration-200 border border-slate-600 mb-4">Schedule an Appointment</button>

@@ -1,14 +1,13 @@
 import React from "react";
 import Navbar from "./component/Navbar/Navbar";
 import AllRouting from "./component/AllRouting/AllRouting";
-import CounseInfo from "./component/Counselor info/CounseInfo";
-import ComplaintBlock from "./component/Complaint/Collapsible/ComplaintBlock";
+import ComplaintForm from "./component/FillingForm/ComplaintForm";
 const App = () => {
   return (
   <div className=""> 
     <Navbar/>
     <AllRouting/>
-    <CounseInfo/>
+    <ComplaintForm/>
   </div>
   )
 }
