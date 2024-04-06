@@ -20,7 +20,7 @@ const LoginPage = () => {
         <div className="relative my-7 flex space-x-2 text-[18px]">
         <lable htmlFor=""> Password</lable>
           <input type="password" className=" mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500
+         focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"  required />
       <RiLockPasswordLine className='absolute top-4 right-4'/>
         </div>
