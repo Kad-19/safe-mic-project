@@ -1,19 +1,15 @@
 import React from "react";
-import LoginPage from "./component/LoginPage/LoginPage"
-import Reg from "./component/LoginPage/Reg";
 import Navbar from "./component/Navbar/Navbar";
-import Complaint from './component/Complaint/Complaint'
 import AllRouting from "./component/AllRouting/AllRouting";
 import CounseInfo from "./component/Counselor info/CounseInfo";
+import ComplaintBlock from "./component/Complaint/Collapsible/ComplaintBlock";
 const App = () => {
   return (
-  <div> 
+  <div className=""> 
     <Navbar/>
     <AllRouting/>
     <CounseInfo/>
   </div>
-  
-
   )
 }
 export default App;

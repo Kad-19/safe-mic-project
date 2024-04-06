@@ -14,7 +14,7 @@ const Navbar = () => {
           Login
         </NavLink>
         <NavLink to="/signup"
-         className="rounded-3xl bg-gray-950 px-5 p-2 text-gray-50 font-bold">
+        className="rounded-3xl bg-gray-950 px-5 p-2 text-gray-50 font-bold">
           Sign up
         </NavLink>
       </div>
