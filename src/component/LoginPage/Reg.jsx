@@ -9,7 +9,7 @@ const Reg = () => {
     <div className="flex bg-slate-300 border-slate-500 rounded pt-10 pl-10 pr-40 pb-32 shadow-lg    backdrop-blur-sm bg-opacity-50 text-sm/[40px] ">
     <form action="">
       
-      <h1 className="text-[32px] pb-10 ">Your Account</h1>
+      <h1 className="text-[32px] pb-10 ">Create Account</h1>
       <div className="relative my-10 flex space-x-8 text-[18px]">
        <label htmlFor="">Email</label>
         <input type="email" className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
