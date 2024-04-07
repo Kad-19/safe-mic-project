@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Card,
   CardContent,
@@ -15,27 +15,45 @@ export default function ChatArea() {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [chatSocket, setChatSocket] = useState(null);
-  const [roomMessages, setRoomMessages] = useState({});
+  const [resData, setResData] = useState(null);
+  const [rend, setRend] = useState(0);
   let namey = Math.floor(Math.random() * 1000);
 
+  const scrollableRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollableRef.current) {
+      scrollableRef.current.scrollTop = scrollableRef.current.scrollHeight;
+    }
+  }, [messages]);
+  
   useEffect(() => {
     enterRoom("discussion");
-  }, [])
+    fetchMessages();
+  }, []);
+  
+  useEffect(() => {
+    console.log(resData);
+    if (resData && rend%2 == 0) {
+      resData.results.map((data) => {
+        const messageText = data.user + data.message;
+        setMessages((prevMessages) => [...prevMessages, messageText]);
+      });
+    }
+    setRend(prev => prev + 1);
+  }, [resData]);
 
-  const updateRoomMessages = (key, value) => {
-    setRoomMessages((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+  const fetchMessages = async () => {
+    const response = await fetch(
+      "http://127.0.0.1:8000/api/messages/discussion/?limit=10&offset=0"
+    );
+    const responseData = await response.json();
+    setResData(responseData);
   };
+
 
   function enterRoom(room) {
     setRoom(room);
-    if (roomMessages[room]) {
-      setMessages(roomMessages[room]);
-    } else {
-      setMessages([]);
-    }
     connectToWebSocket(room);
   }
   function connectToWebSocket(room) {
@@ -65,13 +83,8 @@ export default function ChatArea() {
       setMessages((prevMessages) => [...prevMessages, messageText]);
       setMessageInput("");
     };
-    console.log(chatSocket);
   }, [chatSocket]);
 
-  useEffect(() => {
-    updateRoomMessages(room, messages);
-  }, [messages]);
-  console.log(roomMessages);
 
   function sendMessage(e) {
     e.preventDefault();
@@ -82,7 +95,7 @@ export default function ChatArea() {
       <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
         <h1>Discussion</h1>
       </CardHeader>
-      <CardContent className="overflow-auto h-96">
+      <CardContent className="overflow-auto h-96" ref={scrollableRef}>
         <div className="bg-blue-600 p-3 rounded-lg mt-3 mr-auto w-3/4">
           <h1>person 1</h1>
         </div>
@@ -91,15 +104,24 @@ export default function ChatArea() {
         </div>
         {messages.map((mes, index) => (
           <div>
-            <div key={index} className="bg-blue-600 p-3 rounded-lg mt-3 mr-auto w-3/4 text-slate-200">{mes}</div>
+            <div
+              key={index}
+              className="bg-blue-600 p-3 rounded-lg mt-3 mr-auto w-3/4 text-slate-200"
+            >
+              {mes}
+            </div>
             <br />
           </div>
         ))}
       </CardContent>
       <CardFooter className="p-4">
         <form onSubmit={sendMessage} className="w-[100%]">
-          <Input placeholder="enter your message..." onChange={(e) => setMessageInput(e.target.value)}
-          value={messageInput} className='w-[100%]'/>
+          <Input
+            placeholder="enter your message..."
+            onChange={(e) => setMessageInput(e.target.value)}
+            value={messageInput}
+            className="w-[100%]"
+          />
         </form>
       </CardFooter>
     </Card>
