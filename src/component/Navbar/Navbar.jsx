@@ -15,8 +15,7 @@ const Navbar = ({logout, isAuthenticated}) => {
         <NavLink to="/login"className="rounded-3xl bg-gray-300 px-5 p-2 font-bold">
           Login
         </NavLink>
-        <NavLink to="/signup"
-        className="rounded-3xl bg-gray-950 px-5 p-2 text-gray-50 font-bold">
+        <NavLink to="/signup" className="rounded-3xl bg-gray-950 px-5 p-2 text-gray-50 font-bold">
           Sign up
         </NavLink>
       </div>

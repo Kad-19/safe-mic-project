@@ -42,7 +42,7 @@ const Reg = ({ signup, isAuthenticated }) => {
     <div className="flex justify-center items-center rounded md p8 m-20">
       <div className="flex bg-slate-300 border-slate-500 rounded pt-10 pl-10 pr-40 pb-32 shadow-lg    backdrop-blur-sm bg-opacity-50 text-sm/[40px] ">
         <form onSubmit={(e) => onSubmit(e)}>
-          <h1 className="text-[32px] pb-10 ">Your Account</h1>
+          <h1 className="text-[32px] pb-10 ">Create Account</h1>
           <div className="relative my-10 flex space-x-8 text-[18px]">
             <label htmlFor="">Email</label>
             <input

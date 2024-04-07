@@ -8,13 +8,10 @@ import {
     DropdownMenuSeparator} from "@radix-ui/react-dropdown-menu"
 import { Button, } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import { AppointmentContext } from "../Appointment";
 function TimeSetter(){
-    function TimeSlots(startingTime,sessionDuration){
-        this.startingTime=startingTime;
-        this.sessionDuration=sessionDuration;
-    }
+const {tSetter}=useContext(AppointmentContext)
 const [stime,setStime]=useState([
     {
         hour:8,
@@ -40,24 +37,27 @@ return <span className="mx-8">
     <Button
             variant={"outline"}
             className={cn(
-                "w-36  justify-start text-left font-normal rounded-lg"
+                "w-40  justify-start text-left font-normal rounded-lg shadow-md"
             )}
         >
             {btnText}
         </Button>
     </DropdownMenuTrigger>
 
-    <DropdownMenuContent>
-        <DropdownMenuLabel >
+    <DropdownMenuContent  className={cn("bg-transparent rounded-lg px-4 pt-4 shadow-sm")}>
+        {/* <DropdownMenuLabel >
             Available slots
-        </DropdownMenuLabel>
+        </DropdownMenuLabel> */}
             <DropdownMenuGroup>{
                 
 stime.map(obj=>{
     let appointment=obj.hour+':00 - '+ obj.hour+':'+obj.minute
     return  <DropdownMenuItem key={obj.hour} 
-    className={cn('px-6 mb-2 flex justify-center rounded-md hover:cursor-pointer border hover:dark:bg-zinc-900 hover:dark:border-white hover:scale-105')}
-    onClick={()=>setbtnText(obj.hour+':00 - '+ obj.hour+':'+obj.minute)}>
+    className={cn('px-4 py-2 mb-2 flex justify-center bg-gray-100 rounded-md hover:cursor-pointer hover:dark:bg-zinc-900 hover:dark:border-white hover:scale-105')}
+    onClick={()=>{
+        setbtnText(obj.hour+':00 - '+ obj.hour+':'+obj.minute)
+        tSetter(obj)
+        }}>
                 {appointment}
             </DropdownMenuItem>
 })
