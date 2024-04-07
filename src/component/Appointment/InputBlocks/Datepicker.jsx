@@ -6,15 +6,18 @@ import { Calendar } from "@/components/ui/calendar";
 import { useState,useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useContext } from "react";
+import { AppointmentContext } from "../Appointment";
 function Datepicker(){
     const [date,setDate]=useState(new Date())
-    const [dsply, setDsply]= useState("Set the date")    
+    const [dsply, setDsply]= useState("Set the date") 
+    const {dateSetter}=useContext(AppointmentContext);
     return <Popover>
         <PopoverTrigger asChild>
             <Button
             variant={"outline"}
             className={cn(
-                "w-[280px] justify-start text-left font-normal rounded-lg"
+                "w-[280px] justify-start text-left font-normal rounded-lg shadow-md"
             )}
         >{dsply}</Button>
         </PopoverTrigger>
@@ -30,6 +33,7 @@ function Datepicker(){
             ,month:'long'
             ,year:'numeric'
         }))
+        dateSetter(date)
         }}
         initialFocus
         />

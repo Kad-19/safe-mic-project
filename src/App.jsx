@@ -7,7 +7,6 @@ const App = () => {
   <div className=""> 
     <Navbar/>
     <AllRouting/>
-    <ComplaintForm/>
   </div>
   )
 }
