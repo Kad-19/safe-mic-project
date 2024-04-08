@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/Images/logo.png'
+// import logo from '../assets/Images/logo.png'
 import { HiHome, HiMagnifyingGlass, HiTv } from "react-icons/hi2";
 import { HiPlus, HiDotsVertical } from "react-icons/hi";
 import { TbMovie } from "react-icons/tb";
@@ -26,7 +26,7 @@ function Header() {
   return (
     <div className='flex items-center  justify-between bg-[#213547] '>
       <div className='flex gap-20 items-center '>
-        <img src={logo} className='w-[80px] md:w-[115px] object-cover rounded-full' alt="Logo" />
+        <img className='w-[80px] md:w-[115px] object-cover rounded-full' alt="Logo" />
         <div className='hidden md:flex gap-20'>
           <Link to='/'>
             <HeaderItem name='Complaint' Icon={HiHome} />

@@ -9,14 +9,17 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { connect } from 'react-redux';
 
-export default function ChatArea() {
+
+const ChatArea = ({user}) => {
   const [room, setRoom] = useState("");
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [chatSocket, setChatSocket] = useState(null);
   const [resData, setResData] = useState(null);
   const [rend, setRend] = useState(0);
+  const [prevOffset, setprevOffset] = useState(0);
   let namey = Math.floor(Math.random() * 1000);
 
   const scrollableRef = useRef(null);
@@ -36,7 +39,7 @@ export default function ChatArea() {
     console.log(resData);
     if (resData && rend%2 == 0) {
       resData.results.map((data) => {
-        const messageText = data.user + data.message;
+        const messageText = data.user + " : " + data.message;
         setMessages((prevMessages) => [...prevMessages, messageText]);
       });
     }
@@ -44,12 +47,28 @@ export default function ChatArea() {
   }, [resData]);
 
   const fetchMessages = async () => {
+    const res = await fetch("http://127.0.0.1:8000/api/messages/discussion/?limit=1&offset=1");
+    const data = await res.json();
+    let offset = data.count - 10;
     const response = await fetch(
-      "http://127.0.0.1:8000/api/messages/discussion/?limit=10&offset=0"
+      `http://127.0.0.1:8000/api/messages/discussion/?limit=10&offset=${offset}`
     );
     const responseData = await response.json();
     setResData(responseData);
+    setprevOffset(offset - 10);
   };
+
+  const fetchPrevMessages = async () => {
+    let offset = prevOffset;
+    if(offset < 0){
+      offset = 0;
+    }
+  }
+
+  useEffect(() => {
+  if(scrollableRef.current){
+    console.log(scrollableRef.current.scrollTop);
+  }}, []);
 
 
   function enterRoom(room) {
@@ -127,3 +146,10 @@ export default function ChatArea() {
     </Card>
   );
 }
+
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+
+export default connect(mapStateToProps) (ChatArea);

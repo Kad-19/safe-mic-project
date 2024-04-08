@@ -32,6 +32,7 @@ export const load_user = () => async (dispatch) => {
         `http://localhost:8000/auth/users/me/`,
         config
       );
+      console.log(res);
 
       dispatch({
         type: USER_LOADED_SUCCESS,
@@ -85,6 +86,40 @@ export const checkAuthenticated = () => async (dispatch) => {
     dispatch({
       type: AUTHENTICATED_FAIL,
     });
+  }
+};
+export const delete_user = (password) => async (dispatch) => {
+  if (localStorage.getItem("access")) {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${localStorage.getItem("access")}`,
+        Accept: "application/json",
+      },
+    };
+
+    const body = JSON.stringify({ password });
+    console.log(body);
+
+    try {
+      const res = await axios.delete(
+        `http://localhost:8000/auth/users/me/`,
+        body,
+        config
+      );
+      console.log(res);
+      console.log("account deleted");
+    } catch (err) {
+      // dispatch({
+      //   type: AUTHENTICATED_FAIL,
+      // });
+      console.log(err);
+    }
+  } else {
+    // dispatch({
+    //   type: AUTHENTICATED_FAIL,
+    // });
+    console.log("invalid token");
   }
 };
 
