@@ -1,5 +1,7 @@
+"use client"
 import Datepicker from "./InputBlocks/Datepicker"
 import TimeSetter from "./InputBlocks/TimeSetter"
+import AppointmentToast from "./InputBlocks/ApointmentToast";
 import { createContext } from "react";
 import { useState,
     useEffect} from "react";
@@ -25,7 +27,7 @@ function Appointment(){
         <div className="mx-4 absolute bottom-1/2 ">
 {date&&appointmentTime!=null?date.toLocaleDateString("en-UK",{day:'numeric',month:'long',year:'numeric'}):""} {date&&appointmentTime!=null?"at "+String(appointmentTime.hour)+":00":"" +""}
         </div>
-        
+        <AppointmentToast/>
     
     </> 
 }export default Appointment;
