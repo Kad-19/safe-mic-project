@@ -57,6 +57,7 @@ stime.map(obj=>{
     onClick={()=>{
         setbtnText(obj.hour+':00 - '+ obj.hour+':'+obj.minute)
         tSetter(obj)
+        console.log(new Date())
         }}>
                 {appointment}
             </DropdownMenuItem>
