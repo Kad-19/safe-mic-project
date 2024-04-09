@@ -25,14 +25,16 @@ function Datepicker(){
         <Calendar 
         mode="single"
         selected={date}
-
+        className={cn(' bg-white')}
         onSelect={date=>{
             setDate(date)
-            setDsply(date.toLocaleDateString("en-UK",
-            {day:'numeric'
-            ,month:'long'
-            ,year:'numeric'
+            setDsply(date.toLocaleDateString("en-US",
+            {year:'numeric',
+            month:'short',
+            day:'numeric'
         }))
+        
+        setDate(date)
         dateSetter(date)
         }}
         initialFocus
