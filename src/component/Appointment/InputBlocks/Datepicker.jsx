@@ -25,7 +25,7 @@ function Datepicker(){
         <Calendar 
         mode="single"
         selected={date}
-        className={cn(' bg-white')}
+        className={cn(' bg-background')}
         onSelect={date=>{
             setDate(date)
             setDsply(date.toLocaleDateString("en-US",

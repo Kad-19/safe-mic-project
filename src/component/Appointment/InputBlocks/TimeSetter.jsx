@@ -12,7 +12,7 @@ import { useState, useContext } from "react";
 import { AppointmentContext } from "../Appointment";
 function TimeSetter(){
 const {hourSetter}=useContext(AppointmentContext)
-const [stime,setStime]=useState([3,4,5,8,9,10])
+const [stime,setStime]=useState([3,4,5,8,9])
 const [btnText,setbtnText]=useState('Set Time')
 return <span className="mx-8">
     <DropdownMenu className='bg-zinc-500'>
