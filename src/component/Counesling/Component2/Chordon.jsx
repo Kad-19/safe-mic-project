@@ -14,10 +14,10 @@ function Chordon() {
     Take the first step toward a healthier you
   </div>
   <div className="flex gap-5 items-start mt-14 text-2xl font-bold max-md:flex-wrap max-md:mt-10">
-    <Button className="grow justify-center px-7 py-5 text-xl bg-white border border-neutral-700 border-solid rounded-[36px] text-stone-700 w-fit max-md:px-5 hover:text-neutral-200 transition-all duration-300 ease-in-out">
+    <Button className="grow justify-center px-5 py-7 text-xl font-medium bg-white border border-neutral-700 border-solid rounded-[36px] text-stone-700 w-fit max-md:px-5 hover:text-neutral-200 transition-all duration-300 ease-in-out">
       Chat with a counselor
     </Button>
-    <Button className="grow justify-center px-7 py-5 border text-xl border-neutral-700 border-solid bg-neutral-700 rounded-[36px] text-stone-200 w-fit max-md:px-5  hover:text-neutral-200 transition-all duration-300 ease-in-out">
+    <Button className="grow justify-center px-5 py-7 font-medium border text-xl border-neutral-700 border-solid bg-neutral-700 rounded-[36px] text-stone-200 w-fit max-md:px-5  hover:text-neutral-200 transition-all duration-300 ease-in-out">
       Book Appointment
     </Button>
     
