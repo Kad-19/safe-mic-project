@@ -15,7 +15,7 @@ function Counseling() {
   <div><Direct/></div>
   <div><Benefit/></div>
   <div><Science/></div>
- <div><Chordon/></div>
+<div><Chordon/></div>
 </div>
 <div><Footer/></div>
 </div>

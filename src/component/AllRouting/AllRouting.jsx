@@ -6,6 +6,7 @@ import Reg from "../LoginPage/Reg";
 import GroupChat from "../chat/Group/GroupChat";
 import ResetPassword from "../LoginPage/ResetPassword";
 import ResetPasswordConfirm from "../LoginPage/ResetPasswordConfirm";
+import Appointment from "../Appointment/Appointment";
 import Activate from "../LoginPage/Activate";
 import Counseling from "../Counesling/Counseling";
 import Homepage from "../Homepage/Homepage";
@@ -20,6 +21,7 @@ const AllRouting = () => {
       <Route path="/counseling" element={<Counseling />} />
       <Route path="/groupChat" element={<GroupChat />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/Appointment" element={<Appointment/>} />
       <Route
         path="/password/reset/confirm/:uid/:token"
         element={<ResetPasswordConfirm />}
