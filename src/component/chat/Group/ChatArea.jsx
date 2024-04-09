@@ -9,17 +9,18 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-
-const ChatArea = ({user}) => {
+const ChatArea = ({ user }) => {
   const [room, setRoom] = useState("");
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [chatSocket, setChatSocket] = useState(null);
   const [resData, setResData] = useState(null);
   const [rend, setRend] = useState(0);
-  const [prevOffset, setprevOffset] = useState(0);
+  const [prevOffset, setPrevOffset] = useState(0);
+  const [reachedTop, setReachedTop] = useState(false);
+  const [limit, setLimit] = useState(20);
   let namey = Math.floor(Math.random() * 1000);
 
   const scrollableRef = useRef(null);
@@ -29,47 +30,77 @@ const ChatArea = ({user}) => {
       scrollableRef.current.scrollTop = scrollableRef.current.scrollHeight;
     }
   }, [messages]);
-  
+
   useEffect(() => {
     enterRoom("discussion");
     fetchMessages();
   }, []);
-  
+
   useEffect(() => {
-    console.log(resData);
     if (resData && rend%2 == 0) {
-      resData.results.map((data) => {
-        const messageText = data.user + " : " + data.message;
-        setMessages((prevMessages) => [...prevMessages, messageText]);
+      setMessages(prevMessages => {
+        const newMessages = resData.results.map(data => {
+          return data.user + " : " + data.message;
+        });
+        return [...newMessages, ...prevMessages];
       });
     }
-    setRend(prev => prev + 1);
+    setRend((prev) => prev + 1);
   }, [resData]);
 
   const fetchMessages = async () => {
-    const res = await fetch("http://127.0.0.1:8000/api/messages/discussion/?limit=1&offset=1");
+    const res = await fetch(
+      "http://127.0.0.1:8000/api/messages/discussion/?limit=1&offset=1"
+    );
     const data = await res.json();
-    let offset = data.count - 10;
+    let offset = data.count - limit;
     const response = await fetch(
-      `http://127.0.0.1:8000/api/messages/discussion/?limit=10&offset=${offset}`
+      `http://127.0.0.1:8000/api/messages/discussion/?limit=${limit}&offset=${offset}`
     );
     const responseData = await response.json();
     setResData(responseData);
-    setprevOffset(offset - 10);
+
+    setPrevOffset(offset - limit);
   };
 
-  const fetchPrevMessages = async () => {
-    let offset = prevOffset;
-    if(offset < 0){
+  const fetchPrevMessages = async (offset, lmt) => {
+    console.log("prevOffset: " + prevOffset);
+    if (offset < 0 && offset > 0 - lmt) {
+      lmt = lmt + offset;
       offset = 0;
+    } else if (offset <= 0 - lmt) {
+      return;
     }
-  }
+    console.log("limit: " + lmt);
+    const response = await fetch(
+      `http://127.0.0.1:8000/api/messages/discussion/?limit=${lmt}&offset=${offset}`
+    );
+    const responseData = await response.json();
+    console.log(responseData);
+    setResData(responseData);
+    setPrevOffset(offset - limit);
+  };
 
   useEffect(() => {
-  if(scrollableRef.current){
-    console.log(scrollableRef.current.scrollTop);
-  }}, []);
+    const handleScroll = () => {
+      const scrollTop = scrollableRef.current.scrollTop;
 
+      if (scrollTop === 0 && !reachedTop) {
+        setReachedTop(true);
+        console.log("Reachtop true");
+        fetchPrevMessages(prevOffset, limit);
+      } else {
+        setReachedTop(false);
+        console.log("reachtop false");
+      }
+    };
+
+    scrollableRef.current.addEventListener("scroll", handleScroll);
+
+    return () => {
+      scrollableRef.current.removeEventListener("scroll", handleScroll);
+    };
+  }, [reachedTop, prevOffset]);
 
   function enterRoom(room) {
     setRoom(room);
@@ -103,7 +134,6 @@ const ChatArea = ({user}) => {
       setMessageInput("");
     };
   }, [chatSocket]);
-
 
   function sendMessage(e) {
     e.preventDefault();
@@ -145,11 +175,10 @@ const ChatArea = ({user}) => {
       </CardFooter>
     </Card>
   );
-}
+};
 
-const mapStateToProps = state => ({
-  user: state.auth.user
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
 });
 
-
-export default connect(mapStateToProps) (ChatArea);
+export default connect(mapStateToProps)(ChatArea);

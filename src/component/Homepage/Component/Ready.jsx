@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import React from 'react'
 // import logo from '../assets/Images/logo.png'
 function Ready() {
@@ -21,9 +22,9 @@ function Ready() {
               amet euismod erat bibendum. Etiam nec sagittis metus. Nunc
               fringilla nisl elit, ut interdum ante fringilla et.
             </div>
-            <div className="justify-center self-start px-5 py-5 mt-11 ml-3 bg-white border border-solid border-neutral-700 rounded-[31px] max-md:px-5 max-md:mt-10 max-md:ml-2.5">
+            <Button className="justify-center self-start px-5 py-5 mt-11 ml-3 bg-white border border-solid border-neutral-700 rounded-[31px] max-md:px-5 max-md:mt-10 max-md:ml-2.5 text-neutral-700 hover:text-neutral-200 transition-all duration-300 ease-in-out">
               Find out more about us
-            </div>
+            </Button>
           </div>
         </div>
         <div className="flex flex-col ml-5 w-[55%] max-md:ml-0 max-md:w-full">

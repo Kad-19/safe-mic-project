@@ -11,7 +11,7 @@ function Counseling() {
   return (
     <div className="flex flex-col">
     {/* <div><Header/></div> */}
-<div className="flex flex-col items-center px-20 mt-36 w-full max-md:px-5 max-md:mt-10 max-md:max-w-full">
+<div className="flex flex-col items-center px-20 mt-36 w-[80%] mx-auto max-md:px-5 max-md:mt-10 max-md:max-w-full">
   <div><Direct/></div>
   <div><Benefit/></div>
   <div><Science/></div>
