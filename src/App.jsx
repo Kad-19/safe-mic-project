@@ -9,15 +9,24 @@ import { BrowserRouter } from "react-router-dom";
 import Auth from "./component/LoginPage/Auth";
 import { useState, useEffect } from "react";
 const App = () => {
-  const [theme,setTheme]=useState('light')
+  const [theme,setTheme]=useState({
+    current:'light',
+    previous:null
+  })
+  let themes=['light','dark','violate','darkviolate','rose','darkrose','slate','darkslate']
+  let [themeIndex,setThemeIndex]=useState(1)
   useEffect(()=>{
     const root = window.document.documentElement
-    root.classList.remove(theme=="dark"?"light":"dark")
-    root.classList.add(theme)
+    if(theme.previous!=null)root.classList.remove(theme.previous)
+    root.classList.add(theme.current)
+    console.log(theme)
   },[theme])
 
   const changeTheme=()=>{
-    theme=='light'?setTheme('dark'):setTheme('light')
+    setTheme({current:themes.at(themeIndex),
+              previous:theme.current})
+    themeIndex<7?setThemeIndex(++themeIndex):setThemeIndex(themeIndex=0)
+    
   }
   return (
     <Provider store={store}>
