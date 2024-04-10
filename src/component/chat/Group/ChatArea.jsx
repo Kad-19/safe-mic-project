@@ -11,6 +11,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { connect } from "react-redux";
 import axios from "axios";
+import { IoMdSend } from "react-icons/io";
+import { MdGroups } from "react-icons/md";
 
 const ChatArea = ({ user }) => {
   const [room, setRoom] = useState("");
@@ -21,10 +23,14 @@ const ChatArea = ({ user }) => {
   const [rend, setRend] = useState(0);
   const [prevOffset, setPrevOffset] = useState(0);
   const [reachedTop, setReachedTop] = useState(false);
-  const [limit, setLimit] = useState(20);
+  const [limit, setLimit] = useState(100);
   let namey = Math.floor(Math.random() * 1000);
 
   const scrollableRef = useRef(null);
+
+  useEffect(() => {
+    enterRoom("discussion");
+  }, []);
 
   useEffect(() => {
     if (scrollableRef.current) {
@@ -33,15 +39,16 @@ const ChatArea = ({ user }) => {
   }, [messages]);
 
   useEffect(() => {
-    enterRoom("discussion");
-    fetchMessages();
-  }, []);
+    if (user) {
+      fetchMessages();
+    }
+  }, [user]);
 
   useEffect(() => {
-    if (resData && rend%2 == 0) {
-      setMessages(prevMessages => {
-        const newMessages = resData.results.map(data => {
-          return data.user + " : " + data.message;
+    if (resData && rend % 2 == 0) {
+      setMessages((prevMessages) => {
+        const newMessages = resData.results.map((data) => {
+          return { message: data.message, username: data.user };
         });
         return [...newMessages, ...prevMessages];
       });
@@ -50,11 +57,6 @@ const ChatArea = ({ user }) => {
   }, [resData]);
 
   const fetchMessages = async () => {
-    // const res = await fetch(
-    //   "http://127.0.0.1:8000/ws/api/messages/discussion/?limit=1&offset=0"
-    // );
-    // const data = await res.json();
-    // console.log(data);
     if (localStorage.getItem("access")) {
       const config = {
         headers: {
@@ -63,46 +65,60 @@ const ChatArea = ({ user }) => {
           Accept: "application/json",
         },
       };
-  
-  
+
       try {
         const res = await axios.get(
           `http://127.0.0.1:8000/ws/api/messages/discussion/?limit=1&offset=0`,
           config
         );
-        console.log(res);
+        const data = res.data;
+        let offset = data.count - limit;
+        try {
+          const response = await axios.get(
+            `http://127.0.0.1:8000/ws/api/messages/discussion/?limit=${data.count}&offset=0`,
+            config
+          );
+          const responseData = response.data;
+          setResData(responseData);
+          setPrevOffset(offset - limit);
+        } catch (err) {
+          console.log(err);
+        }
       } catch (err) {
         console.log(err);
       }
     } else {
       console.log("invalid token");
     }
-    // let offset = data.count - limit;
-    // const response = await fetch(
-    //   `http://127.0.0.1:8000/api/messages/discussion/?limit=${limit}&offset=${offset}`
-    // );
-    // const responseData = await response.json();
-    // setResData(responseData);
-
-    // setPrevOffset(offset - limit);
   };
 
   const fetchPrevMessages = async (offset, lmt) => {
-    console.log("prevOffset: " + prevOffset);
     if (offset < 0 && offset > 0 - lmt) {
       lmt = lmt + offset;
       offset = 0;
     } else if (offset <= 0 - lmt) {
       return;
     }
-    console.log("limit: " + lmt);
-    const response = await fetch(
-      `http://127.0.0.1:8000/api/messages/discussion/?limit=${lmt}&offset=${offset}`
-    );
-    const responseData = await response.json();
-    console.log(responseData);
-    setResData(responseData);
-    setPrevOffset(offset - limit);
+    if (localStorage.getItem("access")) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.getItem("access")}`,
+          Accept: "application/json",
+        },
+      };
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/ws/api/messages/discussion/?limit=${lmt}&offset=${offset}`,
+          config
+        );
+        const responseData = response.data;
+        setResData(responseData);
+        setPrevOffset(offset - limit);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   useEffect(() => {
@@ -111,19 +127,13 @@ const ChatArea = ({ user }) => {
 
       if (scrollTop === 0 && !reachedTop) {
         setReachedTop(true);
-        console.log("Reachtop true");
         // fetchPrevMessages(prevOffset, limit);
       } else {
         setReachedTop(false);
-        console.log("reachtop false");
       }
     };
 
     scrollableRef.current.addEventListener("scroll", handleScroll);
-
-    return () => {
-      scrollableRef.current.removeEventListener("scroll", handleScroll);
-    };
   }, [reachedTop, prevOffset]);
 
   function enterRoom(room) {
@@ -152,49 +162,52 @@ const ChatArea = ({ user }) => {
     chatSocket.onmessage = function (e) {
       const data = JSON.parse(e.data);
 
-      let messageText = data.username + " : " + data.message;
-      console.log(data);
-      setMessages((prevMessages) => [...prevMessages, messageText]);
+      setMessages((prevMessages) => [...prevMessages, data]);
       setMessageInput("");
     };
   }, [chatSocket]);
 
   function sendMessage(e) {
     e.preventDefault();
-    chatSocket.send(JSON.stringify({ message: messageInput, username: namey }));
+    chatSocket.send(
+      JSON.stringify({ message: messageInput, username: user.name })
+    );
   }
   return (
     <Card className="m-auto mt-12   bg-gray-100 sm:w-1/2 lg:w-1/2 md:w-1/2 ">
       <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
-        <h1>Discussion</h1>
+        <MdGroups className="w-8 h-8"/>
       </CardHeader>
       <CardContent className="overflow-auto h-96" ref={scrollableRef}>
-        <div className="bg-blue-600 p-3 rounded-lg mt-3 mr-auto w-3/4">
-          <h1>person 1</h1>
-        </div>
-        <div className="bg-slate-400 p-3 rounded-lg mt-3 w-3/4 ml-auto ">
-          <h1>person 2</h1>
-        </div>
         {messages.map((mes, index) => (
-          <div>
-            <div
-              key={index}
-              className="bg-blue-600 p-3 rounded-lg mt-3 mr-auto w-3/4 text-slate-200"
-            >
-              {mes}
-            </div>
+          <div key={index}>
+            {mes.username != user.name ? (
+              <div className="relative bg-slate-600 p-1 rounded-tr-2xl rounded-tl-2xl rounded-br-2xl mt-3 mr-auto w-3/4 ">
+                <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-slate-600 border-b-[0px] border-b-transparent transform bottom-0 -left-2"></div>
+                <p className="px-3 text-blue-500 font-medium">{mes.username}</p>
+                <p className="text-slate-200 p-1 px-3">{mes.message}</p>
+              </div>
+            ) : (
+              <div className="relative bg-slate-400 p-1 mt-3 w-3/4 ml-auto rounded-tr-2xl rounded-tl-2xl rounded-bl-2xl">
+                <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-slate-400 border-b-[0px] border-b-transparent transform bottom-0 -right-2"></div>
+                <p className="text-slate-200 p-1 px-3">{mes.message}</p>
+              </div>
+            )}
             <br />
           </div>
         ))}
       </CardContent>
       <CardFooter className="p-4">
-        <form onSubmit={sendMessage} className="w-[100%]">
+        <form onSubmit={sendMessage} className="w-[100%] flex gap-1">
           <Input
             placeholder="enter your message..."
             onChange={(e) => setMessageInput(e.target.value)}
             value={messageInput}
             className="w-[100%]"
           />
+          <button type="submit" className="flex align-middle items-center w-8">
+            <IoMdSend className="w-6 h-6" />
+          </button>
         </form>
       </CardFooter>
     </Card>

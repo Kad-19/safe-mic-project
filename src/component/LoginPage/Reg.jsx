@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { FaRegUser } from "react-icons/fa";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { signup } from "../../actions/auth";
@@ -57,6 +58,8 @@ const Reg = ({ signup, isAuthenticated }) => {
               value={name}
               onChange={(e) => onChange(e)}
             />
+            <FaRegUser className=" absolute top-4 right-4"/>
+
           </div>
           <div className="relative my-7 flex text-[18px] flex-wrap flex-col">
             <label htmlFor="" className="w-[110px] font-medium">Email</label>
