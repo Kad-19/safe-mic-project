@@ -10,6 +10,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { connect } from "react-redux";
+import axios from "axios";
 
 const ChatArea = ({ user }) => {
   const [room, setRoom] = useState("");
@@ -49,18 +50,41 @@ const ChatArea = ({ user }) => {
   }, [resData]);
 
   const fetchMessages = async () => {
-    const res = await fetch(
-      "http://127.0.0.1:8000/api/messages/discussion/?limit=1&offset=1"
-    );
-    const data = await res.json();
-    let offset = data.count - limit;
-    const response = await fetch(
-      `http://127.0.0.1:8000/api/messages/discussion/?limit=${limit}&offset=${offset}`
-    );
-    const responseData = await response.json();
-    setResData(responseData);
+    // const res = await fetch(
+    //   "http://127.0.0.1:8000/ws/api/messages/discussion/?limit=1&offset=0"
+    // );
+    // const data = await res.json();
+    // console.log(data);
+    if (localStorage.getItem("access")) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.getItem("access")}`,
+          Accept: "application/json",
+        },
+      };
+  
+  
+      try {
+        const res = await axios.get(
+          `http://127.0.0.1:8000/ws/api/messages/discussion/?limit=1&offset=0`,
+          config
+        );
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log("invalid token");
+    }
+    // let offset = data.count - limit;
+    // const response = await fetch(
+    //   `http://127.0.0.1:8000/api/messages/discussion/?limit=${limit}&offset=${offset}`
+    // );
+    // const responseData = await response.json();
+    // setResData(responseData);
 
-    setPrevOffset(offset - limit);
+    // setPrevOffset(offset - limit);
   };
 
   const fetchPrevMessages = async (offset, lmt) => {
@@ -88,7 +112,7 @@ const ChatArea = ({ user }) => {
       if (scrollTop === 0 && !reachedTop) {
         setReachedTop(true);
         console.log("Reachtop true");
-        fetchPrevMessages(prevOffset, limit);
+        // fetchPrevMessages(prevOffset, limit);
       } else {
         setReachedTop(false);
         console.log("reachtop false");

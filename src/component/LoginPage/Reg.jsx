@@ -11,7 +11,7 @@ const Reg = ({ signup, isAuthenticated }) => {
   const navigate = useNavigate();
   const [accountCreated, setAccountCreated] = useState(false);
   const [formData, setFormData] = useState({
-    name: "default",
+    name: "",
     email: "",
     password: "",
     re_password: "",
@@ -44,6 +44,21 @@ const Reg = ({ signup, isAuthenticated }) => {
         <form onSubmit={(e) => onSubmit(e)} className="mx-auto sm:w-[60%] w-[80%]">
           <h1 className="text-[32px] pb-10 text-center">Create Account</h1>
           <div className="relative mt-10 flex text-[18px] flex-wrap flex-col">
+            <label htmlFor="" className="w-[110px] font-medium">User Name</label>
+            <input
+              type="text"
+              className="mt-1 block w-full xl:w-[100%] px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+    focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500
+    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+    "
+              placeholder="user name"
+              required
+              name="name"
+              value={name}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
+          <div className="relative my-7 flex text-[18px] flex-wrap flex-col">
             <label htmlFor="" className="w-[110px] font-medium">Email</label>
             <input
               type="email"
