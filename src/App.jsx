@@ -10,7 +10,7 @@ import Auth from "./component/LoginPage/Auth";
 import { useState, useEffect } from "react";
 import Selector from "./component/ThemeSelector/Selector";
 import { createContext } from "react";
-import { FaLess } from "react-icons/fa";
+import DrawerComp from "./component/ChatBox/DrawerComp";
 
 export const themeContext=createContext(null)
 const App = () => {
@@ -61,15 +61,10 @@ const App = () => {
           <div>
           <themeContext.Provider value={{changeTheme,darkThemeSwitch,theme}}>
           <Navbar />
-            <Selector/>
           </themeContext.Provider>
-
-          <Button onClick={darkThemeSwitch}>
-            theme
-          </Button>
-          
           </div>
           <AllRouting />
+        <DrawerComp/>
         </div>
       </BrowserRouter>
     </Provider>
