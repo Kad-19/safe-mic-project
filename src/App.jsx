@@ -63,6 +63,20 @@ const App = () => {
           <Navbar />
           </themeContext.Provider>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <AllRouting />
         <DrawerComp/>
         </div>
