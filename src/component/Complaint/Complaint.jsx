@@ -28,7 +28,7 @@ function Complaint(){
     console.log(complaints[0].title); // Output: Slow Internet Speed
     console.log(complaints[0].description); // Output: I am experiencing very slow internet speed, making it difficult to browse or stream videos.
     
-    return <div className=" grid grid-cols-1 m-12 items-center">
+    return <div className=" grid grid-cols-1 m-12 items-center w-[80%] mx-auto">
     
     <div className="mb-16 h-1/2">
     <h1 className=" text-6xl">

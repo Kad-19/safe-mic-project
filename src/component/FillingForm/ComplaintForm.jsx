@@ -1,20 +1,62 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ComplaintForm = () => {
   const [selection, setSelection] = useState('both'); // Default selection is 'both'
+  const [tag, setTag] = useState("grade_issue");
+  const [body, setBody] = useState("");
+
 
   const handleRadioChange = (event) => {
     setSelection(event.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitForm();
+  }
+
+  console.log(body);
+  
+  const submitForm = async () => {
+    
+  }
+  
+  // useEffect( async () => {
+  //   const bod = JSON.stringify({
+  //     tag,
+  //     body,
+  //   });
+  //   const config = {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `JWT ${localStorage.getItem("access")}`,
+  //       Accept: "application/json",
+  //     },
+  //   };
+  
+  
+  //   try {
+  //     const res = await axios.post(
+  //       `http://localhost:8000/complaint/complaints/`,
+  //       bod,
+  //       config,
+  //     );
+  //     console.log(res);
+  //   } catch (err){
+  //     console.log(err);
+  //   }
+
+  // }, [])
+
   return (
     <div className="flex justify-center items-center rounded md p-8 m-20">
       <div className="flex bg-slate-100 border-slate-500 rounded pt-10 pl-10 pr-40 pb-12 shadow-lg backdrop-blur-sm bg-opacity-50 text-sm/[40px] ">
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <h1 className="text-[32px] pt-24 pb-20 text-center">Complaint Filling Form</h1>
           <p className="text-[18px] mb-4">What is Your Complaint on?</p>
           <div className="flex text-[18px]">
-            <div className="mr-4">
+            {/* <div className="mr-4">
               <input
                 type="radio"
                 id="person"
@@ -67,7 +109,7 @@ const ComplaintForm = () => {
                 className="mt-1 block w-64 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                 required
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="relative mt-20 mb-8 space-x-4 text-[18px]">
@@ -79,6 +121,8 @@ const ComplaintForm = () => {
               required
               rows="12"
               cols="20"
+              onChange={(e) => setBody(e.target.value)}
+              value={body}
             />
           </div>
 

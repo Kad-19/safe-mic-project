@@ -1,31 +1,60 @@
+"use client"
 import Datepicker from "./InputBlocks/Datepicker"
 import TimeSetter from "./InputBlocks/TimeSetter"
+import { Button } from "@/components/ui/button";
 import { createContext } from "react";
 import { useState,
     useEffect} from "react";
 import {motion} from "framer-motion"
 export const AppointmentContext=createContext(null);
 function Appointment(){
-    const [date,setDate]=useState(null)
-    const [appointmentTime,setAppointmentTime]=useState(null)
-    const dateSetter=(dae)=>setDate(dae)
-    const tSetter=(t)=>setAppointmentTime(t)
+    let dt=new Date()
+    const [date,setDate]=useState(dt)
+    const [appointment,setAppointment]=useState("")
+    useEffect(()=>{
+        setAppointment(date.toLocaleDateString('en-UK',
+        {hour:'2-digit',
+        weekday:'long',
+        day:'2-digit',
+        month:'short',
+        year:'numeric'}
+    ))
+    console.log(date)
 
+    },
+    [date])
+    const dateSetter=(dae)=>setDate(dae)
+    const hourSetter=(hr)=>{
+        let date2=new Date(date)
+        date2.setHours(hr)
+        setDate(date2)
+    }
     return<>
-    <div className="flex my-4">
+    <div className="flex my-4 justify-center">
         
         <p className="mx-4">Set your appointment</p>
-        <span className=" ">
-            <AppointmentContext.Provider value={{dateSetter,tSetter}}>
+        <div className="grid grid-cols-1  gap-12 md:grid-cols-2">
+            <AppointmentContext.Provider value={{dateSetter,hourSetter}}>
                 <Datepicker/>
                 <TimeSetter/>
             </AppointmentContext.Provider>
-        </span>
-    </div>
-        <div className="mx-4 absolute bottom-1/2 ">
-{date&&appointmentTime!=null?date.toLocaleDateString("en-UK",{day:'numeric',month:'long',year:'numeric'}):""} {date&&appointmentTime!=null?"at "+String(appointmentTime.hour)+":00":"" +""}
         </div>
-        
+    </div>
+    <div className="fixed bottom-1/4">
+        Your Appointment: {date!=dt?appointment:""}
+        <br />
+        <Button onClick={()=>{
+            console.log(date.toISOString())
+            let a={
+                appointment_time:date.toISOString(),
+                counselor_id:'2'
+            }
+            console.log(a)
+            console.log(JSON.stringify(a))
+        }}>
+            Confirm
+        </Button>
+    </div>
     
     </> 
 }export default Appointment;

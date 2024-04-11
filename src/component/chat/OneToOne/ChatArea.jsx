@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Card,
     CardContent,
@@ -14,6 +14,73 @@ import {
   
 
 export default function ChatArea() {
+  const [room, setRoom] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [messageInput, setMessageInput] = useState("");
+  const [chatSocket, setChatSocket] = useState(null);
+  const [roomMessages, setRoomMessages] = useState({});
+  let namey = Math.floor(Math.random() * 1000);
+
+  useEffect(() => {
+    enterRoom("a");
+  }, [])
+
+  const updateRoomMessages = (key, value) => {
+    setRoomMessages((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  function enterRoom(room) {
+    setRoom(room);
+    if (roomMessages[room]) {
+      setMessages(roomMessages[room]);
+    }
+    else{
+      setMessages([]);
+    }
+    connectToWebSocket(room);
+  }
+  function connectToWebSocket(room) {
+    if (chatSocket) {
+      chatSocket.close();
+    }
+    setChatSocket(new WebSocket("ws://localhost:8000/ws/chat/" + room + "/"));
+  }
+  useEffect(() => {
+    if (!chatSocket) {
+      return;
+    }
+    chatSocket.onopen = function (e) {
+      console.log("The connection was setup successfully !");
+    };
+    chatSocket.onclose = function (e) {
+      console.log("Something unexpected happened !");
+    };
+    chatSocket.onerror = function (error) {
+      console.error("WebSocket Error:", error);
+    };
+    chatSocket.onmessage = function (e) {
+      const data = JSON.parse(e.data);
+
+      let messageText = data.username + " : " + data.message;
+      console.log(data);
+      setMessages((prevMessages) => [...prevMessages, messageText]);
+      setMessageInput("");
+    };
+    console.log(chatSocket);
+  }, [chatSocket]);
+
+  useEffect(() => {
+    updateRoomMessages(room, messages);
+  }, [messages]);
+  console.log(roomMessages);
+
+  function sendMessage(e) {
+    e.preventDefault();
+    chatSocket.send(JSON.stringify({ message: messageInput, username: namey }));
+  }
   const conversation = [
     "Hi there!",
     "Hey, how's it going?",
@@ -41,7 +108,7 @@ export default function ChatArea() {
 
   <CardContent className="overflow-auto h-96 grid grid-cols-1">
 {
-  conversation.map((str)=>{
+  messages.map((str)=>{
   toggle=toggle?false:true;
   return <div>
             <Message sender={toggle} text={str}/>
@@ -50,7 +117,10 @@ export default function ChatArea() {
 }
   </CardContent>
   <CardFooter className="p-4">
-  <Input   placeholder="enter your message..." />
+  <form onSubmit={sendMessage} className="w-[100%]">
+          <Input placeholder="enter your message..." onChange={(e) => setMessageInput(e.target.value)}
+          value={messageInput} className='w-[100%]'/>
+        </form>
   </CardFooter>
 </Card>
   )

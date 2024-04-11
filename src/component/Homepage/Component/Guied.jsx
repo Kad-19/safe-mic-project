@@ -2,8 +2,8 @@ import React from 'react'
 
 function Guied() {
   return (
-    <div>
-        <div className="self-stretch mt-24 w-full bg-black border border-black border-solid min-h-[1px] max-md:mt-10 max-md:max-w-full" />
+    <div className='flex items-center flex-col'>
+        <div className=" mt-24 w-full bg-black border border-black border-solid min-h-[1px] max-md:mt-10 max-md:max-w-[80%]" />
     <div className="flex gap-5 justify-center items-center px-2 py-9 mt-32 text-2xl text-center text-neutral-700 max-md:flex-wrap max-md:px-5 max-md:mt-10">
       <img
         loading="lazy"
