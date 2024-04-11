@@ -8,6 +8,7 @@ import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 import Auth from "./component/LoginPage/Auth";
 import { useState, useEffect } from "react";
+import Selector from "./component/ThemeSelector/Selector";
 const App = () => {
   const [theme,setTheme]=useState({
     current:'light',
@@ -34,10 +35,11 @@ const App = () => {
         <div className="">
           <Auth/>
           <Navbar />
-          <div>
             <Button onClick={changeTheme}>
                 Change theme
             </Button>
+          <div>
+            <Selector/>
           </div>
           <AllRouting />
         </div>
