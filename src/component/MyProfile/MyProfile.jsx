@@ -1,36 +1,79 @@
-import React, { useState } from 'react'
-import { delete_user } from '../../actions/auth';
+import React, { useEffect, useState } from "react";
+import { delete_user } from "../../actions/auth";
 import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
+import { FiLogOut } from "react-icons/fi";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
+const MyProfile = ({ user, delete_user, logout }) => {
+  const navigate = useNavigate();
 
-const MyProfile = ({delete_user}) => {
-  const [password, setPassword ] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
   const del = (e) => {
     e.preventDefault();
     delete_user(password);
+  };
+
+  useEffect(() => {
+    if (user) {
+      setIsLoading(false);
+    }
+  }, [user]);
+
+  const log_out = () => {
+    logout();
+    navigate("/");
   }
 
   return (
     <div className="flex justify-center items-center rounded md p8 m-20">
-    <div className="flex bg-slate-300 border-slate-500 rounded pt-10 pl-20 pr-40 pb-32 shadow-lg bg-opacity-50 text-sm/[40px] ">
-      <form action="">
-        <h1 className="text-[32px] pb-10 pt-12  text-center">My Profile</h1>
-        <div className="text-[18px] pb-12">
-        <p>User Name: kdds123</p>
-        <p>Email: example@gmail.com</p>
-        </div>
-        <div className="border-t border-black my-4"></div>
-        
-        <div className="flex space-x-10 space-y- text-[18px] my-12">
-          <button type="submit" className='h-12 w-60 object-cover rounded-full bg-black text-white hover:bg-gray-600 py- transition-colors duration-200'>Reset Password</button>
+      <div className="flex bg-slate-300 border-slate-500 rounded pt-10 pl-20 pr-40 pb-32 shadow-lg bg-opacity-50 text-sm/[40px] ">
+        <form action="">
+          <h1 className="text-[32px] pb-10 pt-12  text-center">My Account</h1>
+          <div className="text-[18px] pb-12">
+            <p>User Name: {isLoading ? "" : user.name}</p>
+            <p>Email: {isLoading ? "" : user.email}</p>
+          </div>
+          <div className="border-t border-black my-4"></div>
 
-          <button type="submit" className='h-12 w-60 object-cover rounded-full bg-white text-red-600 hover:bg-red-300 py-0 transition-colors duration-200' onClick={del}>Delete Account</button>
-          <input type='text' placeholder='password' onChange={(e) => setPassword(e.target.value)} value={password}/>
-        </div>       
-      </form>
+          <div className="flex space-x-10 space-y- text-[18px] my-12">
+            <button
+              type="submit"
+              className="h-12 w-60 object-cover rounded-full bg-black text-white hover:bg-gray-600 py- transition-colors duration-200"
+            >
+              Reset Password
+            </button>
+
+            <button
+              type="submit"
+              className="h-12 w-60 object-cover rounded-full bg-white text-red-600 hover:bg-red-300 py-0 transition-colors duration-200"
+              onClick={del}
+            >
+              Delete Account
+            </button>
+            <input
+              type="text"
+              placeholder="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+          </div>
+          <div className="m-4">
+            <Button onClick={log_out}>
+              <FiLogOut className="mx-2" /> Logout
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default connect(null, { delete_user})(MyProfile);
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps, { delete_user, logout })(MyProfile);

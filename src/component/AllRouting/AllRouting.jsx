@@ -11,6 +11,11 @@ import Activate from "../LoginPage/Activate";
 import Counseling from "../Counesling/Counseling";
 import Homepage from "../Homepage/Homepage";
 import MyProfile from "../MyProfile/MyProfile";
+import CounseInfo from "../Counselor info/CounseInfo";
+import ComplaintForm from "../FillingForm/ComplaintForm";
+import ChooseCounselor from "../Counesling/ChooseCounselor";
+import Chatbot from "../ChatBox/Chatbot";
+import AuthCounselor from "../LoginPage/AuthCounselor";
 const AllRouting = () => {
   return (
     <Routes>
@@ -22,12 +27,17 @@ const AllRouting = () => {
       <Route path="/groupChat" element={<GroupChat />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/Appointment" element={<Appointment/>} />
+      <Route path="/counselor-info" element={<CounseInfo/>}/>
+      <Route path="/complaint-form" element={<ComplaintForm/>}/>
+      <Route path="/chooseCounselor" element={<ChooseCounselor/>}/>
+      <Route path="/chatbot" element={<Chatbot/>}/>
       <Route
         path="/password/reset/confirm/:uid/:token"
         element={<ResetPasswordConfirm />}
       />
       <Route path="/activate/:uid/:token" element={<Activate />} />
-      <Route path="/profile" element={<MyProfile/>}/>
+      <Route path="/account" element={<MyProfile/>}/>
+      <Route path="/authCounselor" element={<AuthCounselor/>}/>
     </Routes>
   );
 };

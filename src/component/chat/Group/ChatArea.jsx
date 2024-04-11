@@ -174,7 +174,7 @@ const ChatArea = ({ user }) => {
     );
   }
   return (
-    <Card className="m-auto mt-12   bg-gray-100 sm:w-1/2 lg:w-1/2 md:w-1/2 ">
+    <Card className="m-auto mt-24 bg-gray-100 sm:w-1/2 lg:w-1/2 md:w-1/2 ">
       <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
         <MdGroups className="w-8 h-8"/>
       </CardHeader>

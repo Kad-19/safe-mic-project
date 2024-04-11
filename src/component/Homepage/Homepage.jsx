@@ -12,9 +12,7 @@ import { BrowserRouter as Route } from "react-router-dom";
 function Homepage() {
   return (
     <div className="flex flex-col">
-      <div>
-        {/* <Header /> */}
-      </div>
+      <div>{/* <Header /> */}</div>
       <div className="flex flex-col items-center px-20 mt-36 w-[80%] mx-auto max-md:px-5 max-md:mt-10 max-md:max-w-full">
         <div>
           <Hero />

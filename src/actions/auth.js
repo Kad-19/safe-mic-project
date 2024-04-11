@@ -88,24 +88,25 @@ export const checkAuthenticated = () => async (dispatch) => {
     });
   }
 };
-export const delete_user = (password) => async (dispatch) => {
+export const delete_user = (current_password) => async () => {
   if (localStorage.getItem("access")) {
+    const body = JSON.stringify({ current_password });
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `JWT ${localStorage.getItem("access")}`,
         Accept: "application/json",
       },
     };
 
-    const body = JSON.stringify({ password });
     console.log(body);
+    console.log(config);
 
     try {
       const res = await axios.delete(
         `http://localhost:8000/auth/users/me/`,
-        body,
-        config
+        config,
+        body
       );
       console.log(res);
       console.log("account deleted");
@@ -149,6 +150,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,
+      payload: err.response.data,
     });
   }
 };
@@ -174,7 +176,6 @@ export const signup =
         body,
         config
       );
-      console.log(res);
 
       dispatch({
         type: SIGNUP_SUCCESS,
@@ -184,6 +185,7 @@ export const signup =
       console.log(err);
       dispatch({
         type: SIGNUP_FAIL,
+        payload: err.response.data,
       });
     }
   };

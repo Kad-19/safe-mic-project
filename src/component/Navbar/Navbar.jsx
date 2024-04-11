@@ -46,17 +46,16 @@ const Navbar = ({ logout, isAuthenticated }) => {
           Complaint
         </NavLink>
         <NavLink
-          to="/"
-          className="rounded-3xl bg-gray-300 px-5 p-2 font-bold"
-          onClick={logout}
+          to="/account"
+          className="font-semibold"
         >
-          Logout
+          My Account
         </NavLink>
       </div>
     </Fragment>
   );
   return (
-    <div className="flex justify-between p-6 bg-gray-50">
+    <div className="flex justify-between p-6 bg-gray-50 fixed w-full">
       <div>
         <div>Mic</div>
       </div>
