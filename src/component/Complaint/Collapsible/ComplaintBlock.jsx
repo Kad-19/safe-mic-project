@@ -7,6 +7,8 @@ import up from './ChevronUp.svg'
 import down from './ChevronDown.svg'
 import { Card,CardContent,CardTitle } from "@/components/ui/card";
 import { useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
 function ComplaintBlock({title,content}){
     const [open,SetOpen]=useState(false)
     return <Collapsible
@@ -17,15 +19,14 @@ function ComplaintBlock({title,content}){
         <CollapsibleTrigger
         className={cn("w-full")}
         >
-            <div className="border-solid border-black 
+            <div className="border-solid
             border-2 px-4 py-1 mx-4 my-2 
             rounded-2xl flex justify-between
-            hover:scale-x-105
             ">
                 <p className="">
                     My complaint 
                 </p> 
-                <img className=" " src={open?up:down} alt="" />
+                {open?<FaChevronUp/>:<FaChevronDown/>}
             </div>
         </CollapsibleTrigger>
         

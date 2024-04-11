@@ -4,18 +4,23 @@ import {motion} from 'framer-motion'
 import { cn } from "@/lib/utils";
 import { useContext } from "react";
 import { themeContext } from "@/App";
+import { CiDark } from "react-icons/ci";
+import { CiLight } from "react-icons/ci";
 function Selector(){
-    const {changeTheme}=useContext(themeContext)
+    const {changeTheme,darkThemeSwitch,theme}=useContext(themeContext)
     return <Popover >
         <PopoverTrigger asChild>
-            <Button className={cn(' rounded-full bg-primary')} >
-                nt
-            </Button>
+            <span className="bg-primary font-semibold p-1 rounded-md text-primary-foreground" >
+                theme
+            </span>
         </PopoverTrigger>
         <PopoverContent className={cn('block w-fit')} side={'bottom'}>
             <motion.div className="my-1 w-12 aspect-square bg-[#3B82F6] rounded-full"
             whileTap={{
                 scale:0.7
+            }}
+            whileHover={{
+                scale:1.1
             }}
             onClick={()=>changeTheme(0)}
             >
@@ -24,6 +29,9 @@ function Selector(){
             whileTap={{
                 scale:0.7
             }}
+            whileHover={{
+                scale:1.1
+            }}
             onClick={()=>changeTheme(1)}
             >
             </motion.div>
@@ -31,16 +39,25 @@ function Selector(){
             whileTap={{
                 scale:0.7
             }}
+            whileHover={{
+                scale:1.1
+            }}
             onClick={()=>changeTheme(2)}
             >
             </motion.div>
-            <motion.div className="my-1 w-12 aspect-square bg-[#0F172A] rounded-full"
+            <motion.div className="my-1 w-12 aspect-square bg-[#0F172A] border border-white rounded-full"
             whileTap={{
                 scale:0.7
+            }}
+            whileHover={{
+                scale:1.1
             }}
             onClick={()=>changeTheme(3)}
             >
             </motion.div>
+            <button onClick={darkThemeSwitch}>
+                {theme.dark?<CiLight className="aspect-square w-12"/>:<CiDark className="aspect-square w-12"/>}
+            </button>
         </PopoverContent>
     </Popover>
 }export default Selector;

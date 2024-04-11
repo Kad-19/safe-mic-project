@@ -58,9 +58,9 @@ const App = () => {
       <BrowserRouter>
         <div className="">
           <Auth/>
-          <Navbar />
           <div>
-          <themeContext.Provider value={{changeTheme}}>
+          <themeContext.Provider value={{changeTheme,darkThemeSwitch,theme}}>
+          <Navbar />
             <Selector/>
           </themeContext.Provider>
 

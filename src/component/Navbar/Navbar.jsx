@@ -2,6 +2,9 @@ import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
+import Selector from "../ThemeSelector/Selector";
+import { useContext } from "react";
+import { themeContext } from "@/App";
 const Navbar = ({ logout, isAuthenticated }) => {
   const guestLinks = () => (
     <Fragment>
@@ -9,6 +12,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
         <NavLink to="/" className="font-semibold">
           Home
         </NavLink>
+        <Selector/>
         <NavLink to="/counseling" className="font-semibold">
           Counseling
         </NavLink>
