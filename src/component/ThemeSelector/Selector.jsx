@@ -8,33 +8,33 @@ function Selector(){
     const {changeTheme}=useContext(themeContext)
     return <Popover >
         <PopoverTrigger asChild>
-            <Button className={cn(' rounded-full ')} >
-                Theme
+            <Button className={cn(' rounded-full bg-primary')} >
+                nt
             </Button>
         </PopoverTrigger>
-        <PopoverContent className={cn('flex')} side={'right'}>
-            <motion.div className="mx-2 w-12 aspect-square bg-[#3B82F6] rounded-full"
+        <PopoverContent className={cn('block w-fit')} side={'bottom'}>
+            <motion.div className="my-1 w-12 aspect-square bg-[#3B82F6] rounded-full"
             whileTap={{
                 scale:0.7
             }}
             onClick={()=>changeTheme(0)}
             >
             </motion.div>
-            <motion.div className="mx-2 w-12 aspect-square bg-[#E11D48] rounded-full"
+            <motion.div className="my-1 w-12 aspect-square bg-[#E11D48] rounded-full"
             whileTap={{
                 scale:0.7
             }}
             onClick={()=>changeTheme(1)}
             >
             </motion.div>
-            <motion.div className="mx-2 w-12 aspect-square bg-[#6D28D9] rounded-full"
+            <motion.div className="my-1 w-12 aspect-square bg-[#6D28D9] rounded-full"
             whileTap={{
                 scale:0.7
             }}
             onClick={()=>changeTheme(2)}
             >
             </motion.div>
-            <motion.div className="mx-2 w-12 aspect-square bg-[#0F172A] rounded-full"
+            <motion.div className="my-1 w-12 aspect-square bg-[#0F172A] rounded-full"
             whileTap={{
                 scale:0.7
             }}

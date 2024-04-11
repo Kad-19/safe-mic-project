@@ -31,10 +31,28 @@ const App = () => {
 
   const changeTheme=(i)=>{
     theme.dark?i=i+4:i
+    console.log(i,theme.dark)
       setTheme({current:themes.at(i),
-                previous:theme.current})
+                previous:theme.current,
+                dark:theme.dark})
     //themeIndex<3?setThemeIndex(++themeIndex):setThemeIndex(themeIndex=0)
   }
+  const darkThemeSwitch=()=>{
+    let CurrentIndex=themes.indexOf(theme.current);
+    if(theme.dark){
+      setTheme({
+        current:themes.at(CurrentIndex%4),
+        previous:themes.at(CurrentIndex),
+        dark:false
+      })
+    }else{
+      setTheme({
+        current:themes.at(CurrentIndex+4),
+        previous:themes.at(CurrentIndex),
+        dark:true
+      })
+    }
+    }
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -46,22 +64,7 @@ const App = () => {
             <Selector/>
           </themeContext.Provider>
 
-          <Button onClick={()=>{
-            let CurrentIndex=themes.indexOf(theme.current);
-            if(theme.dark){
-              setTheme({
-                current:themes.at(CurrentIndex%4),
-                previous:themes.at(CurrentIndex),
-                dark:false
-              })
-            }else{
-              setTheme({
-                current:themes.at(CurrentIndex+4),
-                previous:themes.at(CurrentIndex),
-                dark:true
-              })
-            }
-            }}>
+          <Button onClick={darkThemeSwitch}>
             theme
           </Button>
           
