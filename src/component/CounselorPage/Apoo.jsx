@@ -1,9 +1,33 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import axios from 'axios';
 
 
 
 function Apoo() {
+
+  useEffect(() => {
+    getAppointment();
+  }, [])
+
+  const getAppointment = async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${localStorage.getItem("access")}`,
+        Accept: "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.get(
+        `http://localhost:8000/counselor/all-appointments/`,
+        config
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="flex flex-col bg-white">
     <div className="flex flex-col items-start pl-12 mt-1.5 w-full max-md:pl-5 max-md:max-w-full">

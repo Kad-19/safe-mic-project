@@ -11,6 +11,7 @@ const AuthCounselor = () => {
     languages: "",
     specialities: "",
   });
+  const [gender, setGender] = useState("");
 
   const { bio, languages, specialities } = formData;
   const onChange = (e) =>
@@ -29,8 +30,9 @@ const AuthCounselor = () => {
         Accept: "application/json",
       },
     };
+    const verified = true;
 
-    const body = JSON.stringify({ bio, languages, specialities});
+    const body = JSON.stringify({ bio, languages, specialities, gender, verified });
 
     try {
       const res = await axios.post(
@@ -50,8 +52,8 @@ const AuthCounselor = () => {
     // getVerifiedCounselors();
   }, []);
 
-  if(verified){
-    navigate("/")
+  if (verified) {
+    navigate("/");
   }
 
   const getProfile = async () => {
@@ -69,7 +71,7 @@ const AuthCounselor = () => {
         config
       );
       console.log(res);
-      setVerified(res.data.verified)
+      setVerified(res.data.verified);
     } catch (err) {
       console.log(err);
       setErrorStatus(err.response.status);
@@ -95,6 +97,9 @@ const AuthCounselor = () => {
       console.log(err);
     }
   };
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  };
 
   return (
     <div className="mt-10">
@@ -104,15 +109,44 @@ const AuthCounselor = () => {
             <label>Bio</label>
             <input onChange={(e) => onChange(e)} value={bio} name="bio"></input>
             <label>Languages</label>
-            <input onChange={(e) => onChange(e)} value={languages} name="languages"></input>
+            <input
+              onChange={(e) => onChange(e)}
+              value={languages}
+              name="languages"
+            ></input>
             <label>Specialities</label>
-            <input onChange={(e) => onChange(e)} value={specialities} name="specialities"></input>
+            <input
+              onChange={(e) => onChange(e)}
+              value={specialities}
+              name="specialities"
+            ></input>
+            <label>
+              <input
+                type="radio"
+                value="male"
+                checked={gender === "male"}
+                onChange={handleGenderChange}
+              />
+              Male
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="female"
+                checked={gender === "female"}
+                onChange={handleGenderChange}
+              />
+              Female
+            </label>
+            <div>Selected Gender: {gender}</div>
             <label>Years of experience</label>
             <input></input>
             <button type="submit">Submit</button>
           </form>
+        ) : verified ? (
+          "Verified"
         ) : (
-          verified? "Verified": <div> Your Account is not verified by the Admin yet.</div>
+          <div> Your Account is not verified by the Admin yet.</div>
         )}
       </div>
     </div>
