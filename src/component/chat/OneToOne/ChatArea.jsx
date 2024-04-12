@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import axios from 'axios'
 import {
     Card,
     CardContent,
@@ -10,20 +11,91 @@ import {
   import Message from '../MessageBlock/Message'
   import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
   import { Input } from "@/components/ui/input"
+  import { connect } from "react-redux";
+import { useParams } from 'react-router-dom'
+import { IoMdSend } from "react-icons/io";
+
 
   
 
-export default function ChatArea() {
+const ChatArea = ({user}) => {
+  const {counselor} = useParams();
   const [room, setRoom] = useState("");
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [chatSocket, setChatSocket] = useState(null);
   const [roomMessages, setRoomMessages] = useState({});
+  const [resData, setResData] = useState(null);
+  const [rend, setRend] = useState(0);
+  const [limit, setLimit] = useState(100);
+
   let namey = Math.floor(Math.random() * 1000);
 
+  const scrollableRef = useRef(null);
+
   useEffect(() => {
-    enterRoom("a");
+    if (scrollableRef.current) {
+      scrollableRef.current.scrollTop = scrollableRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    enterRoom("discussion");
   }, [])
+
+  useEffect(() => {
+    if (user) {
+      fetchMessages();
+    }
+  }, [user]);
+
+  const fetchMessages = async () => {
+    if (localStorage.getItem("access")) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.getItem("access")}`,
+          Accept: "application/json",
+        },
+      };
+
+      try {
+        const res = await axios.get(
+          `http://127.0.0.1:8000/ws/api/messages/discussion/?limit=1&offset=0`,
+          config
+        );
+        const data = res.data;
+        let offset = data.count - limit;
+        try {
+          const response = await axios.get(
+            `http://127.0.0.1:8000/ws/api/messages/discussion/?limit=${data.count}&offset=0`,
+            config
+          );
+          const responseData = response.data;
+          setResData(responseData);
+        } catch (err) {
+          console.log(err);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log("invalid token");
+    }
+  };
+
+
+  useEffect(() => {
+    if (resData && rend % 2 == 0) {
+      setMessages((prevMessages) => {
+        const newMessages = resData.results.map((data) => {
+          return { message: data.message, username: data.user };
+        });
+        return [...newMessages, ...prevMessages];
+      });
+    }
+    setRend((prev) => prev + 1);
+  }, [resData]);
 
   const updateRoomMessages = (key, value) => {
     setRoomMessages((prev) => ({
@@ -34,12 +106,12 @@ export default function ChatArea() {
 
   function enterRoom(room) {
     setRoom(room);
-    if (roomMessages[room]) {
-      setMessages(roomMessages[room]);
-    }
-    else{
-      setMessages([]);
-    }
+    // if (roomMessages[room]) {
+    //   setMessages(roomMessages[room]);
+    // }
+    // else{
+    //   setMessages([]);
+    // }
     connectToWebSocket(room);
   }
   function connectToWebSocket(room) {
@@ -64,64 +136,65 @@ export default function ChatArea() {
     chatSocket.onmessage = function (e) {
       const data = JSON.parse(e.data);
 
-      let messageText = data.username + " : " + data.message;
-      console.log(data);
-      setMessages((prevMessages) => [...prevMessages, messageText]);
+      setMessages((prevMessages) => [...prevMessages, data]);
       setMessageInput("");
     };
-    console.log(chatSocket);
   }, [chatSocket]);
 
-  useEffect(() => {
-    updateRoomMessages(room, messages);
-  }, [messages]);
-  console.log(roomMessages);
+  // useEffect(() => {
+  //   updateRoomMessages(room, messages);
+  // }, [messages]);
+  // console.log(roomMessages);
 
   function sendMessage(e) {
     e.preventDefault();
-    chatSocket.send(JSON.stringify({ message: messageInput, username: namey }));
+    chatSocket.send(JSON.stringify({ message: messageInput, username: user.name }));
   }
-  const conversation = [
-    "Hi there!",
-    "Hey, how's it going?",
-    "Not too bad, thanks for asking. What about you?",
-    "I'm doing pretty well. Just got back from a jog.",
-    "That sounds nice. I need to get back into exercising.",
-    "Yeah, it's tough to stay motivated sometimes.",
-    "Definitely. Maybe we can go for a run together sometime?",
-    "That would be great! Let's plan for it next weekend.",
-    "Sounds like a plan. Looking forward to it!",
-    "Me too. Have a good day!",
-    "You too!"
-  ];
-
-  let toggle=true;
+ 
   return (
-    <Card className="m-auto mt-12  bg-gray-100 sm:w-1/2 lg:w-3/6 md:w-6/12 ">
-
-  <CardHeader className="bg-blue-100 flex justify-center items-center" >
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-  </CardHeader>
-
-  <CardContent className="overflow-auto h-96 grid grid-cols-1">
-{
-  messages.map((str)=>{
-  toggle=toggle?false:true;
-  return <div>
-            <Message sender={toggle} text={str}/>
-        </div>
-  })
-}
-  </CardContent>
-  <CardFooter className="p-4">
-  <form onSubmit={sendMessage} className="w-[100%]">
-          <Input placeholder="enter your message..." onChange={(e) => setMessageInput(e.target.value)}
-          value={messageInput} className='w-[100%]'/>
+    <Card className="ml-auto mt-0 bg-gray-100 sm:w-3/4 h-9/10">
+      <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
+        Chat
+      </CardHeader>
+      <CardContent className="overflow-auto h-[73vh]" ref={scrollableRef}>
+        {messages.map((mes, index) => (
+          <div key={index}>
+            {mes.username != user.name ? (
+              <div className="relative bg-slate-600 p-1 rounded-tr-2xl rounded-tl-2xl rounded-br-2xl mt-3 mr-auto w-3/4 ">
+                <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-slate-600 border-b-[0px] border-b-transparent transform bottom-0 -left-2"></div>
+                <p className="px-3 text-blue-500 font-medium">{mes.username}</p>
+                <p className="text-slate-200 p-1 px-3 text-lg">{mes.message}</p>
+              </div>
+            ) : (
+              <div className="relative bg-slate-400 p-1 mt-3 w-3/4 ml-auto rounded-tr-2xl rounded-tl-2xl rounded-bl-2xl">
+                <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-slate-400 border-b-[0px] border-b-transparent transform bottom-0 -right-2"></div>
+                <p className="text-slate-200 p-1 px-3 text-lg">{mes.message}</p>
+              </div>
+            )}
+            <br />
+          </div>
+        ))}
+      </CardContent>
+      <CardFooter className="p-4">
+        <form onSubmit={sendMessage} className="w-[100%] flex gap-1">
+          <Input
+            placeholder="enter your message..."
+            onChange={(e) => setMessageInput(e.target.value)}
+            value={messageInput}
+            className="w-[100%]"
+          />
+          <button type="submit" className="flex align-middle items-center w-8">
+            <IoMdSend className="w-6 h-6" />
+          </button>
         </form>
-  </CardFooter>
-</Card>
+      </CardFooter>
+    </Card>
+
   )
 }
+
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps)(ChatArea);

@@ -174,23 +174,23 @@ const ChatArea = ({ user }) => {
     );
   }
   return (
-    <Card className="m-auto mt-24 bg-gray-100 sm:w-1/2 lg:w-1/2 md:w-1/2 ">
+    <Card className="ml-auto mt-0 bg-gray-100 sm:w-3/4 h-9/10">
       <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
         <MdGroups className="w-8 h-8"/>
       </CardHeader>
-      <CardContent className="overflow-auto h-96" ref={scrollableRef}>
+      <CardContent className="overflow-auto h-[73vh]" ref={scrollableRef}>
         {messages.map((mes, index) => (
           <div key={index}>
             {mes.username != user.name ? (
               <div className="relative bg-slate-600 p-1 rounded-tr-2xl rounded-tl-2xl rounded-br-2xl mt-3 mr-auto w-3/4 ">
                 <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-slate-600 border-b-[0px] border-b-transparent transform bottom-0 -left-2"></div>
                 <p className="px-3 text-blue-500 font-medium">{mes.username}</p>
-                <p className="text-slate-200 p-1 px-3">{mes.message}</p>
+                <p className="text-slate-200 p-1 px-3 text-lg">{mes.message}</p>
               </div>
             ) : (
               <div className="relative bg-slate-400 p-1 mt-3 w-3/4 ml-auto rounded-tr-2xl rounded-tl-2xl rounded-bl-2xl">
                 <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-slate-400 border-b-[0px] border-b-transparent transform bottom-0 -right-2"></div>
-                <p className="text-slate-200 p-1 px-3">{mes.message}</p>
+                <p className="text-slate-200 p-1 px-3 text-lg">{mes.message}</p>
               </div>
             )}
             <br />

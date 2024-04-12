@@ -16,17 +16,19 @@ import ComplaintForm from "../FillingForm/ComplaintForm";
 import ChooseCounselor from "../Counesling/ChooseCounselor";
 import Chatbot from "../ChatBox/Chatbot";
 import AuthCounselor from "../LoginPage/AuthCounselor";
+import OneToOneChat from "../chat/OneToOne/OneToOneChat"
 const AllRouting = () => {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/login/:notVerified?" element={<LoginPage />} />
       <Route path="/signup" element={<Reg />} />
       <Route path="/complaint" element={<Complaint />} />
       <Route path="/counseling" element={<Counseling />} />
       <Route path="/groupChat" element={<GroupChat />} />
+      <Route path="/oneToOneChat/:counselor?" element={<OneToOneChat/>}/>
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/Appointment" element={<Appointment/>} />
+      <Route path="/appointment" element={<Appointment/>} />
       <Route path="/counselor-info" element={<CounseInfo/>}/>
       <Route path="/complaint-form" element={<ComplaintForm/>}/>
       <Route path="/chooseCounselor" element={<ChooseCounselor/>}/>

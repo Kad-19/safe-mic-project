@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthCounselor = () => {
   const [errorStatus, setErrorStatus] = useState(0);
+  const navigate = useNavigate();
+  const [verified, setVerified] = useState(false);
   const [formData, setFormData] = useState({
     bio: "",
     languages: "",
@@ -47,6 +50,10 @@ const AuthCounselor = () => {
     // getVerifiedCounselors();
   }, []);
 
+  if(verified){
+    navigate("/")
+  }
+
   const getProfile = async () => {
     const config = {
       headers: {
@@ -62,6 +69,7 @@ const AuthCounselor = () => {
         config
       );
       console.log(res);
+      setVerified(res.data.verified)
     } catch (err) {
       console.log(err);
       setErrorStatus(err.response.status);
@@ -104,7 +112,7 @@ const AuthCounselor = () => {
             <button type="submit">Submit</button>
           </form>
         ) : (
-          "some other shit"
+          verified? "Verified": <div> Your Account is not verified by the Admin yet.</div>
         )}
       </div>
     </div>

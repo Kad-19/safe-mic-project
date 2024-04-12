@@ -58,7 +58,7 @@ const Reg = ({ signup, isAuthenticated, error }) => {
     navigate("/");
   }
   if (accountCreated) {
-    navigate("/login");
+    navigate(`/login/${true}`);
   }
 
   return (

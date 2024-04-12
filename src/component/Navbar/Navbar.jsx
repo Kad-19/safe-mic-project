@@ -32,7 +32,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
   );
   const authLinks = () => (
     <Fragment>
-      <div className="flex justify-between gap-6 items-center">
+      <div className="flex justify-between gap-6 items-center h-[5vh]">
         <NavLink to="/" className="font-semibold">
           Home
         </NavLink>
