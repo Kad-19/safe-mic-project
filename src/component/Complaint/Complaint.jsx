@@ -34,7 +34,7 @@ function Complaint(){
     <h1 className=" text-6xl">
         Have a Concern?
     </h1>
-        <button className=" max-w-max border-solid my-4 border-black border-2 rounded-3xl px-4 p-1 hover:font-semibold hover:px-8">
+        <button className=" max-w-max border-solid my-4 border-foreground border-2 rounded-3xl px-4 p-1 hover:font-semibold hover:px-8">
             File Your Complaint here
         </button>
     </div>

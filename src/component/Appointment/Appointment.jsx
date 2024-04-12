@@ -19,11 +19,12 @@ function Appointment(){
         month:'short',
         year:'numeric'}
     ))
-    console.log(date)
-
     },
     [date])
-    const dateSetter=(dae)=>setDate(dae)
+    const dateSetter=(dae)=>{
+        dae.setHours(date.getHours())
+        setDate(dae)
+    }
     const hourSetter=(hr)=>{
         let date2=new Date(date)
         date2.setHours(hr)
