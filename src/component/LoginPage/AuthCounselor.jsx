@@ -1,6 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Input } from "@/components/ui/input";
+import { Card,CardContent } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { FaArrowRight } from "react-icons/fa";
 
 const AuthCounselor = () => {
   const [errorStatus, setErrorStatus] = useState(0);
@@ -102,53 +109,87 @@ const AuthCounselor = () => {
   };
 
   return (
-    <div className="mt-10">
-      <div>
+    <div className="mt-10 mx-16">
+      
         {errorStatus == 500 ? (
-          <form onSubmit={(e) => onSubmit(e)}>
-            <label>Bio</label>
-            <input onChange={(e) => onChange(e)} value={bio} name="bio"></input>
-            <label>Languages</label>
-            <input
+        <Card className={cn('py-4 px-2')}>
+          <CardContent>
+            
+          <form onSubmit={(e) => onSubmit(e)} className='flex flex-col gap-4'>
+            <Label>Bio</Label>
+            <Textarea onChange={(e) => onChange(e)} value={bio} name="bio"/>
+            <Label>Languages</Label>
+            <Input
               onChange={(e) => onChange(e)}
               value={languages}
               name="languages"
-            ></input>
-            <label>Specialities</label>
-            <input
+              placeholder="Hello"
+              ></Input>
+            <Label>Specialities</Label>
+            <Input
               onChange={(e) => onChange(e)}
               value={specialities}
               name="specialities"
-            ></input>
-            <label>
+            ></Input>
+            <div className="flex gap-12">
+              Gender:
+              <span>
+              <Label>
               <input
+                
+                className='aspect-square w-4 mx-2'
                 type="radio"
                 value="male"
                 checked={gender === "male"}
                 onChange={handleGenderChange}
-              />
-              Male
-            </label>
-            <label>
+                />Male
+              </Label>
+            
+              </span>
+              <span>
+              <Label htmlFor="">
+                
               <input
+                className='aspect-square w-4 mx-2'
                 type="radio"
                 value="female"
                 checked={gender === "female"}
                 onChange={handleGenderChange}
-              />
-              Female
-            </label>
-            <div>Selected Gender: {gender}</div>
-            <label>Years of experience</label>
-            <input></input>
-            <button type="submit">Submit</button>
+                />
+                Female</Label>
+              </span>
+            </div>
+            <Label className={cn()}>Years of experience:</Label>
+            <Input type='number' min='0' className={cn('w-8/12')}/>
+            <Button type="submit" className=' font-semibold w-fit'>Submit</Button>
           </form>
+        </CardContent>
+        </Card>
         ) : verified ? (
           "Verified"
         ) : (
-          <div> Your Account is not verified by the Admin yet.</div>
+          <div className="grid grid-cols-2 gap-24 font-bold w-8/12 text-3xl"> 
+          <p>
+          Your Account is not verified by the Admin yet.
+          </p>
+          <button className=" flex items-center border-solid my-4 
+                        border-foreground border-2 
+                        h-fit font-medium text-lg
+                        w-fit
+                        rounded-3xl px-4 p-1 hover:font-semibold 
+                        hover:px-8 "
+                        onClick={()=>{
+                          navigate("/")
+                        }}
+                        >
+            <p className="mr-4">
+              HomePage
+            </p>
+              <FaArrowRight/>
+        </button>
+          </div>
         )}
-      </div>
+      
     </div>
   );
 };
