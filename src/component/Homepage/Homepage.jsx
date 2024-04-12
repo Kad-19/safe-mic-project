@@ -1,14 +1,11 @@
 import React from "react";
 import Approach from "./Component/Approach";
 import GetCons from "./Component/GetCons";
-import Guied from "./Component/Guied";
 import Hero from "./Component/Hero";
 import Ready from "./Component/Ready";
 import Service from "./Component/Service";
-import Header from "./Component/Header";
 import Footer from "./Component/Footer";
-import { BrowserRouter as Route } from "react-router-dom";
-
+import AdviceCarousel from "./Component/AdviceCarousel";
 function Homepage() {
   return (
     <div className="flex flex-col">
@@ -18,7 +15,7 @@ function Homepage() {
           <Hero />
         </div>
         <div>
-          <Guied />
+          <AdviceCarousel/>
         </div>
         <div>
           <Approach />
