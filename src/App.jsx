@@ -10,7 +10,7 @@ import Auth from "./component/LoginPage/Auth";
 import { useState, useEffect } from "react";
 import Selector from "./component/ThemeSelector/Selector";
 import { createContext } from "react";
-import DrawerComp from "./component/ChatBox/DrawerComp";
+import DrawerComp from "./component/Customization/DrawerComp";
 
 export const themeContext=createContext(null)
 const App = () => {
@@ -61,6 +61,7 @@ const App = () => {
           <Navbar />
           </themeContext.Provider>
           <AllRouting />
+          <DrawerComp/>
       </BrowserRouter>
     </Provider>
   );
