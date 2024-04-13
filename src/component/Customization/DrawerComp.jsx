@@ -10,22 +10,26 @@ import {
 } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { FaUser } from "react-icons/fa";
+import Selector from "../ThemeSelector/Selector";
 function DrawerComp(){
-    return <Drawer direction='left'>
-    <DrawerTrigger>Open</DrawerTrigger>
-    <DrawerContent className={cn('w-4/6')}>
+    return <div>
+    <Drawer direction='left'>
+    <DrawerTrigger>
+        <FaUser/>
+    </DrawerTrigger>
+    <DrawerContent className={cn('')}>
     <DrawerHeader >
-        <DrawerTitle>Welcome to our chatbot</DrawerTitle>
-        <DrawerDescription>Your conversation is private</DrawerDescription>
+        <DrawerTitle>User Settings</DrawerTitle>
+        <DrawerDescription>Customize the site to your liking</DrawerDescription>
     </DrawerHeader>
-
+<Selector/>
     <DrawerFooter>
-        <Button>Submit</Button>
         <DrawerClose>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">Close</Button>
         </DrawerClose>
     </DrawerFooter>
     </DrawerContent>
 </Drawer>
-
+    </div>
 }export default DrawerComp

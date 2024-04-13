@@ -11,12 +11,15 @@ function Selector(){
     const {changeTheme,darkThemeSwitch,theme}=useContext(themeContext)
     return <Popover >
         <PopoverTrigger  asChild>
-    <NavLink>
-        Theme
-    </NavLink>
+            <button className='w-10/12 p-4 m-2 bg-transparent text-foreground text-start'>
+            Theme 
+            <span className="float-end aspect-square w-8 rounded-full bg-primary">
+
+            </span>
+            </button>
         </PopoverTrigger>
-        <PopoverContent className={cn('block w-fit')} side={'bottom'}>
-            <motion.div className="my-1 w-12 aspect-square bg-[#3B82F6] rounded-full"
+        <PopoverContent className={cn('flex')} side={'bottom'}>
+            <motion.div className="m-2 w-12 aspect-square bg-[#3B82F6] rounded-full"
             whileTap={{
                 scale:0.7
             }}
@@ -26,7 +29,7 @@ function Selector(){
             onClick={()=>changeTheme(0)}
             >
             </motion.div>
-            <motion.div className="my-1 w-12 aspect-square bg-[#E11D48] rounded-full"
+            <motion.div className="m-2 w-12 aspect-square bg-[#E11D48] rounded-full"
             whileTap={{
                 scale:0.7
             }}
@@ -36,7 +39,7 @@ function Selector(){
             onClick={()=>changeTheme(1)}
             >
             </motion.div>
-            <motion.div className="my-1 w-12 aspect-square bg-[#6D28D9] rounded-full"
+            <motion.div className="m-2 w-12 aspect-square bg-[#6D28D9] rounded-full"
             whileTap={{
                 scale:0.7
             }}
@@ -46,7 +49,7 @@ function Selector(){
             onClick={()=>changeTheme(2)}
             >
             </motion.div>
-            <motion.div className="my-1 w-12 aspect-square bg-[#0F172A] border border-white rounded-full"
+            <motion.div className="m-2 w-12 aspect-square bg-[#0F172A] border border-white rounded-full"
             whileTap={{
                 scale:0.7
             }}

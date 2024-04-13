@@ -6,11 +6,12 @@ import Selector from "../ThemeSelector/Selector";
 import { Outlet } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import DrawerComp from "../Customization/DrawerComp";
 import { useContext } from "react";
 import { themeContext } from "@/App";
 const Navbar = ({ logout, isAuthenticated }) => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
-  const [isScrolledDown, setIsScrolledDown] = useState(true);
+  const [isScrolledDown, setIsScrolledDown] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,13 +33,13 @@ const Navbar = ({ logout, isAuthenticated }) => {
         <NavLink to="/" className="font-semibold px-4">
           Home
         </NavLink>
-        <Selector/>
         <NavLink to="/counseling" className="font-semibold px-4">
           Counseling
         </NavLink>
         <NavLink to="/complaint" className="font-semibold px-4">
           Complaint
         </NavLink>
+        <DrawerComp/>
         <NavLink
           to="/login"
           className="rounded-3xl border-2 px-5 p-2 font-bold"
@@ -52,6 +53,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
           Sign up
         </Button> 
         </NavLink>
+        
       
     </header>
     </div>

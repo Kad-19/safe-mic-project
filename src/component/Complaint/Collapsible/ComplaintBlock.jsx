@@ -14,13 +14,13 @@ function ComplaintBlock({title,content}){
     return <Collapsible
         open={open}
         onOpenChange={SetOpen}
-        className={cn("w-10/12 md:w-6/12")}
+        className={cn("w-full md:w-8/12")}
         >
         <CollapsibleTrigger
         className={cn("w-full")}
         >
             <div className="border-solid
-            border-2 px-4 py-1 mx-4 my-2 
+            border-2 px-4 py-1 my-2 
             rounded-2xl flex justify-between
             ">
                 <p className="">
