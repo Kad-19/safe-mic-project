@@ -73,7 +73,6 @@ const App = () => {
           <Navbar />
           </themeContext.Provider>
           <AllRouting />
-          <DrawerComp/>
       </BrowserRouter>
     </Provider>
   );

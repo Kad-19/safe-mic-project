@@ -18,7 +18,7 @@ function DrawerComp(){
     <DrawerTrigger>
         <FaUser/>
     </DrawerTrigger>
-    <DrawerContent className={cn('')}>
+    <DrawerContent className={cn(' w-full sm:w-10/12 md:w-1/2 lg:w-2/6')}>
     <DrawerHeader >
         <DrawerTitle>User Settings</DrawerTitle>
         <DrawerDescription>Customize the site to your liking</DrawerDescription>
