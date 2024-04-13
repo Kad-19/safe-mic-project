@@ -7,7 +7,7 @@ function Ready() {
         <div className="self-stretch px-px mt-56 w-full max-md:mt-10 max-md:max-w-full">
       <div className="flex gap-5 max-md:flex-col max-md:gap-0">
         <div className="flex flex-col w-[45%] max-md:ml-0 max-md:w-full">
-          <div className="flex z-10 flex-col self-stretch px-12 pt-11 pb-16 my-auto w-full text-xl font-light text-black rounded-none bg-neutral-50 max-md:px-5 max-md:mt-10 max-md:max-w-full">
+          <div className="flex flex-col self-stretch px-12 pt-11 pb-16 my-auto w-full text-xl font-light text-black rounded-none bg-neutral-50 max-md:px-5 max-md:mt-10 max-md:max-w-full">
             <div className="text-2xl font-semibold text-center max-md:max-w-full">
               Are you struggling? We can help
             </div>

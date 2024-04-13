@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./component/Navbar/Navbar";
-import AllRouting from "./component/AllRouting/AllRouting";
+import AllRouting from "./component/AllRouting/AllRouting1";
 import ComplaintBlock from "./component/Complaint/Collapsible/ComplaintBlock";
 import { Provider } from "react-redux";
 import { Button } from "./components/ui/button";
@@ -56,16 +56,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <div className="">
           <Auth/>
-          <div>
           <themeContext.Provider value={{changeTheme,darkThemeSwitch,theme}}>
           <Navbar />
           </themeContext.Provider>
-          </div>
-          
           <AllRouting />
-        </div>
       </BrowserRouter>
     </Provider>
   );
