@@ -17,7 +17,8 @@ import ChooseCounselor from "../Counesling/ChooseCounselor";
 import Chatbot from "../ChatBox/Chatbot";
 import AuthCounselor from "../LoginPage/AuthCounselor";
 import OneToOneChat from "../chat/OneToOne/OneToOneChat"
-import Apoo from "../CounselorPage/Apoo";
+import Apoo from "../CounselorPage/Appo/Compo/Apoo";
+import Landing from "../CounselorPage/LandingPage/Comp/Landing";
 const AllRouting = () => {
   return (
     <Routes>
@@ -42,6 +43,7 @@ const AllRouting = () => {
       <Route path="/account" element={<MyProfile/>}/>
       <Route path="/authCounselor" element={<AuthCounselor/>}/>
       <Route path="/counselor/all-appointments" element={<Apoo/>}/>
+      <Route path="/counselor/landing-page" element={<Landing/>}/>
     </Routes>
   );
 };

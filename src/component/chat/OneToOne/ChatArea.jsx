@@ -57,16 +57,18 @@ const ChatArea = ({ user }) => {
       if(roomsLoaded){
         return;
       }
-      rooms.map((rum) => {
+      rooms.forEach(async(rum) => {
         const { counselorId, studentId } = extractIds(rum.name);
         if (userData.is_student) {
           if (studentId == user.id) {
-            const newroom = { username: getUsername(counselorId), room: rum };
-            setUserRooms((userRoom) => [...userRoom, newroom]);
+            const username = await getUsername(counselorId);
+          const newroom = { username: username, room: rum };
+          setUserRooms((userRoom) => [...userRoom, newroom]);
           }
         } else {
           if (counselorId == user.id) {
-            const newroom = { username: getUsername(studentId), room: rum };
+            const username = await getUsername(studentId);
+            const newroom = { username: username, room: rum };
             setUserRooms((userRoom) => [...userRoom, newroom]);
           }
         }
@@ -75,8 +77,14 @@ const ChatArea = ({ user }) => {
     }
   }, [userData, rooms]);
 
-  const getUsername = (id) => {
-    return fetchUserName(id);
+  const getUsername = async (id) => {
+    try {
+      const username = await fetchUserName(id);
+      return username;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
   };
 
   const fetchUserName = async (id) => {
@@ -97,6 +105,7 @@ const ChatArea = ({ user }) => {
         return res.data.name;
       } catch (err) {
         console.log(err);
+        throw err;
       }
     } else {
       console.log("invalid token");
@@ -263,8 +272,9 @@ const ChatArea = ({ user }) => {
         >
           Discusstion
         </Button>
-        <Button onClick={() => enterRoom("c2s5")}>Room 1</Button>
-        <Button onClick={() => enterRoom("c2s2")}>Room 2</Button>
+        {userRooms.length !=0? userRooms.map((rums) => (
+          <Button onClick={() => enterRoom(rums.room.name)} className="rounded-none py-7 border border-blue-500">{rums.username}</Button>
+        )): ""}
       </div>
       <Card className="ml-auto mt-0 bg-gray-100 sm:w-3/4 h-9/10">
         <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
