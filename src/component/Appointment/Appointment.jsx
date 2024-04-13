@@ -12,6 +12,7 @@ function Appointment() {
   let dt = new Date();
   const [date, setDate] = useState(dt);
   const [appointment, setAppointment] = useState("");
+  const [counselers, setCounselers] = useState([]);
 
   useEffect(() => {
     getVerifiedCounselors();
@@ -34,6 +35,7 @@ function Appointment() {
       setCounselers(res.data);
     } catch (err) {}
   };
+  console.log(counselers);
 
   useEffect(() => {
     setAppointment(
@@ -84,7 +86,7 @@ function Appointment() {
   };
   return (
     <>
-      <div className="flex my-4 justify-center">
+      <div className="flex my-4 justify-center h-[100vh]">
         <p className="mx-4">Set your appointment</p>
         <div className="grid grid-cols-1  gap-12 md:grid-cols-2">
           <AppointmentContext.Provider value={{ dateSetter, hourSetter }}>

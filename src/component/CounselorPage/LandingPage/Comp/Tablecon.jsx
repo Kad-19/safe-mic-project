@@ -73,7 +73,7 @@ function Tablecon() {
 
       try {
         const res = await axios.get(
-          `${API}/all/users/${id}`,
+          `${API_URL}/all/users/${id}`,
           config
         );
         return res.data.name;
