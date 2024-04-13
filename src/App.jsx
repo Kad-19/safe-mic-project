@@ -65,7 +65,6 @@ const App = () => {
           </div>
           
           <AllRouting />
-        <DrawerComp/>
         </div>
       </BrowserRouter>
     </Provider>

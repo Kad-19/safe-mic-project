@@ -9,14 +9,16 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 function DrawerComp(){
     return <Drawer direction='left'>
     <DrawerTrigger>Open</DrawerTrigger>
-    <DrawerContent>
-    <DrawerHeader>
-        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+    <DrawerContent className={cn('w-4/6')}>
+    <DrawerHeader >
+        <DrawerTitle>Welcome to our chatbot</DrawerTitle>
+        <DrawerDescription>Your conversation is private</DrawerDescription>
     </DrawerHeader>
+
     <DrawerFooter>
         <Button>Submit</Button>
         <DrawerClose>

@@ -1,6 +1,22 @@
 import { useState } from 'react';
 import prompt from '../../prompts';
-
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import Message from '../chat/MessageBlock/Message';
+import { LuSendHorizonal } from "react-icons/lu";
+import { IoClose } from "react-icons/io5";
+import { FaRobot } from "react-icons/fa6";
 const Chatbot = () => {
   const [messages, setMessages] = useState([
     {
@@ -44,37 +60,50 @@ const Chatbot = () => {
   };
 
   return (
+    <Drawer direction='left'>
+    <DrawerTrigger asChild>
+      <Button className={cn('bg-primary rounded-full fixed bottom-4 right-4')}>
+        <FaRobot/>
+      </Button>
+      </DrawerTrigger>
+    <DrawerContent className={cn('w-4/6 overflow-scroll')}>
+    <DrawerHeader >
+        <span>
+        <DrawerClose className={cn('float-end')}>
+            <Button variant="outline"><IoClose/></Button>
+        </DrawerClose>
+        <DrawerTitle>Welcome to our chatbot</DrawerTitle>
+        <DrawerDescription>Your conversation is private</DrawerDescription>
+        </span>
+        
+    </DrawerHeader>
+
     <div className="chat-container">
-      <div className="card flex-grow-1">
-        <div className="card-header bg-primary text-white">Chat</div>
-        <div className="card-body messages-box">
-          <ul className="list-unstyled messages-list">
+        <div className="w-full">
             {messages.map((message, index) => (
-              <li key={index} className={`message ${message.role === 'user' ? 'sent' : 'received'}`}>
-                <div className="message-text">
-                  <div className="message-sender">
-                    <b>{message.role === 'user' ? 'You' : 'AI Chatbot'}</b>
-                  </div>
-                  <div className="message-content">
-                    {message.content}
-                  </div>
-                </div>
-              </li>
+                  <Message key={index} sender={message.role === 'user' ? true: false}
+                    text={message.content}
+                    top={message.role === 'user' ? 'You' : 'AI Chatbot'}
+                    />
             ))}
-          </ul>
         </div>
       </div>
-      <form className="message-form" onSubmit={handleSubmit}>
-        <input
+    <DrawerFooter>
+    <form className="flex" onSubmit={handleSubmit}>
+        <Input
+          required
           type="text"
-          className="form-control message-input"
+          className={cn('w-10/12 ')}
           placeholder="Type your message..."
           value={inputMessage}
           onChange={handleChange}
         />
-        <button type="submit" className="btn btn-primary btn-send">Send</button>
+        <Button type="submit"><LuSendHorizonal/></Button>
       </form>
-    </div>
+    </DrawerFooter>
+    </DrawerContent>
+</Drawer>
+
   );
 };
 
