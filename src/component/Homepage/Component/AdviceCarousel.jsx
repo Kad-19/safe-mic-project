@@ -44,9 +44,9 @@ function AdviceCarousel(){
     ];
     
     
-    return<Carousel className="max-w-lg">
+    return<Carousel className="">
         
-        <CarouselContent className=" w-64 sm:w-80 md:w-[480px]">
+        <CarouselContent className=" w-64 sm:w-80 md:w-[480px] lg:w-[800px]">
             {
                 campusAdvice.map((advice,index)=>{
                     return <CarouselItem key={index}>
