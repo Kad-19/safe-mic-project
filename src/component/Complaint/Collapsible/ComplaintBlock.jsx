@@ -14,7 +14,7 @@ function ComplaintBlock({title,content}){
     return <Collapsible
         open={open}
         onOpenChange={SetOpen}
-        className={cn("w-full md:w-6/12")}
+        className={cn("w-full md:w-8/12")}
         >
         <CollapsibleTrigger
         className={cn("w-full")}

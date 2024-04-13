@@ -7,23 +7,20 @@ function Ready() {
         <div className="self-stretch px-px mt-56 w-full max-md:mt-10 max-md:max-w-full">
       <div className="flex gap-5 max-md:flex-col max-md:gap-0">
         <div className="flex flex-col w-[45%] max-md:ml-0 max-md:w-full">
-          <div className="flex flex-col self-stretch px-12 pt-11 pb-16 my-auto w-full text-xl font-light text-black rounded-none bg-neutral-50 max-md:px-5 max-md:mt-10 max-md:max-w-full">
+          <div className="flex flex-col self-stretch px-12 pt-11 pb-16 my-auto w-full text-xl font-normal text-black rounded-none bg-neutral-50 max-md:px-5 max-md:mt-10 max-md:max-w-full">
             <div className="text-2xl font-semibold text-center max-md:max-w-full">
-              Are you struggling? We can help
+              About, Mental health 
             </div>
             <div className="mt-9 text-neutral-700 max-md:max-w-full">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
-              amet urna sit amet massa efficitur pellentesque nec id nisl.
-              Duis blandit vel ligula eu consectetur. Proin quis velit
-              convallis, rutrum justo aliquet, condimentum tellus. Duis varius
-              magna sed rutrum elementum. Nullam facilisis justo eget leo
-              porttitor, quis lacinia urna mollis. Maecenas aliquam molestie
-              ligula a sollicitudin. Nulla ornare nunc eu ipsum maximus, sit
-              amet euismod erat bibendum. Etiam nec sagittis metus. Nunc
-              fringilla nisl elit, ut interdum ante fringilla et.
+            Mental health is a level of psychological well-being or an absence of mental illness. 
+            It's the psychological state of someone who is functioning at a satisfactory level of emotional 
+            and behavioural adjustment.
+            It includes subjective well-being, perceived self-efficacy, 
+            autonomy, competence, inter-generational dependence, and
+            self-actualization of one's intellectual and emotional potential, among others.
             </div>
-            <Button className="justify-center self-start px-5 py-5 mt-11 ml-3 bg-white border border-solid border-neutral-700 rounded-[31px] max-md:px-5 max-md:mt-10 max-md:ml-2.5 text-neutral-700 hover:text-neutral-200 transition-all duration-300 ease-in-out">
-              Find out more about us
+            <Button className="w-fit">
+              Get Resources
             </Button>
           </div>
         </div>

@@ -48,7 +48,7 @@ function Complaint(){
         <Circles title={"Assault"} detail={" this will be the text inside the circleand another text and another"}/>
         <Circles title={"Assault"} detail={" this will be the text inside the circleand another text and another"}/>
     </div>
-    <div className="h-screem grid grid-cols-1 place-items-center m-12">
+    <div className="h-screem grid grid-cols-1 place-items-center">
         {
             complaints.map((obj,index)=><ComplaintBlock title={obj.title} content={obj.description}/>)
         }
