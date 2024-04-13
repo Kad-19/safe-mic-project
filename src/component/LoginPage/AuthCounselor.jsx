@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { FaArrowRight } from "react-icons/fa";
+import API_URL from "@/url";
 
 const AuthCounselor = () => {
   const [errorStatus, setErrorStatus] = useState(0);
@@ -44,7 +45,7 @@ const AuthCounselor = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/counselor/counselor-profile/`,
+        `${API_URL}/counselor/counselor-profile/`,
         body,
         config
       );
@@ -75,7 +76,7 @@ const AuthCounselor = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/counselor/counselor-profile/`,
+        `${API_URL}/counselor/counselor-profile/`,
         config
       );
       console.log(res);
@@ -96,7 +97,7 @@ const AuthCounselor = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/counselor/counselors/`,
+        `${API_URL}/counselor/counselors/`,
         config
       );
       console.log("Counselors");

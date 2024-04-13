@@ -17,6 +17,7 @@ import Message from '../chat/MessageBlock/Message';
 import { LuSendHorizonal } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
 import { FaRobot } from "react-icons/fa6";
+import API_URL from '@/url';
 const Chatbot = () => {
   const [messages, setMessages] = useState([
     {
@@ -35,7 +36,7 @@ const Chatbot = () => {
     setInputMessage('');
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/chatbot/', {
+      const response = await fetch(`${API_URL}/chatbot/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

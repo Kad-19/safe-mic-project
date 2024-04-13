@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
+import API_URL from "@/url";
 
 export default function ChooseCounselor() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function ChooseCounselor() {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/counselor/counselors/`,
+        `${API_URL}/counselor/counselors/`,
         config
       );
       const data = 

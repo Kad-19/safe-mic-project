@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem ,
@@ -9,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import API_URL from '@/url';
 const ComplaintForm = () => {
   const [selection, setSelection] = useState('both'); // Default selection is 'both'
   const [tag, setTag] = useState("grade_issue");
@@ -28,34 +30,31 @@ const ComplaintForm = () => {
   
   const submitForm = async () => {
     
+    const bod = JSON.stringify({
+      tag,
+      body,
+    });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${localStorage.getItem("access")}`,
+        Accept: "application/json",
+      },
+    };
+  
+  
+    try {
+      const res = await axios.post(
+        `${API_URL}/complaint/complaints/`,
+        bod,
+        config,
+      );
+      console.log(res);
+    } catch (err){
+      console.log(err);
+    }
   }
   
-  // useEffect( async () => {
-  //   const bod = JSON.stringify({
-  //     tag,
-  //     body,
-  //   });
-  //   const config = {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `JWT ${localStorage.getItem("access")}`,
-  //       Accept: "application/json",
-  //     },
-  //   };
-  
-  
-  //   try {
-  //     const res = await axios.post(
-  //       `http://localhost:8000/complaint/complaints/`,
-  //       bod,
-  //       config,
-  //     );
-  //     console.log(res);
-  //   } catch (err){
-  //     console.log(err);
-  //   }
-
-  // }, [])
 
   return (
     <div className="flex justify-center items-center rounded md p-8 m-20">

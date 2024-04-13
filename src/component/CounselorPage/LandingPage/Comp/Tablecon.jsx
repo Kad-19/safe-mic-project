@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import API_URL from "@/url";
 function Tablecon() {
   const [appos, setAppo] = useState([]);
   const [convertingIso, setConvertingIso] = useState(true);
@@ -72,7 +73,7 @@ function Tablecon() {
 
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/all/users/${id}`,
+          `${API}/all/users/${id}`,
           config
         );
         return res.data.name;
@@ -96,7 +97,7 @@ function Tablecon() {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/counselor/all-appointments/`,
+        `${API_URL}/counselor/all-appointments/`,
         config
       );
       console.log(res);

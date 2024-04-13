@@ -15,8 +15,10 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { IoMdSend } from "react-icons/io";
 import { Button } from "@/components/ui/button";
+import API_URL from "@/url";
 
 const ChatArea = ({ user }) => {
+
   const [room, setRoom] = useState("");
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
@@ -44,8 +46,10 @@ const ChatArea = ({ user }) => {
 
   useEffect(() => {
     if (user) {
-      fetchMessages(room);
-      fetchUserData();
+      if (room) {
+        fetchMessages(room);
+        fetchUserData();
+      }
     }
   }, [user, room]);
 
@@ -96,7 +100,7 @@ const ChatArea = ({ user }) => {
 
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/all/users/${id}`,
+          `${API_URL}/all/users/${id}`,
           config
         );
         return res.data.name;
@@ -134,13 +138,13 @@ const ChatArea = ({ user }) => {
 
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/ws/api/messages/${room}/?limit=1&offset=0`,
+          `${API_URL}/ws/api/messages/${room}/?limit=1&offset=0`,
           config
         );
         const data = res.data;
         try {
           const response = await axios.get(
-            `http://127.0.0.1:8000/ws/api/messages/${room}/?limit=${data.count}&offset=0`,
+            `${API_URL}/ws/api/messages/${room}/?limit=${data.count}&offset=0`,
             config
           );
           const responseData = response.data;
@@ -169,7 +173,7 @@ const ChatArea = ({ user }) => {
 
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/ws/api/rooms/`,
+          `${API_URL}/ws/api/rooms/`,
           config
         );
         setRooms(res.data);
@@ -193,7 +197,7 @@ const ChatArea = ({ user }) => {
 
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/all/users/${user.id}`,
+          `${API_URL}/all/users/${user.id}`,
           config
         );
         setUserData(res.data);
@@ -262,97 +266,94 @@ const ChatArea = ({ user }) => {
   console.log(messages);
 
   return (
-    <div className="flex">
-      <Card className="ml-auto bg-gray-100 w-full h-[100vh]">
+    <div className="flex mb-1">
+      <Card className="mx-0 bg-gray-100 w-full h-[100vh]">
         <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
           Chat
         </CardHeader>
         <div className="flex">
-
-      <div className="grow flex flex-col ">
-        <Button
-          className="rounded-none py-7"
-          onClick={() => enterRoom("discussion")}
-        >
-          Discusstion
-        </Button>
-        {userRooms.length != 0
-          ? userRooms.map((rums) => (
-              <Button
-                onClick={() => enterRoom(rums.room.name)}
-                className="rounded-none py-7 border border-blue-500"
-              >
-                {rums.username}
-              </Button>
-            ))
-          : ""}
-      </div>
-      <div className=" w-full">
-
-        <CardContent className="overflow-auto h-[80vh]" ref={scrollableRef}>
-          {messages.map((mes, index) => (
-            <div key={index}>
-              {mes.username !== user.name ? (
-                <div className="relative bg-slate-600 p-1 rounded-tr-2xl rounded-tl-2xl rounded-br-2xl mt-3 mr-auto w-3/4 ">
-                  <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-slate-600 border-b-[0px] border-b-transparent transform bottom-0 -left-2"></div>
-                  <p className="px-3 text-blue-500 font-medium">
-                    {mes.username}
-                  </p>
-                  <p className="text-slate-200 p-1 px-3 text-lg">
-                    {mes.message}
-                  </p>
-                  <p className="text-slate-200 p-1 px-3 text-xs">
-                    {mes.timestamp
-                      ? new Date(mes.timestamp).toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })
-                      : new Date().toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                  </p>
-                </div>
-              ) : (
-                <div className="relative bg-slate-400 p-1 mt-3 w-3/4 ml-auto rounded-tr-2xl rounded-tl-2xl rounded-bl-2xl">
-                  <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-slate-400 border-b-[0px] border-b-transparent transform bottom-0 -right-2"></div>
-                  <p className="text-slate-200 p-1 px-3 text-lg">
-                    {mes.message}
-                  </p>
-                  <p className="text-slate-200 p-1 px-3 text-xs">
-                    {mes.timestamp
-                      ? new Date(mes.timestamp).toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })
-                      : new Date().toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                  </p>
-                </div>
-              )}
-            </div>
-          ))}
-        </CardContent>
-        <CardFooter className="p-4">
-          <form onSubmit={sendMessage} className="w-[100%] flex gap-3">
-            <Input
-              placeholder="enter your message..."
-              onChange={(e) => setMessageInput(e.target.value)}
-              value={messageInput}
-              className="w-[100%]"
-            />
-            <button
-              type="submit"
-              className="flex align-middle items-center w-8"
+          <div className="grow flex flex-col border-r-2">
+            <Button
+              className="rounded-none py-7 bg-foreground"
+              onClick={() => enterRoom("discussion")}
             >
-              <IoMdSend className="w-6 h-6" />
-            </button>
-          </form>
-        </CardFooter>
-      </div>
-
+              Discusstion
+            </Button>
+            {userRooms.length != 0
+              ? userRooms.map((rums) => (
+                  <Button
+                    onClick={() => enterRoom(rums.room.name)}
+                    className="rounded-none py-5 px-12 bg-slate-800 hover:bg-slate-600"
+                  >
+                    {rums.username}
+                  </Button>
+                ))
+              : ""}
+          </div>
+          <div className=" w-full">
+            <CardContent className="overflow-auto h-[80vh]" ref={scrollableRef}>
+              {messages.map((mes, index) => (
+                <div key={index}>
+                  {mes.username !== user.name ? (
+                    <div className="relative bg-slate-600 p-1 rounded-tr-2xl rounded-tl-2xl rounded-br-2xl mt-3 mr-auto w-3/4 ">
+                      <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-slate-600 border-b-[0px] border-b-transparent transform bottom-0 -left-2"></div>
+                      <p className="px-3 text-blue-500 font-medium">
+                        {mes.username}
+                      </p>
+                      <p className="text-slate-200 p-1 px-3 text-lg">
+                        {mes.message}
+                      </p>
+                      <p className="text-slate-200 p-1 px-3 text-xs">
+                        {mes.timestamp
+                          ? new Date(mes.timestamp).toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                          : new Date().toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="relative bg-slate-400 p-1 mt-3 w-3/4 ml-auto rounded-tr-2xl rounded-tl-2xl rounded-bl-2xl">
+                      <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-slate-400 border-b-[0px] border-b-transparent transform bottom-0 -right-2"></div>
+                      <p className="text-slate-200 p-1 px-3 text-lg">
+                        {mes.message}
+                      </p>
+                      <p className="text-slate-200 p-1 px-3 text-xs">
+                        {mes.timestamp
+                          ? new Date(mes.timestamp).toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                          : new Date().toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </CardContent>
+            <CardFooter className="p-4">
+              <form onSubmit={sendMessage} className="w-[100%] flex gap-3">
+                <Input
+                  placeholder="enter your message..."
+                  onChange={(e) => setMessageInput(e.target.value)}
+                  value={messageInput}
+                  className="w-[100%]"
+                />
+                <button
+                  type="submit"
+                  className="flex align-middle items-center w-8"
+                >
+                  <IoMdSend className="w-6 h-6" />
+                </button>
+              </form>
+            </CardFooter>
+          </div>
         </div>
       </Card>
     </div>

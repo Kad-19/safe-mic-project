@@ -61,8 +61,8 @@ const Navbar = ({ logout, isAuthenticated }) => {
         <NavLink to="/counseling" className="font-semibold">
           Counseling
         </NavLink>
-        <NavLink to="/groupChat" className="font-semibold">
-          Discussion
+        <NavLink to="/oneToOneChat" className="font-semibold">
+          Chat
         </NavLink>
         <NavLink to="/complaint" className="font-semibold">
           Complaint
@@ -77,7 +77,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
     </Fragment>
   );
   return (
-    <div className={`flex justify-between p-6 bg-gray-50 fixed w-full ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'}`}>
+    <div className={`z-50 flex justify-between px-6 py-4 bg-gray-50 fixed w-full ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'}`}>
       <div>
         <div>Mic</div>
       </div>

@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { IoMdSend } from "react-icons/io";
 import { MdGroups } from "react-icons/md";
+import API_URL from "@/url";
 
 const ChatArea = ({ user }) => {
   const [room, setRoom] = useState("");
@@ -68,14 +69,14 @@ const ChatArea = ({ user }) => {
 
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/ws/api/messages/discussion/?limit=1&offset=0`,
+          `${API_URL}/ws/api/messages/discussion/?limit=1&offset=0`,
           config
         );
         const data = res.data;
         let offset = data.count - limit;
         try {
           const response = await axios.get(
-            `http://127.0.0.1:8000/ws/api/messages/discussion/?limit=${data.count}&offset=0`,
+            `${API_URL}/ws/api/messages/discussion/?limit=${data.count}&offset=0`,
             config
           );
           const responseData = response.data;
@@ -109,7 +110,7 @@ const ChatArea = ({ user }) => {
       };
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/ws/api/messages/discussion/?limit=${lmt}&offset=${offset}`,
+          `${API_URL}/ws/api/messages/discussion/?limit=${lmt}&offset=${offset}`,
           config
         );
         const responseData = response.data;

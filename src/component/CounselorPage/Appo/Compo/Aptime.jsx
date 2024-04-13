@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import API_URL from "@/url";
 
 function Aptime() {
   const [originalAppos, setOriginalAppos] = useState([]);
@@ -26,7 +27,7 @@ function Aptime() {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/counselor/counselor-profile/`,
+        `${API_URL}/counselor/counselor-profile/`,
         config
       );
       setCounselorId(res.data.id);
@@ -162,7 +163,7 @@ function Aptime() {
 
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/all/users/${id}`,
+          `${API_URL}/all/users/${id}`,
           config
         );
         return res.data.name;
@@ -186,7 +187,7 @@ function Aptime() {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/counselor/all-appointments/`,
+        `${API_URL}/counselor/all-appointments/`,
         config
       );
       console.log(res);

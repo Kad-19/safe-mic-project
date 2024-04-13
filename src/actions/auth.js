@@ -16,6 +16,7 @@ import {
   ACTIVATION_FAIL,
   LOGOUT,
 } from "./types";
+import API_URL from "@/url";
 
 export const load_user = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
@@ -29,7 +30,7 @@ export const load_user = () => async (dispatch) => {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/auth/users/me/`,
+        `${API_URL}/auth/users/me/`,
         config
       );
       console.log(res);
@@ -63,7 +64,7 @@ export const checkAuthenticated = () => async (dispatch) => {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/auth/jwt/verify/`,
+        `${API_URL}/auth/jwt/verify/`,
         body,
         config
       );
@@ -104,7 +105,7 @@ export const delete_user = (current_password) => async () => {
 
     try {
       const res = await axios.delete(
-        `http://localhost:8000/auth/users/me/`,
+        `${API_URL}/auth/users/me/`,
         config,
         body
       );
@@ -135,7 +136,7 @@ export const login = (email, password) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      `http://localhost:8000/auth/jwt/create/`,
+      `${API_URL}/auth/jwt/create/`,
       body,
       config
     );
@@ -171,7 +172,7 @@ export const signup =
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/auth/users/`,
+        `${API_URL}/auth/users/`,
         body,
         config
       );
@@ -200,7 +201,7 @@ export const verify = (uid, token) => async (dispatch) => {
 
   try {
     await axios.post(
-      `http://localhost:8000/auth/users/activation/`,
+      `${API_URL}/auth/users/activation/`,
       body,
       config
     );
@@ -226,7 +227,7 @@ export const reset_password = (email) => async (dispatch) => {
 
   try {
     await axios.post(
-      `http://localhost:8000/auth/users/reset_password/`,
+      `${API_URL}/auth/users/reset_password/`,
       body,
       config
     );
@@ -253,7 +254,7 @@ export const reset_password_confirm =
 
     try {
       await axios.post(
-        `http://localhost:8000/auth/users/reset_password_confirm/`,
+        `${API_URL}/auth/users/reset_password_confirm/`,
         body,
         config
       );
