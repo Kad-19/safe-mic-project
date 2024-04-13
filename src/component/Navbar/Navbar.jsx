@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import Selector from "../ThemeSelector/Selector";
+import { Outlet } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { useContext } from "react";
 import { themeContext } from "@/App";
 const Navbar = ({ logout, isAuthenticated }) => {
@@ -24,65 +27,73 @@ const Navbar = ({ logout, isAuthenticated }) => {
     };
   }, [lastScrollTop]);
   const guestLinks = () => (
-    <Fragment>
-      <div className="flex justify-between gap-6 items-center">
-        <NavLink to="/" className="font-semibold">
+    <div className="z-0">
+    <header className={` flex justify-end bg-background w-full px-8 py-4 fixed top-0 z-10 border-2 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
+        <NavLink to="/" className="font-semibold px-4">
           Home
         </NavLink>
         <Selector/>
-        <NavLink to="/counseling" className="font-semibold">
+        <NavLink to="/counseling" className="font-semibold px-4">
           Counseling
         </NavLink>
-        <NavLink to="/complaint" className="font-semibold">
+        <NavLink to="/complaint" className="font-semibold px-4">
           Complaint
         </NavLink>
         <NavLink
           to="/login"
-          className="rounded-3xl bg-gray-300 px-5 p-2 font-bold"
+          className="rounded-3xl border-2 px-5 p-2 font-bold"
         >
           Login
         </NavLink>
         <NavLink
           to="/signup"
-          className="rounded-3xl bg-gray-950 px-5 p-2 text-gray-50 font-bold"
         >
+        <Button className={cn('rounded-3xl')}>
           Sign up
+        </Button> 
         </NavLink>
-      </div>
-    </Fragment>
+      
+    </header>
+    </div>
   );
   const authLinks = () => (
-    <Fragment>
-      <div className="flex justify-between gap-6 items-center h-[5vh]">
-        <NavLink to="/" className="font-semibold">
+    <div>
+
+<header className="flex justify-end bg-background w-full px-8 py-4 top-0">
+        <NavLink to="/" className="font-semibold px-4">
           Home
         </NavLink>
         <Selector/>
-        <NavLink to="/counseling" className="font-semibold">
+        <NavLink to="/counseling" className="font-semibold px-4">
           Counseling
         </NavLink>
         <NavLink to="/oneToOneChat" className="font-semibold">
           Chat
         </NavLink>
-        <NavLink to="/complaint" className="font-semibold">
+        <NavLink to="/complaint" className="font-semibold px-4">
           Complaint
         </NavLink>
         <NavLink
           to="/account"
-          className="font-semibold"
+          className="font-semibold px-4"
         >
           My Account
         </NavLink>
-      </div>
-    </Fragment>
+      </header>
+    </div>
   );
   return (
-    <div className={`z-50 flex justify-between px-6 py-4 bg-gray-50 fixed w-full ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'}`}>
-      <div>
-        <div>Mic</div>
-      </div>
-      {isAuthenticated? authLinks() : guestLinks()}
-    </div>
+    // <div className={`flex justify-between p-6 bg-gray-50 fixed w-full`}>
+    //   <div>
+    //     <div>Mic</div>
+    //   </div>
+    <>
+    {isAuthenticated? authLinks() : guestLinks()}
+    <main>
+      <Outlet/>
+    </main>
+    </>
+    // </div>
   );
 };
 

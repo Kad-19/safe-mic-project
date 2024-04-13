@@ -6,13 +6,14 @@ import { useContext } from "react";
 import { themeContext } from "@/App";
 import { CiDark } from "react-icons/ci";
 import { CiLight } from "react-icons/ci";
+import { NavLink } from "react-router-dom";
 function Selector(){
     const {changeTheme,darkThemeSwitch,theme}=useContext(themeContext)
     return <Popover >
-        <PopoverTrigger asChild>
-            <span className="bg-primary font-semibold p-1 rounded-md text-primary-foreground" >
-                theme
-            </span>
+        <PopoverTrigger  asChild>
+    <NavLink>
+        Theme
+    </NavLink>
         </PopoverTrigger>
         <PopoverContent className={cn('block w-fit')} side={'bottom'}>
             <motion.div className="my-1 w-12 aspect-square bg-[#3B82F6] rounded-full"

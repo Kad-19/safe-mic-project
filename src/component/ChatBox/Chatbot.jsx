@@ -67,7 +67,7 @@ const Chatbot = () => {
         <FaRobot/>
       </Button>
       </DrawerTrigger>
-    <DrawerContent className={cn('w-4/6 overflow-scroll')}>
+    <DrawerContent className={cn(' w-full sm:w-10/12 md:w-1/2 lg:w-2/6 overflow-scroll p-2')}>
     <DrawerHeader >
         <span>
         <DrawerClose className={cn('float-end')}>
