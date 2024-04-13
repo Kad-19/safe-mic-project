@@ -1,2 +1,2 @@
-const API_URL = "http://localhost:8000"
+const API_URL = "https://kalkidanyis.pythonanywhere.com"
 export default API_URL;

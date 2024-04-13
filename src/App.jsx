@@ -5,12 +5,23 @@ import ComplaintBlock from "./component/Complaint/Collapsible/ComplaintBlock";
 import { Provider } from "react-redux";
 import { Button } from "./components/ui/button";
 import store from "./store";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
 import Auth from "./component/LoginPage/Auth";
 import { useState, useEffect } from "react";
 import Selector from "./component/ThemeSelector/Selector";
 import { createContext } from "react";
 import DrawerComp from "./component/ChatBox/DrawerComp";
+
+
+const ScrollToTop = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+};
 
 export const themeContext=createContext(null)
 const App = () => {
@@ -57,6 +68,7 @@ const App = () => {
     <Provider store={store}>
       <BrowserRouter>
           <Auth/>
+          <ScrollToTop/>
           <themeContext.Provider value={{changeTheme,darkThemeSwitch,theme}}>
           <Navbar />
           </themeContext.Provider>

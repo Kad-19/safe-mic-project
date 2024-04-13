@@ -30,6 +30,7 @@ const ChatArea = ({ user }) => {
   const [userData, setUserData] = useState(null);
   const [userRooms, setUserRooms] = useState([]);
   const [roomsLoaded, setRoomsLoaded] = useState(false);
+  const {roomName} = useParams();
 
   const scrollableRef = useRef(null);
 
@@ -40,7 +41,12 @@ const ChatArea = ({ user }) => {
   }, [messages]);
 
   useEffect(() => {
-    enterRoom("discussion");
+    if(roomName){
+      enterRoom(roomName);  
+    }
+    else{
+      enterRoom("discussion");
+    }
     fetchRooms();
   }, []);
 
@@ -152,6 +158,7 @@ const ChatArea = ({ user }) => {
           setResData(responseData);
         } catch (err) {
           console.log(err);
+          setMessages([]);
         }
       } catch (err) {
         console.log(err);

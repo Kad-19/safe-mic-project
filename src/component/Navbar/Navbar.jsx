@@ -57,10 +57,9 @@ const Navbar = ({ logout, isAuthenticated }) => {
     </div>
   );
   const authLinks = () => (
-    <div>
-
-<header className="flex justify-end bg-background w-full px-8 py-4 top-0">
-        <NavLink to="/" className="font-semibold px-4">
+    <div className="z-0">
+    <header className={` flex justify-end bg-background w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
+    <NavLink to="/" className="font-semibold px-4">
           Home
         </NavLink>
         <Selector/>
@@ -79,9 +78,11 @@ const Navbar = ({ logout, isAuthenticated }) => {
         >
           My Account
         </NavLink>
-      </header>
+      
+    </header>
     </div>
   );
+  
   return (
     // <div className={`flex justify-between p-6 bg-gray-50 fixed w-full`}>
     //   <div>

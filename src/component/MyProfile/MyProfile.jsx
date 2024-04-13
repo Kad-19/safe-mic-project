@@ -12,11 +12,6 @@ const MyProfile = ({ user, delete_user, logout }) => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  const del = (e) => {
-    e.preventDefault();
-    delete_user(password);
-  };
-
   useEffect(() => {
     if (user) {
       setIsLoading(false);
@@ -47,19 +42,7 @@ const MyProfile = ({ user, delete_user, logout }) => {
               Reset Password
             </button>
 
-            <button
-              type="submit"
-              className="h-12 w-60 object-cover rounded-full bg-white text-red-600 hover:bg-red-300 py-0 transition-colors duration-200"
-              onClick={del}
-            >
-              Delete Account
-            </button>
-            <input
-              type="text"
-              placeholder="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
+            
           </div>
           <div className="m-4">
             <Button onClick={log_out}>

@@ -11,8 +11,9 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
 import API_URL from "@/url";
+import { connect } from "react-redux";
 
-export default function ChooseCounselor() {
+const ChooseCounselor = ({user}) => {
   const navigate = useNavigate();
   const [counselers, setCounselers] = useState([]);
   useEffect(() => {
@@ -33,26 +34,28 @@ export default function ChooseCounselor() {
         `${API_URL}/counselor/counselors/`,
         config
       );
-      const data = 
-      console.log("Counselors");
       setCounselers(res.data);
     } catch (err) {}
   };
 
-  console.log(counselers);
 
   const handleClick = (counselor) => {
-    navigate(`/oneToOneChat/${counselor}`);
+    const roomName = "c" + counselor.otherId + "s" + user.id;
+    console.log(roomName);
+    if(typeof roomName === 'string'){
+      console.log("string");
+    }
+    navigate(`/oneToOneChat/${roomName}`);
   }
 
   return (
     <div className="">
       <h1 className="flex justify-center mt-28 2/w-2/12 p-8 font-semibold">
-        select a Counselor you want to chat with
+        Select a Counselor you want to chat with
       </h1>
       <div className="flex justify-center ">
-        {counselers.map((counselor) => (
-          <Card className="bg-gray-200 flex justify-center items-center flex-col rounded-lg m-5 lg:w-2/12 md:w-1/3 sm:w-1/2 hover:bg-gray-300 cursor-pointer" onClick={(counselor) => handleClick(counselor)}>
+        {counselers.map((counselor, index) => (
+          <Card key={index} className="bg-gray-200 flex justify-center items-center flex-col rounded-lg m-5 lg:w-2/12 md:w-1/3 sm:w-1/2 hover:bg-gray-300 cursor-pointer" onClick={() => handleClick(counselor)}>
             <CardHeader className="p-6">
               <Avatar>
                 <AvatarImage src="https://github.com/shadcn.png" />
@@ -71,3 +74,9 @@ export default function ChooseCounselor() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps)(ChooseCounselor);

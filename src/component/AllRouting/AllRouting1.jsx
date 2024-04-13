@@ -28,7 +28,7 @@ const AllRouting = () => {
       <Route path="/complaint" element={<Complaint />} />
       <Route path="/counseling" element={<Counseling />} />
       <Route path="/groupChat" element={<GroupChat />} />
-      <Route path="/oneToOneChat" element={<OneToOneChat/>}/>
+      <Route path="/oneToOneChat/:roomName?" element={<OneToOneChat/>}/>
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/appointment" element={<Appointment/>} />
       <Route path="/counselor-info" element={<CounseInfo/>}/>

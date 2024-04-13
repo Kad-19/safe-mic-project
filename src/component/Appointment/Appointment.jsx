@@ -6,11 +6,35 @@ import { Button } from "@/components/ui/button";
 import { createContext } from "react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import API_URL from "@/url";
 export const AppointmentContext = createContext(null);
 function Appointment() {
   let dt = new Date();
   const [date, setDate] = useState(dt);
   const [appointment, setAppointment] = useState("");
+
+  useEffect(() => {
+    getVerifiedCounselors();
+  }, []);
+
+  const getVerifiedCounselors = async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${localStorage.getItem("access")}`,
+        Accept: "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.get(
+        `${API_URL}/counselor/counselors/`,
+        config
+      );
+      setCounselers(res.data);
+    } catch (err) {}
+  };
+
   useEffect(() => {
     setAppointment(
       date.toLocaleDateString("en-UK", {
@@ -49,7 +73,7 @@ function Appointment() {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/counselor/appointments/`,
+        `${API_URL}/counselor/appointments/`,
         bod,
         config
       );
