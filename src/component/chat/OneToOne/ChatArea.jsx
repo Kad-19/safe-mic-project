@@ -21,7 +21,6 @@ const ChatArea = ({ user }) => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [chatSocket, setChatSocket] = useState(null);
-  const [roomMessages, setRoomMessages] = useState({});
   const [resData, setResData] = useState(null);
   const [rend, setRend] = useState(0);
   const [limit, setLimit] = useState(100);
@@ -29,8 +28,6 @@ const ChatArea = ({ user }) => {
   const [userData, setUserData] = useState(null);
   const [userRooms, setUserRooms] = useState([]);
   const [roomsLoaded, setRoomsLoaded] = useState(false);
-
-  let namey = Math.floor(Math.random() * 1000);
 
   const scrollableRef = useRef(null);
 
@@ -54,16 +51,16 @@ const ChatArea = ({ user }) => {
 
   useEffect(() => {
     if (userData) {
-      if(roomsLoaded){
+      if (roomsLoaded) {
         return;
       }
-      rooms.forEach(async(rum) => {
+      rooms.forEach(async (rum) => {
         const { counselorId, studentId } = extractIds(rum.name);
         if (userData.is_student) {
           if (studentId == user.id) {
             const username = await getUsername(counselorId);
-          const newroom = { username: username, room: rum };
-          setUserRooms((userRoom) => [...userRoom, newroom]);
+            const newroom = { username: username, room: rum };
+            setUserRooms((userRoom) => [...userRoom, newroom]);
           }
         } else {
           if (counselorId == user.id) {
@@ -141,13 +138,13 @@ const ChatArea = ({ user }) => {
           config
         );
         const data = res.data;
-        let offset = data.count - limit;
         try {
           const response = await axios.get(
             `http://127.0.0.1:8000/ws/api/messages/${room}/?limit=${data.count}&offset=0`,
             config
           );
           const responseData = response.data;
+          console.log(responseData);
           setResData(responseData);
         } catch (err) {
           console.log(err);
@@ -175,7 +172,6 @@ const ChatArea = ({ user }) => {
           `http://127.0.0.1:8000/ws/api/rooms/`,
           config
         );
-        console.log(res);
         setRooms(res.data);
       } catch (err) {
         console.log(err);
@@ -200,7 +196,6 @@ const ChatArea = ({ user }) => {
           `http://127.0.0.1:8000/all/users/${user.id}`,
           config
         );
-        console.log(res);
         setUserData(res.data);
       } catch (err) {
         console.log(err);
@@ -215,7 +210,11 @@ const ChatArea = ({ user }) => {
       setMessages([]);
       setMessages((prevMessages) => {
         const newMessages = resData.results.map((data) => {
-          return { message: data.message, username: data.user };
+          return {
+            message: data.message,
+            username: data.user,
+            timestamp: data.timestamp,
+          };
         });
         return [...newMessages, ...prevMessages];
       });
@@ -260,30 +259,40 @@ const ChatArea = ({ user }) => {
       JSON.stringify({ message: messageInput, username: user.name })
     );
   }
-
-  console.log(userRooms);
+  console.log(messages);
 
   return (
     <div className="flex">
-      <div className="grow flex flex-col">
+      <Card className="ml-auto bg-gray-100 w-full h-[100vh]">
+        <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
+          Chat
+        </CardHeader>
+        <div className="flex">
+
+      <div className="grow flex flex-col ">
         <Button
           className="rounded-none py-7"
           onClick={() => enterRoom("discussion")}
         >
           Discusstion
         </Button>
-        {userRooms.length !=0? userRooms.map((rums) => (
-          <Button onClick={() => enterRoom(rums.room.name)} className="rounded-none py-7 border border-blue-500">{rums.username}</Button>
-        )): ""}
+        {userRooms.length != 0
+          ? userRooms.map((rums) => (
+              <Button
+                onClick={() => enterRoom(rums.room.name)}
+                className="rounded-none py-7 border border-blue-500"
+              >
+                {rums.username}
+              </Button>
+            ))
+          : ""}
       </div>
-      <Card className="ml-auto mt-0 bg-gray-100 sm:w-3/4 h-9/10">
-        <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
-          Chat
-        </CardHeader>
-        <CardContent className="overflow-auto h-[73vh]" ref={scrollableRef}>
+      <div className=" w-full">
+
+        <CardContent className="overflow-auto h-[80vh]" ref={scrollableRef}>
           {messages.map((mes, index) => (
             <div key={index}>
-              {mes.username != user.name ? (
+              {mes.username !== user.name ? (
                 <div className="relative bg-slate-600 p-1 rounded-tr-2xl rounded-tl-2xl rounded-br-2xl mt-3 mr-auto w-3/4 ">
                   <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-slate-600 border-b-[0px] border-b-transparent transform bottom-0 -left-2"></div>
                   <p className="px-3 text-blue-500 font-medium">
@@ -292,6 +301,17 @@ const ChatArea = ({ user }) => {
                   <p className="text-slate-200 p-1 px-3 text-lg">
                     {mes.message}
                   </p>
+                  <p className="text-slate-200 p-1 px-3 text-xs">
+                    {mes.timestamp
+                      ? new Date(mes.timestamp).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                      : new Date().toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                  </p>
                 </div>
               ) : (
                 <div className="relative bg-slate-400 p-1 mt-3 w-3/4 ml-auto rounded-tr-2xl rounded-tl-2xl rounded-bl-2xl">
@@ -299,9 +319,19 @@ const ChatArea = ({ user }) => {
                   <p className="text-slate-200 p-1 px-3 text-lg">
                     {mes.message}
                   </p>
+                  <p className="text-slate-200 p-1 px-3 text-xs">
+                    {mes.timestamp
+                      ? new Date(mes.timestamp).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                      : new Date().toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                  </p>
                 </div>
               )}
-              <br />
             </div>
           ))}
         </CardContent>
@@ -321,6 +351,9 @@ const ChatArea = ({ user }) => {
             </button>
           </form>
         </CardFooter>
+      </div>
+
+        </div>
       </Card>
     </div>
   );

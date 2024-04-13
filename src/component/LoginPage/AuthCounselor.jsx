@@ -17,16 +17,18 @@ const AuthCounselor = () => {
     bio: "",
     languages: "",
     specialities: "",
+    years_of_experience: 0,
   });
   const [gender, setGender] = useState("");
 
-  const { bio, languages, specialities } = formData;
+  const { bio, languages, specialities, years_of_experience } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
     submitProfile();
+    setErrorStatus(0);
   };
 
   const submitProfile = async () => {
@@ -37,9 +39,8 @@ const AuthCounselor = () => {
         Accept: "application/json",
       },
     };
-    const verified = true;
 
-    const body = JSON.stringify({ bio, languages, specialities, gender, verified });
+    const body = JSON.stringify({ bio, languages, specialities, gender, years_of_experience});
 
     try {
       const res = await axios.post(
@@ -60,7 +61,7 @@ const AuthCounselor = () => {
   }, []);
 
   if (verified) {
-    navigate("/");
+    navigate("/counselor/landing-page");
   }
 
   const getProfile = async () => {
@@ -117,19 +118,20 @@ const AuthCounselor = () => {
             
           <form onSubmit={(e) => onSubmit(e)} className='flex flex-col gap-4'>
             <Label>Bio</Label>
-            <Textarea onChange={(e) => onChange(e)} value={bio} name="bio"/>
+            <Textarea onChange={(e) => onChange(e)} value={bio} name="bio" placeholder="bio"/>
             <Label>Languages</Label>
             <Input
               onChange={(e) => onChange(e)}
               value={languages}
               name="languages"
-              placeholder="Hello"
+              placeholder="English,..."
               ></Input>
             <Label>Specialities</Label>
             <Input
               onChange={(e) => onChange(e)}
               value={specialities}
               name="specialities"
+              placeholder="specialities..."
             ></Input>
             <div className="flex gap-12">
               Gender:
@@ -160,7 +162,7 @@ const AuthCounselor = () => {
               </span>
             </div>
             <Label className={cn()}>Years of experience:</Label>
-            <Input type='number' min='0' className={cn('w-8/12')}/>
+            <Input type='number' min='0' className={cn('w-8/12')} onChange={(e) => onChange(e)}/>
             <Button type="submit" className=' font-semibold w-fit'>Submit</Button>
           </form>
         </CardContent>

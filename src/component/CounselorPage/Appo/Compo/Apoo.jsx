@@ -3,12 +3,12 @@ import Aptime from './Aptime'
 function Apoo() {
   return (
     <div className="flex flex-col bg-white">
-    <div className="flex flex-col items-start pl-12 mt-1.5 w-full max-md:pl-5 max-md:max-w-full">
+    <div className="flex flex-col items-start pl-12 mt-1.5 w-full">
       <div className="mt-28 ml-20 text-4xl font-semibold text-black max-md:mt-10 max-md:ml-2.5">
-      Your Appointment In This Week
+      Your Appointments
       </div>
-      <div className="flex flex-col justify-center mt-5 ml-16 max-w-full text-xs leading-4 text-black bg-neutral-700 w-[126px] max-md:ml-2.5">
-        <div className="flex flex-col bg-white rounded border border-solid border-zinc-400">
+      <div className="flex flex-col justify-center mt-5 ml-16 md:w-3/4 text-xs leading-4 max-md:ml-2.5">
+        <div className="">
           <Aptime/>
 
       </div>

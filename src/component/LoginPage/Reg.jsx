@@ -8,7 +8,6 @@ import { signup } from "../../actions/auth";
 import axios from "axios";
 
 const Reg = ({ signup, isAuthenticated, error }) => {
-  const [action, SetAction] = useState("sign up");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const [accountCreated, setAccountCreated] = useState(false);
@@ -18,6 +17,8 @@ const Reg = ({ signup, isAuthenticated, error }) => {
     password: "",
     re_password: "",
   });
+  const [is_student, setIs_student] = useState(true);
+
 
   const { name, email, password, re_password } = formData;
 
@@ -28,11 +29,22 @@ const Reg = ({ signup, isAuthenticated, error }) => {
     e.preventDefault();
 
     if (password === re_password) {
-      signup(name, email, password, re_password);
+      if(is_student){
+        if(email.endsWith("aastustudent.edu.et")){
+          signup(name, email, password, re_password);
+        }
+        else{
+          setErrorMessage("Please use your organization email")
+        }
+      }
+      else{
+        signup(name, email, password, re_password);
+      }
     }
     else {
       setErrorMessage("Password and Confirm password doesn't match");
     }
+
   };
 
   useEffect(() => {
@@ -58,8 +70,16 @@ const Reg = ({ signup, isAuthenticated, error }) => {
     navigate("/");
   }
   if (accountCreated) {
-    navigate(`/login/${true}`);
+    navigate(`/login/notverified`);
   }
+
+  const toggle = () => {
+    if (is_student) {
+      setIs_student(false);
+    } else {
+      setIs_student(true);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center rounded my-20 w-[100%]">
@@ -69,6 +89,21 @@ const Reg = ({ signup, isAuthenticated, error }) => {
           className="mx-auto sm:w-[60%] w-[80%]"
         >
           <h1 className="text-[32px] pb-10 text-center">Create Account</h1>
+          <div className="flex justify-start items-center">
+            <span className="text-lg mr-2 font-medium">Sign up as </span>
+            <label
+              htmlFor="Toggle3"
+              className="inline-flex items-center p-1 rounded-md cursor-pointer text-gray-800"
+            >
+              <input id="Toggle3" type="checkbox" className="hidden peer" />
+              <span className="px-4 rounded-l-md bg-violet-400 peer-checked:bg-gray-300" onClick={toggle}>
+                Student
+              </span>
+              <span className="px-4 rounded-r-md bg-gray-300 peer-checked:bg-violet-400" onClick={toggle}>
+                Counselor
+              </span>
+            </label>
+          </div>
           <div className="relative mt-10 flex text-[18px] flex-wrap flex-col">
             <label htmlFor="" className="w-[110px] font-medium">
               User Name
@@ -125,7 +160,7 @@ const Reg = ({ signup, isAuthenticated, error }) => {
           </div>
 
           <div className="relative my-7 flex flex-wrap text-[18px] flex-col ">
-            <label htmlFor="" className="w-[160px] font-medium">
+            <label htmlFor="" className="font-medium">
               Confirm Password
             </label>
             <input
