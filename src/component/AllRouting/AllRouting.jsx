@@ -19,11 +19,12 @@ import AuthCounselor from "../LoginPage/AuthCounselor";
 import OneToOneChat from "../chat/OneToOne/OneToOneChat"
 import Apoo from "../CounselorPage/Appo/Compo/Apoo";
 import Landing from "../CounselorPage/LandingPage/Comp/Landing";
+import Colors from "@/Colors";
 const AllRouting = () => {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="/login/:notVerified?" element={<LoginPage />} />
+      <Route path="/login/:verified?" element={<LoginPage />} />
       <Route path="/signup" element={<Reg />} />
       <Route path="/complaint" element={<Complaint />} />
       <Route path="/counseling" element={<Counseling />} />
@@ -44,6 +45,7 @@ const AllRouting = () => {
       <Route path="/authCounselor" element={<AuthCounselor/>}/>
       <Route path="/counselor/all-appointments" element={<Apoo/>}/>
       <Route path="/counselor/landing-page" element={<Landing/>}/>
+      <Route path="/colors" element={<Colors/>}/>
     </Routes>
   );
 };

@@ -139,7 +139,6 @@ export const login = (email, password) => async (dispatch) => {
       body,
       config
     );
-    console.log(res);
 
     dispatch({
       type: LOGIN_SUCCESS,

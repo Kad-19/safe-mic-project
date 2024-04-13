@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
@@ -6,6 +6,23 @@ import Selector from "../ThemeSelector/Selector";
 import { useContext } from "react";
 import { themeContext } from "@/App";
 const Navbar = ({ logout, isAuthenticated }) => {
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+  const [isScrolledDown, setIsScrolledDown] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      setIsScrolledDown(scrollTop > lastScrollTop);
+      setLastScrollTop(scrollTop);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollTop]);
   const guestLinks = () => (
     <Fragment>
       <div className="flex justify-between gap-6 items-center">
@@ -40,6 +57,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
         <NavLink to="/" className="font-semibold">
           Home
         </NavLink>
+        <Selector/>
         <NavLink to="/counseling" className="font-semibold">
           Counseling
         </NavLink>
@@ -59,7 +77,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
     </Fragment>
   );
   return (
-    <div className="flex justify-between p-6 bg-gray-50 fixed w-full">
+    <div className={`flex justify-between p-6 bg-gray-50 fixed w-full ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'}`}>
       <div>
         <div>Mic</div>
       </div>

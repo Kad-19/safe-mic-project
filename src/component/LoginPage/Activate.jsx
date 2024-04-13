@@ -15,7 +15,7 @@ const Activate = ({ verify }) => {
   };
 
   if (verified) {
-    navigate("/");
+    navigate(`/login/verified`);
   }
 
   return (
