@@ -62,7 +62,7 @@ const Chatbot = () => {
   return (
     <Drawer direction='left'>
     <DrawerTrigger asChild>
-      <Button className={cn('bg-foreground rounded-full fixed bottom-4 right-4')}>
+      <Button className={cn('bg-primary rounded-full fixed bottom-4 right-4')}>
         <FaRobot/>
       </Button>
       </DrawerTrigger>
@@ -98,7 +98,7 @@ const Chatbot = () => {
           value={inputMessage}
           onChange={handleChange}
         />
-        <Button type="submit" className=""><LuSendHorizonal/></Button>
+        <Button type="submit"><LuSendHorizonal/></Button>
       </form>
     </DrawerFooter>
     </DrawerContent>
