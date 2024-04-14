@@ -3,6 +3,7 @@ import React from 'react'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
+import pic from '/public/Images/pexels-buro-millennial-1438084.jpg'
 // import logo from '../assets/Images/logo.png'
 function Ready() {
   return (
@@ -11,7 +12,7 @@ function Ready() {
         <Card className="">
           <img
             alt='a picture'
-            src='{logo}'
+            src={pic}
             loading="lazy"
             srcSet="..."
             className=""

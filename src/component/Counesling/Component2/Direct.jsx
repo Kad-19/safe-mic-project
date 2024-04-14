@@ -2,9 +2,6 @@ import { Button } from '@/components/ui/button'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useEffect,useState } from 'react'
-import { Link } from 'react-scroll'
-import { all } from 'axios'
 function Direct() {
   return (
     <div className="mt-16 mx-8">
