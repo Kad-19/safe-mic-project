@@ -10,12 +10,13 @@ let tags = {
   other: "other",
   all:'all'
 }
-
+import Loading from '@/component/Animation/Loading/Loading';
 export const Fetcher = () => {
   const { isLoading, data } = useFetch('complaint/all-complaints/', true);
 
   if (isLoading) {
-    return <h2>is loading..</h2>
+    return <div className="flex w-full justify-center"><Loading/>
+            </div>
   }
 
   return (

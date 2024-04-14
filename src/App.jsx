@@ -13,6 +13,7 @@ import { createContext } from "react";
 import DrawerComp from "./component/Customization/DrawerComp";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Footer from "./component/Footer/Footer";
+import Loading from "./component/Animation/Loading/Loading";
 
 
 const queryClient = new QueryClient();
@@ -78,6 +79,7 @@ const App = () => {
           <ScrollToTop/>
           <themeContext.Provider value={{changeTheme,darkThemeSwitch,theme}}>
           <Navbar />
+      
           </themeContext.Provider>
           <AllRouting />
           <Footer/>

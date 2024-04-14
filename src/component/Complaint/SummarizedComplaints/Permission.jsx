@@ -1,12 +1,13 @@
 import { Fetcher } from "./Fetcher";
 import { PopUp } from "./PopUp";
 import useFetch from "./useFetch";
-
+import Loading from "@/component/Animation/Loading/Loading";
 export const Permission=(props)=>{
     const { isLoading, data } = useFetch(`all/users/${props.id}`, true);
 
     if (isLoading) {
-      return <h2>is loading..</h2>
+      return <div className="flex w-full justify-center"><Loading/>
+            </div>
     }
     if(data){
       console.log(data);
