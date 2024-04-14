@@ -6,11 +6,13 @@ import Ready from "./Component/Ready";
 import Service from "./Component/Service";
 import Footer from "./Component/Footer";
 import AdviceCarousel from "./Component/AdviceCarousel";
+import Chatbot from "../ChatBox/Chatbot";
 function Homepage() {
   return (<>
       <div className="flex flex-col items-center  md:w-8/12 mx-auto max-md:px-5 max-md:mt-10 max-md:max-w-full">
         <div>
           <Hero />
+          <Chatbot/>
         </div>
         <div>
           <AdviceCarousel/>

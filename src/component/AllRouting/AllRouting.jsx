@@ -14,7 +14,6 @@ import MyProfile from "../MyProfile/MyProfile";
 import CounseInfo from "../Counselor info/CounseInfo";
 import ComplaintForm from "../FillingForm/ComplaintForm";
 import ChooseCounselor from "../Counesling/ChooseCounselor";
-import Chatbot from "../ChatBox/Chatbot";
 import AuthCounselor from "../LoginPage/AuthCounselor";
 import OneToOneChat from "../chat/OneToOne/OneToOneChat"
 import Apoo from "../CounselorPage/Appo/Compo/Apoo";
@@ -34,7 +33,6 @@ const AllRouting=createBrowserRouter(
             <Route path="/counselor-info" element={<CounseInfo/>}/>
             <Route path="/complaint-form" element={<ComplaintForm/>}/>
             <Route path="/chooseCounselor" element={<ChooseCounselor/>}/>
-            <Route path="/chatbot" element={<Chatbot/>}/>
             <Route
                 path="/password/reset/confirm/:uid/:token"
                 element={<ResetPasswordConfirm />}
