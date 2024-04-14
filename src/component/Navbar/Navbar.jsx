@@ -29,7 +29,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
   }, [lastScrollTop]);
   const guestLinks = () => (
     <div className="z-0">
-    <header className={` flex justify-end bg-background items-center w-full px-8 py-4 fixed top-0 z-10 border-2 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
+    <header className={` flex justify-end bg-background items-center w-full px-8 py-4 sticky top-0 z-10 border-2 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
         <NavLink to="/" className="font-semibold px-4">
           Home
         </NavLink>

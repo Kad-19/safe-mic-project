@@ -19,7 +19,7 @@ import API_URL from "@/url";
 import { WEBSOCKET_URL } from "@/url";
 
 const ChatArea = ({ user }) => {
-
+  const [activeButton, setActiveButton] = useState(-1);
   const [room, setRoom] = useState("");
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
@@ -53,7 +53,7 @@ const ChatArea = ({ user }) => {
 
   useEffect(() => {
     if (user) {
-      if (room) {
+      if (room != "") {
         fetchMessages(room);
         fetchUserData();
       }
@@ -282,16 +282,22 @@ const ChatArea = ({ user }) => {
         <div className="flex">
           <div className="grow flex flex-col border-r-2">
             <Button
-              className="rounded-none py-7 bg-accent text-accent-foreground hover:bg-muted-foreground hover:text-muted"
-              onClick={() => enterRoom("discussion")}
+              className={`rounded-none py-7 bg-${activeButton == -1 ? 'accent': 'background'} text-accent-foreground hover:bg-muted-foreground hover:text-muted`}
+              onClick={() => {
+                enterRoom("discussion");
+                setActiveButton(-1);
+              }}
             >
               Discussion
             </Button>
             {userRooms.length != 0
-              ? userRooms.map((rums) => (
+              ? userRooms.map((rums, index) => (
                   <Button
-                    onClick={() => enterRoom(rums.room.name)}
-                    className="rounded-none py-5 px-12 bg-background text-foreground border hover:bg-accent"
+                    onClick={() => {
+                      enterRoom(rums.room.name);
+                      setActiveButton(index);
+                    }}
+                    className={`rounded-none py-5 px-12 bg-${activeButton === index ? 'accent' : 'background'} text-foreground border-y  hover:bg-accent`}
                   >
                     {rums.username}
                   </Button>

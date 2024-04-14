@@ -19,7 +19,7 @@ export const PopUp = () => {
         <div>
             {open ?
                 <div style={{height:"100vh"}} id="crypto-modal" tabIndex="-1" aria-hidden="true" className="fixed bg-gray-900 bg-opacity-50 backdrop-blur-sm top-0 right-0 bottom-0 left-0 flex items-center justify-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div className="relative p-4 w-full max-w-[40vw] max-h-full">
+                    <div className="relative p-4 w-full w-[80vw] max-w-lg max-h-full">
                         <div style={{height:"520px"}} className="relative bg-white rounded-lg shadow dark:bg-gray-700 animate-fade-in">
                             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">

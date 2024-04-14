@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
-import { Card,CardContent } from "@/components/ui/card";
+import { Card,CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -111,10 +111,14 @@ const AuthCounselor = () => {
   };
 
   return (
-    <div className="mt-10 mx-16">
+    <div className="mt-28 mx-16">
       
         {errorStatus == 500 ? (
         <Card className={cn('py-4 px-2')}>
+          <CardHeader>
+            Enter your profile detail
+
+          </CardHeader>
           <CardContent>
             
           <form onSubmit={(e) => onSubmit(e)} className='flex flex-col gap-4'>
@@ -171,7 +175,7 @@ const AuthCounselor = () => {
         ) : verified ? (
           "Verified"
         ) : (
-          <div className="grid grid-cols-2 gap-24 font-bold w-8/12 text-3xl"> 
+          <div className="grid grid-cols-2 gap-24 font-bold w-8/12 text-3xl pt-24 mx-24"> 
           <p>
           Your Account is not verified by the Admin yet.
           </p>
@@ -180,7 +184,7 @@ const AuthCounselor = () => {
                         h-fit font-medium text-lg
                         w-fit
                         rounded-3xl px-4 p-1 hover:font-semibold 
-                        hover:px-8 "
+                        hover:px-8 transition-all ease-in-out duration-300"
                         onClick={()=>{
                           navigate("/")
                         }}

@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 export const AppointmentContext = createContext(null);
 function Appointment() {
   let dt = new Date();
@@ -91,14 +92,16 @@ function Appointment() {
     }
   };
   return (
-    <div className="h-[100vh] mt-36">
-      <div className="flex my-4 justify-center flex-col">
-        <div className="">
+    <div className="h-[100vh] mt-24 md:p-10">
+      <Card>
+        <CardHeader>
+          <p className="text-2xl">Schedule in person counseling</p>
+        </CardHeader>
+        <CardContent>
           <div>
             <DropdownMenu>
-              <DropdownMenuTrigger className={cn('flex gap-3 m-4')}>
-                <span>Choose Counselor</span>
-              <Input className={cn('w-4/12')} value={counselorChoice?counselorChoice.username:"Choice"}/>
+              <DropdownMenuTrigger className={cn('flex gap-3 items-center')}>
+              <Input className={cn('')} value={counselorChoice?counselorChoice.username:"Choose a counselor"}/>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
               {counselers.map((counseler, index) => (
@@ -107,20 +110,18 @@ function Appointment() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-        </div>
-        <div className="flex">
-          <p className="m-4">Set your appointment</p>
-          <div className="grid grid-cols-1  gap-12 md:grid-cols-2">
+        <div className="flex flex-col my-4">
+          <p className="mb-4">Set your appointment date and time</p>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:w-1/2">
             <AppointmentContext.Provider value={{ dateSetter, hourSetter }}>
               <Datepicker />
               <TimeSetter />
             </AppointmentContext.Provider>
           </div>
         </div>
-      </div>
-      <div className="">
-        Your Appointment: {date != dt ? appointment : ""}
-        <br />
+
+        </CardContent>
+        <CardFooter>
         <Button
           onClick={() => {
             // console.log(date.toISOString());
@@ -135,6 +136,12 @@ function Appointment() {
         >
           Confirm
         </Button>
+
+        </CardFooter>
+      </Card>
+      <div className="flex my-4 justify-center flex-col">
+        <div className="">
+        </div>
       </div>
     </div>
   );

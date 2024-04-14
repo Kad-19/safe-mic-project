@@ -186,6 +186,23 @@ html{
   }
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #101010;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555555;
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f5f9;
+}
+
+
 
 @layer base {
   * {

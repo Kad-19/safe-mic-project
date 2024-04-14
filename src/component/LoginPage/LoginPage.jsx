@@ -4,10 +4,13 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 const LoginPage = ({ user, login, isAuthenticated, error }) => {
   const navigate = useNavigate();
   const [is_student, setIs_student] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,6 +26,7 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     login(email, password);
   };
@@ -39,6 +43,9 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
         console.log(user);
 
       }
+    }
+    if(error){
+      setIsLoading(false);
     }
   });
 
@@ -107,15 +114,20 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
             <div className=" italic text-red-500 text-lg ">
               {error ? error.detail : ""}
             </div>
-            <button
+            
+            {isLoading? <Button disabled className=" bg-purple-600 text-white hover:bg-purple-800">
+                <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
+                Please wait
+              </Button>:<Button
               type="submit"
               className="w-full rounded-lg bg-purple-600 text-white hover:bg-purple-800 py-1 transition-colors duration-200 font-medium"
             >
               Login
-            </button>
+            </Button>}
 
+              
             <div className="w-full text-blue-500 text-right mr-4 font-medium">
-              <a href="#">Forgot Password?</a>
+              <NavLink to="/reset-password">Forgot Password?</NavLink>
             </div>
           </div>
           <div className="text-lg py-8 font-medium">

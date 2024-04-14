@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000"
+const API_URL = "https://kalkidanyis.pythonanywhere.com"
 export default API_URL;
 
-export const WEBSOCKET_URL = "localhost:8000";
+export const WEBSOCKET_URL = "https://kalkidanyis.pythonanywhere.com";

@@ -6,9 +6,12 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { signup } from "../../actions/auth";
 import axios from "axios";
+import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Reg = ({ signup, isAuthenticated, error }) => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
   const [accountCreated, setAccountCreated] = useState(false);
   const [formData, setFormData] = useState({
@@ -27,6 +30,7 @@ const Reg = ({ signup, isAuthenticated, error }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (password === re_password) {
       if(is_student){
@@ -34,6 +38,7 @@ const Reg = ({ signup, isAuthenticated, error }) => {
           signup(name, email, password, re_password);
         }
         else{
+          setIsLoading(false);
           setErrorMessage("Please use your organization email")
         }
       }
@@ -43,6 +48,7 @@ const Reg = ({ signup, isAuthenticated, error }) => {
     }
     else {
       setErrorMessage("Password and Confirm password doesn't match");
+      setIsLoading(false);
     }
 
   };
@@ -58,11 +64,13 @@ const Reg = ({ signup, isAuthenticated, error }) => {
         error.email.map((mes) => {
           setErrorMessage((prevmes) => prevmes + " " + mes);
         });
+        setIsLoading(false);
       } else if (error.hasOwnProperty("password")) {
         setErrorMessage("");
         error.password.map((mes) => {
           setErrorMessage((prevmes) => prevmes + " " + mes);
         });
+        setIsLoading(false);
       }
     }
   }, [error]);
@@ -181,16 +189,17 @@ const Reg = ({ signup, isAuthenticated, error }) => {
             <div className="italic text-lg text-red-500">
               {errorMessage}
             </div>
-            <button
+            
+            {isLoading? <Button disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
+                Please wait
+              </Button> : <button
               type="submit"
               className="w-full rounded-lg bg-purple-600 text-white hover:bg-purple-800 py-1 transition-colors duration-200 font-medium"
             >
               Sign Up
-            </button>
-
-            <div className="self-auto w-60 text-blue-500 cursor-pointer">
-              <NavLink to="/reset-password"> Forgot Password? </NavLink>
-            </div>
+            </button>}
+          
           </div>
           <div className="text-lg py-8 font-medium">
             <p>

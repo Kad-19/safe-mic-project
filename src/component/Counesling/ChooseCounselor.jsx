@@ -12,6 +12,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
 import API_URL from "@/url";
 import { connect } from "react-redux";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const ChooseCounselor = ({user}) => {
   const navigate = useNavigate();
@@ -48,30 +50,49 @@ const ChooseCounselor = ({user}) => {
     navigate(`/oneToOneChat/${roomName}`);
   }
 
+  const goToAppointment = () => {
+    navigate(`/appointment`)
+  }
+
   return (
-    <div className="">
-      <h1 className="flex justify-center mt-28 2/w-2/12 p-8 font-semibold">
+    <div className="flex items-center justify-center">
+
+    <div className="md:w-[80%]">
+      <h1 className="flex justify-center mt-28 p-8 font-semibold text-2xl">
         Select a Counselor you want to chat with
       </h1>
-      <div className="flex justify-center ">
+      <div className="flex justify-center flex-wrap">
         {counselers.map((counselor, index) => (
-          <Card key={index} className="bg-gray-200 flex justify-center items-center flex-col rounded-lg m-5 lg:w-2/12 md:w-1/3 sm:w-1/2 hover:bg-gray-300 cursor-pointer" onClick={() => handleClick(counselor)}>
+          <Card key={index} className="bg-gray-200 flex flex-col rounded-lg m-5 lg:w-4/12 md:w-1/3 sm:w-1/2 w-[80%] hover:bg-gray-300">
             <CardHeader className="p-6">
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              
+              <p>{counselor.username}</p>
             </CardHeader>
-            <CardContent>
-              <CardDescription>{counselor.username}</CardDescription>
-            </CardContent>
-            <CardFooter className="h-36">
+            <CardContent className="h-36 overflow-y-scroll">
+              <CardDescription>Bio</CardDescription>
               <p>{counselor.bio}</p>
+            </CardContent>
+            <CardFooter className="flex flex-col justify-start h-48" class={cn(' p-6 flex flex-col justify-start')}>
+              <div className="flex">
+              <CardDescription>Specialities</CardDescription>
+              <p className="pl-4">{counselor.specialities}</p>
+              </div>
+              <div className="flex">
+              <CardDescription>Languages</CardDescription>
+              <p className="pl-4">{counselor.languages}</p>
+
+              </div>
+              <div className="flex py-4 gap-3">
+             <Button  onClick={() => handleClick(counselor)} variant="outline">Chat</Button>
+             <Button onClick={() => goToAppointment()}>Schedule Appointment</Button>
+
+              </div>
             </CardFooter>
           </Card>
         ))}
       </div>
     </div>
+</div>
   );
 }
 
