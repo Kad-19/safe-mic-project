@@ -28,12 +28,15 @@ const ScrollToTop = () => {
 
 export const themeContext=createContext(null)
 const App = () => {
-  
   const [theme,setTheme]=useState({
     current:'slate',
     previous:null,
     dark:false
   })
+  useEffect(()=>{
+let firstTheme=localStorage.getItem('themeValue')
+setTheme(JSON.parse(firstTheme))
+  },[])
 
   let themes=['light','rose','violate','slate','dark','darkrose','darkviolate','darkslate']
 
@@ -43,14 +46,17 @@ const App = () => {
     root.classList.add(theme.current)
   },[theme])
 
+useEffect(()=>{
+  if(theme.previous!==null)localStorage.setItem('themeValue',JSON.stringify(theme))
+},[theme])
   const changeTheme=(i)=>{
     theme.dark?i=i+4:i
-    console.log(i,theme.dark)
       setTheme({current:themes.at(i),
                 previous:theme.current,
                 dark:theme.dark})
     //themeIndex<3?setThemeIndex(++themeIndex):setThemeIndex(themeIndex=0)
   }
+  
   const darkThemeSwitch=()=>{
     let CurrentIndex=themes.indexOf(theme.current);
     if(theme.dark){
