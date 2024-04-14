@@ -6,7 +6,7 @@ function Direct() {
   return (
     <div className="mt-16 mx-8">
       <span id='section1' className='flex flex-col h-[60vh]  items-center'>
-          <motion.div className="self-stretch text-8xl font-bold max-md:mr-1.5 max-md:max-w-full max-md:text-4xl"
+          <motion.div className="self-stretch text-8xl font-bold max-sm:mr-1.5 max-sm:max-w-full max-sm:text-4xl"
           initial={{
             y:100,
             opacity:0
