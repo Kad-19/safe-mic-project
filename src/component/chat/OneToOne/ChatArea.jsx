@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 import { IoMdSend } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import API_URL from "@/url";
+import { WEBSOCKET_URL } from "@/url";
 
 const ChatArea = ({ user }) => {
 
@@ -241,7 +242,7 @@ const ChatArea = ({ user }) => {
     if (chatSocket) {
       chatSocket.close();
     }
-    setChatSocket(new WebSocket("ws://localhost:8000/ws/chat/" + room + "/"));
+    setChatSocket(new WebSocket(`ws://${WEBSOCKET_URL}/ws/chat/` + room + "/"));
   }
   useEffect(() => {
     if (!chatSocket) {
@@ -274,23 +275,23 @@ const ChatArea = ({ user }) => {
 
   return (
     <div className="flex mb-1">
-      <Card className="mx-0 bg-gray-100 w-full h-[100vh]">
-        <CardHeader className="bg-blue-100 flex justify-center items-center p-3">
+      <Card className="mx-0 w-full h-[100vh] text-foreground">
+        <CardHeader className="bg-secondary text-muted-foreground flex justify-center items-center p-3">
           Chat
         </CardHeader>
         <div className="flex">
           <div className="grow flex flex-col border-r-2">
             <Button
-              className="rounded-none py-7 bg-foreground"
+              className="rounded-none py-7 bg-accent text-accent-foreground hover:bg-muted-foreground hover:text-muted"
               onClick={() => enterRoom("discussion")}
             >
-              Discusstion
+              Discussion
             </Button>
             {userRooms.length != 0
               ? userRooms.map((rums) => (
                   <Button
                     onClick={() => enterRoom(rums.room.name)}
-                    className="rounded-none py-5 px-12 bg-slate-800 hover:bg-slate-600"
+                    className="rounded-none py-5 px-12 bg-background text-foreground border hover:bg-accent"
                   >
                     {rums.username}
                   </Button>
@@ -302,15 +303,15 @@ const ChatArea = ({ user }) => {
               {messages.map((mes, index) => (
                 <div key={index}>
                   {mes.username !== user.name ? (
-                    <div className="relative bg-slate-600 p-1 rounded-tr-2xl rounded-tl-2xl rounded-br-2xl mt-3 mr-auto w-3/4 ">
-                      <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-slate-600 border-b-[0px] border-b-transparent transform bottom-0 -left-2"></div>
-                      <p className="px-3 text-blue-500 font-medium">
+                    <div className="relative bg-accent p-1 rounded-tr-2xl rounded-tl-2xl rounded-br-2xl mt-3 mr-auto max-w-[50%] ">
+                      <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-accent border-b-[0px] border-b-transparent transform bottom-0 -left-2"></div>
+                      <p className="px-3 text-primary font-medium">
                         {mes.username}
                       </p>
-                      <p className="text-slate-200 p-1 px-3 text-lg">
+                      <p className="text-accent-foreground p-1 px-3 text-md">
                         {mes.message}
                       </p>
-                      <p className="text-slate-200 p-1 px-3 text-xs">
+                      <p className="text-accent-foreground p-1 px-3 text-xs">
                         {mes.timestamp
                           ? new Date(mes.timestamp).toLocaleTimeString([], {
                               hour: "2-digit",
@@ -323,12 +324,12 @@ const ChatArea = ({ user }) => {
                       </p>
                     </div>
                   ) : (
-                    <div className="relative bg-slate-400 p-1 mt-3 w-3/4 ml-auto rounded-tr-2xl rounded-tl-2xl rounded-bl-2xl">
-                      <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-slate-400 border-b-[0px] border-b-transparent transform bottom-0 -right-2"></div>
-                      <p className="text-slate-200 p-1 px-3 text-lg">
+                    <div className="relative bg-muted-foreground p-1 mt-3 max-w-[50%] ml-auto rounded-tr-2xl rounded-tl-2xl rounded-bl-2xl">
+                      <div className="absolute w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-muted-foreground border-b-[0px] border-b-transparent transform bottom-0 -right-2"></div>
+                      <p className="text-muted p-1 px-3 text-md">
                         {mes.message}
                       </p>
-                      <p className="text-slate-200 p-1 px-3 text-xs">
+                      <p className="text-muted p-1 px-3 text-xs">
                         {mes.timestamp
                           ? new Date(mes.timestamp).toLocaleTimeString([], {
                               hour: "2-digit",

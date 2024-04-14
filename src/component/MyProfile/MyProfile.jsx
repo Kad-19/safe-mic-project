@@ -41,13 +41,13 @@ const MyProfile = ({ user, delete_user, logout }) => {
             >
               Reset Password
             </button>
+            <Button onClick={log_out}>
+              <FiLogOut className="mx-2" /> Logout
+            </Button>
 
             
           </div>
           <div className="m-4">
-            <Button onClick={log_out}>
-              <FiLogOut className="mx-2" /> Logout
-            </Button>
           </div>
         </form>
       </div>

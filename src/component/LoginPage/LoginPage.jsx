@@ -46,7 +46,7 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
   return (
     <div className="flex justify-center items-center rounded md my-2 w-full flex-col">
       {verified == "notverified"? (
-        <div className="w-full p-4 bg-purple-300 text-blue-950">
+        <div className="w-full p-4 bg-purple-300 text-blue-950 mt-16">
           An Activation link has been sent to your email, Please activate your
           account by clicking the link inorder to be able to login.
         </div>
@@ -54,7 +54,7 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
         ""
       )}
       {verified == "verified"? (
-        <div className="w-full p-4 bg-purple-300 text-blue-950">
+        <div className="w-full p-4 bg-purple-300 text-blue-950 mt-16">
           You have successfully activated your account, you can now login
         </div>
       ) : (

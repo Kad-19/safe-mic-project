@@ -11,7 +11,10 @@ import { useState, useEffect } from "react";
 import Selector from "./component/ThemeSelector/Selector";
 import { createContext } from "react";
 import DrawerComp from "./component/Customization/DrawerComp";
+import { QueryClient, QueryClientProvider } from "react-query";
 
+
+const queryClient = new QueryClient();
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -67,13 +70,15 @@ const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
+          <QueryClientProvider client={queryClient}>
+
           <Auth/>
           <ScrollToTop/>
           <themeContext.Provider value={{changeTheme,darkThemeSwitch,theme}}>
           <Navbar />
           </themeContext.Provider>
           <AllRouting />
-          <DrawerComp/>
+          </QueryClientProvider>
       </BrowserRouter>
     </Provider>
   );

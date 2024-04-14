@@ -29,7 +29,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
   }, [lastScrollTop]);
   const guestLinks = () => (
     <div className="z-0">
-    <header className={` flex justify-end bg-background w-full px-8 py-4 fixed top-0 z-10 border-2 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
+    <header className={` flex justify-end bg-background items-center w-full px-8 py-4 fixed top-0 z-10 border-2 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
         <NavLink to="/" className="font-semibold px-4">
           Home
         </NavLink>
@@ -39,13 +39,17 @@ const Navbar = ({ logout, isAuthenticated }) => {
         <NavLink to="/complaint" className="font-semibold px-4">
           Complaint
         </NavLink>
-        <DrawerComp/>
         <NavLink
           to="/login"
           className="rounded-3xl border-2 px-5 p-2 font-bold"
         >
           Login
         </NavLink>
+        <div className="px-4">
+
+    <DrawerComp/>
+      
+        </div>
         <NavLink
           to="/signup"
         >
@@ -60,27 +64,25 @@ const Navbar = ({ logout, isAuthenticated }) => {
   );
   const authLinks = () => (
     <div className="z-0">
-    <header className={` flex justify-end bg-background w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
+    <header className={` flex justify-end bg-background items-center w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
     <NavLink to="/" className="font-semibold px-4">
           Home
         </NavLink>
-        <Selector/>
         <NavLink to="/counseling" className="font-semibold px-4">
           Counseling
         </NavLink>
-        <NavLink to="/oneToOneChat" className="font-semibold">
+        <NavLink to="/oneToOneChat" className="font-semibold px-4">
           Chat
         </NavLink>
         <NavLink to="/complaint" className="font-semibold px-4">
           Complaint
         </NavLink>
-        <NavLink
-          to="/account"
-          className="font-semibold px-4"
-        >
-          My Account
-        </NavLink>
+        <div className="px-4">
+
+    <DrawerComp/>
       
+        </div>
+        
     </header>
     </div>
   );
