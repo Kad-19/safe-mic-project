@@ -51,7 +51,7 @@ function AdviceCarousel(){
                 campusAdvice.map((advice,index)=>{
                     return <CarouselItem key={index}>
                     <div className="flex justify-center p-1 m-4">
-                            <p className=" text-center">
+                            <p className=" text-center font-semibold text-lg">
                                 {advice.advice}
                             </p>
                     </div>
