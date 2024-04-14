@@ -3,7 +3,7 @@ import { Card,CardTitle,CardContent } from '@/components/ui/card'
 import { motion } from 'framer-motion'
 function Approach() {
   return (
-  <Card className="px-2 py-8 shadow-none border-none">
+  <Card className="px-2 py-8 shadow-none border-none my-24">
     <CardTitle className='text-center my-8'>
       Our Approach
     </CardTitle>

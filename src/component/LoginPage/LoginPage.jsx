@@ -53,7 +53,7 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
   return (
     <div className="flex justify-center items-center rounded md my-2 w-full flex-col">
       {verified == "notverified"? (
-        <div className="w-full p-4 bg-purple-300 text-blue-950 mt-16">
+        <div className="w-full p-4 bg-purple-300 text-blue-950 ">
           An Activation link has been sent to your email, Please activate your
           account by clicking the link inorder to be able to login.
         </div>
@@ -61,13 +61,13 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
         ""
       )}
       {verified == "verified"? (
-        <div className="w-full p-4 bg-purple-300 text-blue-950 mt-16">
+        <div className="w-full p-4 bg-purple-300 text-blue-950 ">
           You have successfully activated your account, you can now login
         </div>
       ) : (
         ""
       )}
-      <div className="flex bg-slate-300 border-slate-500 rounded-lg pt-20 pl-5 pr-5 pb-32 shadow-lg bg-opacity-50 text-sm/[40px] xl:w-[40%] xl:min-w-[600px] w-[100%] sm:w-[80%] my-12">
+      <div className="flex bg-accent border-slate-500 rounded-lg pt-20 pl-5 pr-5 pb-32 shadow-lg bg-opacity-50 text-sm/[40px] xl:w-[40%] xl:min-w-[600px] w-[100%] sm:w-[80%] my-12">
         <form
           onSubmit={(e) => onSubmit(e)}
           className="mx-auto sm:w-[60%] w-[80%]"
@@ -110,18 +110,18 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
               {error ? error.detail : ""}
             </div>
             
-            {isLoading? <Button disabled className=" bg-purple-600 text-white hover:bg-purple-800">
+            {isLoading? <Button disabled className=" bg-muted-foreground text-muted">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
                 Please wait
               </Button>:<Button
               type="submit"
-              className="w-full rounded-lg bg-purple-600 text-white hover:bg-purple-800 py-1 transition-colors duration-200 font-medium"
+              className="w-full rounded-lg bg-muted-foreground text-muted py-1 transition-colors duration-200 font-medium"
             >
               Login
             </Button>}
 
               
-            <div className="w-full text-blue-500 text-right mr-4 font-medium">
+            <div className="w-full text-primary text-right mr-4 font-medium">
               <NavLink to="/reset-password">Forgot Password?</NavLink>
             </div>
           </div>
@@ -129,7 +129,7 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
             <p>
               {" "}
               New to Safe Mic?{" "}
-              <NavLink to="/signup" className="text-blue-500 sm:mx-3">
+              <NavLink to="/signup" className="text-primary sm:mx-3">
                 Create Account
               </NavLink>
             </p>

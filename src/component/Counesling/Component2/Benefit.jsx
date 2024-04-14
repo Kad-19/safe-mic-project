@@ -5,7 +5,7 @@ import couselingpic from '/Images/counselor-6741671_640.jpg'
 import { motion } from 'framer-motion'
 function Benefit() {
   return (
-          <div className='flex items-center px-12'>
+          <div className='flex items-center px-12 mt-48'>
               
               <img
                 src={couselingpic}

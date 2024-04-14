@@ -13,9 +13,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { NavLink } from "react-router-dom";
 export const AppointmentContext = createContext(null);
 function Appointment() {
   let dt = new Date();
@@ -122,25 +133,40 @@ function Appointment() {
 
         </CardContent>
         <CardFooter>
+        <Dialog>
+    <DialogTrigger>
         <Button
           onClick={() => {
-            // console.log(date.toISOString());
-            // let a = {
-            //   appointment_time: date.toISOString(),
-            //   counselor_id: "2",
-            // };
-            // console.log(a);
-            // console.log(JSON.stringify(a));
             sendAppointment();
           }}
         >
           Confirm
         </Button>
+            
+
+    </DialogTrigger>
+    
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Submitted</DialogTitle>
+        <DialogDescription>
+          You have successfully Scheduled your in person appointment
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <NavLink to="/">
+        <Button>Go to HomePage</Button>
+
+        </NavLink>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
 
         </CardFooter>
       </Card>
       <div className="flex my-4 justify-center flex-col">
         <div className="">
+          
         </div>
       </div>
     </div>

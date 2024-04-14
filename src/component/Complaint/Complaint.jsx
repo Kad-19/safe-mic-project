@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Circles from "./Circular units/Circles";
 import ComplaintBlock from "./Collapsible/ComplaintBlock";
 function Complaint(){
@@ -26,17 +27,20 @@ function Complaint(){
     
     return <div className=" grid grid-cols-1 m-12 items-center w-[80%] mx-auto">
     
-    <div className="mb-16 h-1/2">
-    <h1 className=" text-6xl">
+    <div className="mb-16 h-1/2 mt-24">
+    <h1 className=" text-6xl my-10">
         Have a Concern?
     </h1>
-        <button className=" max-w-max border-solid my-4 border-foreground border-2 rounded-3xl px-4 p-1 hover:font-semibold hover:px-8">
+        <button className=" max-w-max border-solid my-4 border-foreground border-2 rounded-3xl px-4 p-1 hover:font-semibold hover:px-8 transition-all duration-300">
+            <NavLink to="/complaint-form">
             File Your Complaint here
+
+            </NavLink>
         </button>
     </div>
 
 
-    <h1 className="text-3xl">
+    <h1 className="text-3xl mt-40">
         What do you want to report?
     </h1>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"> 
@@ -44,7 +48,7 @@ function Complaint(){
         <Circles title={"Services"} detail={"If you are dissatisfied with the service you are receiving and there is clear violation of policies or standards"}/>
         <span className='md:hidden lg:flex'><Circles title={"Harrasment"} detail={" If you are being harassed by students or teachers"}/></span>
     </div>
-    <div className="h-screem grid grid-cols-1 place-items-center">
+    <div className="h-screem grid grid-cols-1 place-items-center my-40">
         {
             complaints.map((obj,index)=><ComplaintBlock key={index} title={obj.title} content={obj.content}/>)
         }

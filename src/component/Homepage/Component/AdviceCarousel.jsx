@@ -44,7 +44,7 @@ function AdviceCarousel(){
     ];
     
     
-    return<Carousel className="">
+    return<Carousel className="my-36">
         
         <CarouselContent className=" w-64 sm:w-80 md:w-[480px] lg:w-[800px]">
             {

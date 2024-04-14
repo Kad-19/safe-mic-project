@@ -91,7 +91,7 @@ const Reg = ({ signup, isAuthenticated, error }) => {
 
   return (
     <div className="flex justify-center items-center rounded my-20 w-[100%]">
-      <div className="flex bg-slate-300 border-slate-500 rounded-lg pt-20 pl-5 pr-5 pb-32 shadow-lg bg-opacity-50 text-sm/[40px] xl:w-[40%] xl:min-w-[600px] w-[100%] sm:w-[80%]">
+      <div className="flex bg-accent border-slate-500 rounded-lg pt-20 pl-5 pr-5 pb-32 shadow-lg bg-opacity-50 text-sm/[40px] xl:w-[40%] xl:min-w-[600px] w-[100%] sm:w-[80%]">
         <form
           onSubmit={(e) => onSubmit(e)}
           className="mx-auto sm:w-[60%] w-[80%]"
@@ -104,10 +104,10 @@ const Reg = ({ signup, isAuthenticated, error }) => {
               className="inline-flex items-center p-1 rounded-md cursor-pointer text-gray-800"
             >
               <Input id="Toggle3" type="checkbox" className="hidden peer" />
-              <span className="px-4 rounded-l-md bg-violet-400 peer-checked:bg-gray-300" onClick={toggle}>
+              <span className="px-4 rounded-l-md bg-muted-foreground peer-checked:bg-gray-300" onClick={toggle}>
                 Student
               </span>
-              <span className="px-4 rounded-r-md bg-gray-300 peer-checked:bg-violet-400" onClick={toggle}>
+              <span className="px-4 rounded-r-md bg-gray-300 peer-checked:bg-muted-foreground" onClick={toggle}>
                 Counselor
               </span>
             </label>
@@ -183,19 +183,19 @@ const Reg = ({ signup, isAuthenticated, error }) => {
             {isLoading? <Button disabled>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
                 Please wait
-              </Button> : <button
+              </Button> : <Button
               type="submit"
-              className="w-full rounded-lg bg-purple-600 text-white hover:bg-purple-800 py-1 transition-colors duration-200 font-medium"
+              className="w-full rounded-lg bg-muted-foreground text-muted py-1 transition-colors duration-200 font-medium"
             >
               Sign Up
-            </button>}
+            </Button>}
           
           </div>
           <div className="text-lg py-8 font-medium">
             <p>
               {" "}
               Already have Account?{" "}
-              <NavLink to="/login" className="text-blue-500 cursor-pointer">
+              <NavLink to="/login" className="text-primary cursor-pointer">
                 Login
               </NavLink>
             </p>

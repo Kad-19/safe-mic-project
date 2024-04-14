@@ -3,7 +3,7 @@ import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 function Science() {
   return (
-    <Card className={cn('p-8 my-12')}>
+    <Card className={cn('p-8 my-36')}>
     <CardTitle className="my-6">
       What science says about Therapy
     </CardTitle>

@@ -8,7 +8,7 @@ import pic from '/Images/pexels-buro-millennial-1438084.jpg'
 function Ready() {
   return (
     <div className='grid grid-cols-2 max-md:grid-cols-1
-      m-8 max-w-screen-lg max-sm:mx-0 place-items-center'>       
+      m-8 max-w-screen-lg max-sm:mx-0 place-items-center py-24'>       
           <img
             alt='a picture'
             src='/Images/pexels-buro-millennial-1438084.jpg'
@@ -42,7 +42,10 @@ function Ready() {
           </motion.p
           >
             <Button className="w-fit my-12">
+              <a href='https://dreamingechoes.github.io/awesome-mental-health/#/' target='blank'>
+
                 Get Resources
+              </a>
             </Button>
             </Card>
       </div>
