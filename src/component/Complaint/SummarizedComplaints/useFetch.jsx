@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import API_URL from '@/url';
 
 const fetchDjango = (endpoint) => {
   
@@ -12,7 +13,7 @@ const fetchDjango = (endpoint) => {
     },
   };
   
-  return axios.get(`http://localhost:8000/${endpoint}`, config);
+  return axios.get(`${API_URL}/${endpoint}`, config);
 };
 
 const useFetch = (endpoint, fetchOnLoad = false) => {
