@@ -9,9 +9,43 @@ import { cn } from "@/lib/utils";
 import DrawerComp from "../Customization/DrawerComp";
 import { useContext } from "react";
 import { themeContext } from "@/App";
-const Navbar = ({ logout, isAuthenticated }) => {
+import axios from "axios";
+import API_URL from "@/url";
+const Navbar = ({ user, logout, isAuthenticated }) => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [isScrolledDown, setIsScrolledDown] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    if(user){
+      fetchUserData();
+    }
+  }, [user]);
+
+
+  const fetchUserData = async () => {
+    if (localStorage.getItem("access")) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.getItem("access")}`,
+          Accept: "application/json",
+        },
+      };
+
+      try {
+        const res = await axios.get(
+          `${API_URL}/all/users/${user.id}`,
+          config
+        );
+        setUserData(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log("invalid token");
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,34 +63,31 @@ const Navbar = ({ logout, isAuthenticated }) => {
   }, [lastScrollTop]);
   const guestLinks = () => (
     <div className="z-0">
-    <header className={` flex justify-end bg-background items-center w-full px-8 py-4 sticky top-0 z-10 border-2 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
-        <NavLink to="/" className="font-semibold px-4">
+    <header className={` flex bg-background justify-end items-center w-full px-8 py-4 sticky top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
+      <div className="w-2/6">
+
+        <NavLink to="/" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
           Home
         </NavLink>
-        <NavLink to="/counseling" className="font-semibold px-4">
+        <NavLink to="/counseling" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
           Counseling
         </NavLink>
-        <NavLink to="/complaint" className="font-semibold px-4">
+        <NavLink to="/complaint" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
           Complaint
         </NavLink>
-        <NavLink
-          to="/login"
-          className="rounded-3xl border-2 px-5 p-2 font-bold"
-        >
-          Login
-        </NavLink>
+      </div>
         <div className="px-4">
+          <DrawerComp/>
 
-    <DrawerComp/>
       
         </div>
         <NavLink
-          to="/signup"
-        >
-        <Button className={cn('rounded-3xl')}>
-          Sign up
-        </Button> 
+          to="/login"
+          className="rounded-3xl border-2 px-5 p-2 font-bold"
+          >
+          Login
         </NavLink>
+        
         
       
     </header>
@@ -64,20 +95,26 @@ const Navbar = ({ logout, isAuthenticated }) => {
   );
   const authLinks = () => (
     <div className="z-0">
-    <header className={` flex justify-end bg-background items-center w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
-    <NavLink to="/" className="font-semibold px-4">
+    <header className={` flex bg-background items-center justify-end w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
+      <div className="w-2/3">
+
+    <NavLink to="/" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
           Home
         </NavLink>
-        <NavLink to="/counseling" className="font-semibold px-4">
+        <NavLink to="/counseling" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
           Counseling
         </NavLink>
-        <NavLink to="/oneToOneChat" className="font-semibold px-4">
+        <NavLink to="/oneToOneChat" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
           Chat
         </NavLink>
-        <NavLink to="/complaint" className="font-semibold px-4">
+        <NavLink to="/complaint" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
           Complaint
         </NavLink>
-        <div className="px-4">
+        <NavLink to="/appointment" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
+          Appointment
+        </NavLink>
+      </div> 
+        <div className="px-4 flex justify-end  hover:border-b-2 border-primary focus:border-b-2">
 
     <DrawerComp/>
       
@@ -86,6 +123,71 @@ const Navbar = ({ logout, isAuthenticated }) => {
     </header>
     </div>
   );
+  const counselorLinks = () => (
+    <div className="z-0">
+    <header className={` flex bg-background items-center justify-end w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
+      <div className="w-2/3">
+
+    <NavLink to="/counselor/landing-page" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
+          Home
+        </NavLink>
+        <NavLink to="/counselor/all-appointments" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
+          Appointment
+        </NavLink>
+        <NavLink to="/oneToOneChat" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
+          Chat
+        </NavLink>
+      </div> 
+        <div className="px-4 flex justify-end  hover:border-b-2 border-primary focus:border-b-2">
+
+    <DrawerComp/>
+      
+        </div>
+        
+    </header>
+    </div>
+  );
+  const adminLinks = () => (
+    <div className="z-0">
+    <header className={` flex bg-background items-center justify-end w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
+      <div className="w-2/3">
+
+    <NavLink to="/" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
+          Home
+        </NavLink>
+        <NavLink to="/complaints" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
+          Complaints
+        </NavLink>
+      </div> 
+        <div className="px-4 flex justify-end  hover:border-b-2 border-primary focus:border-b-2">
+
+    <DrawerComp/>
+      
+        </div>
+        
+    </header>
+    </div>
+  );
+
+  const links = () => {
+    if(isAuthenticated){
+      if(userData){
+        if(userData.is_student){
+          return authLinks();
+        }
+        else if(userData.is_staff){
+          return adminLinks();
+        }
+        else{
+          return counselorLinks();
+        }
+      }
+    }
+    else{
+      return guestLinks();
+    }
+  }
+
   
   return (
     // <div className={`flex justify-between p-6 bg-gray-50 fixed w-full`}>
@@ -93,7 +195,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
     //     <div>Mic</div>
     //   </div>
     <>
-    {isAuthenticated? authLinks() : guestLinks()}
+    {links()}
     <main>
       <Outlet/>
     </main>
@@ -104,6 +206,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);

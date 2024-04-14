@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API_URL from "@/url";
+import { Button } from "@/components/ui/button";
 
 function Aptime() {
   const [originalAppos, setOriginalAppos] = useState([]);
@@ -55,19 +56,17 @@ function Aptime() {
       ["9:00 - 9:45", "", "", "", "", ""],
     ];
 
-    // Populate the table array based on the appointments data
     appointments.forEach((appointment) => {
       const date = new Date(appointment.appointment_datetime);
-      const weekday = date.getDay(); // Subtract 1 to convert Sunday (0) to Friday (4)
+      const weekday = date.getDay(); 
       const hour = date.getHours();
 
       if (hour === 3 || hour === 4 || hour === 5 || hour === 8 || hour === 9) {
-        const rowIndex = [3, 4, 5, 8, 9].indexOf(hour) + 1; // Get the index of the hour in the tableData array
+        const rowIndex = [3, 4, 5, 8, 9].indexOf(hour) + 1; 
         updatedTableData[rowIndex][weekday] = appointment.user;
       }
     });
 
-    // Update the state with the new table data
     setTableData(updatedTableData);
   }, [appointments]);
 
@@ -203,21 +202,21 @@ function Aptime() {
     <div className=" p-4 w-full">
       <h1 className="text-2xl font-bold mb-4"></h1>
       <div className="flex items-center my-3">
-      <button onClick={() => goBackwardOneWeek()} className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+      <Button onClick={() => goBackwardOneWeek()} className="">
         prev
 
-        </button>
+        </Button>
       <p className="px-5 font-medium text-lg">{startOfWeek? startOfWeek.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) + " - " + endOfWeek.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }): ""}</p>
-      <button onClick={() => goForwardOneWeek()} className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+      <Button onClick={() => goForwardOneWeek()} className="">
         next
 
-      </button>
+      </Button>
 
       </div>
       
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left rtl:text-right ">
+          <thead className="text-xs uppercase bg-accent">
             <tr>
               {tableData[0].map((day, index) => (
                 <th key={index} className="px-6 py-3">
@@ -230,18 +229,18 @@ function Aptime() {
             {tableData.slice(1).map((row, index) => (
               <tr
                 key={index}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                className=" border-b "
               >
                 {row.map((cell, cellIndex) => {
                   return cellIndex === 0 ? (
                     <th
                       key={cellIndex}
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-medium  whitespace-nowrap "
                     >
                       {cell}
                     </th>
                   ) : (
-                    <td key={cellIndex} className={cell != ""? "px-6 py-4 bg-red-100 border-b-2 border-red-400" : "px-6 py-4"}>
+                    <td key={cellIndex} className={cell != ""? "px-6 py-4 border-primary border-b-2 bg-accent" : "px-6 py-4"}>
                       {cell}
                     </td>
                   );

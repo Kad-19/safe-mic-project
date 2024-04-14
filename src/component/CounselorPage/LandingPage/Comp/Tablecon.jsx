@@ -108,11 +108,11 @@ function Tablecon() {
   };
   console.log(appointments);
   return (
-    <div className="container mx-auto mt-4">
+    <div className="relative overflow-x-auto sm:rounded-lg">
       {appointments.length != 0
         ? appointments.map((appo) => (
-            <table className="table-auto">
-              <thead>
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th className="px-4 py-2">Time</th>
                   <th className="px-4 py-2">Appointement</th>
@@ -128,7 +128,7 @@ function Tablecon() {
               </tbody>
             </table>
           ))
-        : "You have No appointments today"}
+        : <div className="text-xl">You have No appointments today</div>}
     </div>
   );
 }

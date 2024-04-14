@@ -1,4 +1,4 @@
-const API_URL = "https://kalkidanyis.pythonanywhere.com"
+const API_URL = "https://geezbit.pythonanywhere.com"
 export default API_URL;
 
-export const WEBSOCKET_URL = "https://kalkidanyis.pythonanywhere.com";
+export const WEBSOCKET_URL = "geezbit.pythonanywhere.com";

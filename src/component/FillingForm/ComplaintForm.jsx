@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import API_URL from '@/url';
 const ComplaintForm = () => {
-  const [selection, setSelection] = useState('both'); // Default selection is 'both'
+  const [selection, setSelection] = useState('both'); 
   const [tag, setTag] = useState("grade_issue");
   const [body, setBody] = useState("");
   const [complaintType,setComplaintType]=useState('Complaint')
@@ -26,7 +26,6 @@ const ComplaintForm = () => {
     submitForm();
   }
 
-  console.log(body);
   
   const submitForm = async () => {
     
