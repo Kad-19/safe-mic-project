@@ -9,7 +9,7 @@ function Approach() {
     </CardTitle>
     <CardContent className='text-lg'>
 <motion.p 
-className=' font-sans'
+className=' font-sans text-center'
 initial={{
   opacity:0,
   y:100

@@ -7,10 +7,8 @@ import Service from "./Component/Service";
 import Footer from "./Component/Footer";
 import AdviceCarousel from "./Component/AdviceCarousel";
 function Homepage() {
-  return (
-    <div className="flex flex-col">
-      <div>{/* <Header /> */}</div>
-      <div className="flex flex-col items-center  mx-auto max-md:px-5 max-md:mt-10 max-md:max-w-full">
+  return (<>
+      <div className="flex flex-col items-center  md:w-8/12 mx-auto max-md:px-5 max-md:mt-10 max-md:max-w-full">
         <div>
           <Hero />
         </div>
@@ -31,7 +29,7 @@ function Homepage() {
       <div>
         <Footer />
       </div>
-    </div>
+    </>
   );
 }
 

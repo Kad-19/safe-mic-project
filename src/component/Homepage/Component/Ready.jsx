@@ -3,21 +3,18 @@ import React from 'react'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
-import pic from '/public/Images/pexels-buro-millennial-1438084.jpg'
-// import logo from '../assets/Images/logo.png'
+import pic from '/Images/pexels-buro-millennial-1438084.jpg'
+// import logo from '../assets/pexels-buro-millennial-1438084.jpg'
 function Ready() {
   return (
-    <div className='grid grid-cols-2 max-md:grid-cols-1 w-fit
-      m-8 max-w-screen-lg max-sm:mx-0'>       
-        <Card className="">
+    <div className='grid grid-cols-2 max-md:grid-cols-1
+      m-8 max-w-screen-lg max-sm:mx-0 place-items-center'>       
           <img
             alt='a picture'
-            src={pic}
+            src='/Images/pexels-buro-millennial-1438084.jpg'
             loading="lazy"
-            srcSet="..."
-            className=""
+            className=" rounded-l-[50px] block "
           />
-        </Card>
         <Card className={cn('mx-4 my-2 px-8 py-12 font-san shadow-lg border max-sm:mx-0')}>
               <div className='my-4'> <b>About, Mental health</b> </div> 
           <motion.p

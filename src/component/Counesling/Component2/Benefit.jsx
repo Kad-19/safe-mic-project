@@ -1,20 +1,34 @@
 import React from 'react'
 import { Card,CardContent,CardDescription,CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import couselingpic from '/Images/counselor-6741671_640.jpg'
+import { motion } from 'framer-motion'
 function Benefit() {
   return (
-          <div className='flex items-center'>
-              <Card className={cn('p-8 m-4 basis-1/3 w-fit h-fit hidden lg:inline')}>
+          <div className='flex items-center px-12'>
+              
               <img
+                src={couselingpic}
                 loading="lazy"
-                srcSet="..."
-                className=""
+                className="hidden md:inline max-w-sm rounded-l-[50px] basis-1/3 "
               />
-              </Card>
-            <Card className={cn('leading-8 p-8 m-4 lg:basis-2/3 w-full ')}>
+            <Card className={cn('leading-8 p-8 m-4 md:basis-2/3 w-full ')}>
             <CardTitle>What are the benefits?</CardTitle>
-            <CardDescription className=' font-light'>Online counseling offers several benefits, including:</CardDescription>
-            <ol type='1' className='list-decimal'>
+            <CardDescription className=' font-light'>
+                  Online counseling offers several benefits, including:
+
+            </CardDescription>
+            <motion.ol type='1' className='list-decimal'
+            initial={{
+              opacity:0.3,
+            }}
+            whileInView={
+              {
+            opacity:1,
+              }}
+            transition={{duration:1,
+            delay:0.3}}
+            >
             <li>
             <b className='font-semibold '>Accessibility:
               </b>Access counseling from anywhere, overcoming distance.
@@ -44,7 +58,7 @@ function Benefit() {
               </b>
               Choose communication formats to suit your needs.
             </li>
-            </ol>
+            </motion.ol>
             </Card>
 </div>
   )
