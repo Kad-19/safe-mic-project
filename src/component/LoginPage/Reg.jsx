@@ -8,7 +8,7 @@ import { signup } from "../../actions/auth";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
+import { Input } from "@/components/ui/input";
 const Reg = ({ signup, isAuthenticated, error }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false)
@@ -103,7 +103,7 @@ const Reg = ({ signup, isAuthenticated, error }) => {
               htmlFor="Toggle3"
               className="inline-flex items-center p-1 rounded-md cursor-pointer text-gray-800"
             >
-              <input id="Toggle3" type="checkbox" className="hidden peer" />
+              <Input id="Toggle3" type="checkbox" className="hidden peer" />
               <span className="px-4 rounded-l-md bg-violet-400 peer-checked:bg-gray-300" onClick={toggle}>
                 Student
               </span>
@@ -116,12 +116,9 @@ const Reg = ({ signup, isAuthenticated, error }) => {
             <label htmlFor="" className="w-[110px] font-medium">
               User Name
             </label>
-            <input
+            <Input
               type="text"
-              className="mt-1 block w-full xl:w-[100%] px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-    focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500
-    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-    "
+              className="mt-1 block w-full xl:w-[100%] px-3 py-2 border  rounded-md text-sm shadow-sm"
               placeholder="user name"
               required
               name="name"
@@ -134,12 +131,9 @@ const Reg = ({ signup, isAuthenticated, error }) => {
             <label htmlFor="" className="w-[110px] font-medium">
               Email
             </label>
-            <input
+            <Input
               type="email"
-              className="mt-1 block w-full xl:w-[100%] px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-    focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500
-    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-    "
+              className="mt-1 block w-full xl:w-[100%] px-3 py-2  rounded-md text-sm shadow-sm"
               placeholder="email"
               required
               name="email"
@@ -153,11 +147,9 @@ const Reg = ({ signup, isAuthenticated, error }) => {
               {" "}
               Password
             </label>
-            <input
+            <Input
               type="password"
-              className=" mt-1 block w-full xl:w-[100%] px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-    focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500
-    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+              className=" mt-1 block w-full xl:w-[100%] px-3 py-2 rounded-md text-sm shadow-sm"
               placeholder="password"
               name="password"
               value={password}
@@ -171,11 +163,9 @@ const Reg = ({ signup, isAuthenticated, error }) => {
             <label htmlFor="" className="font-medium">
               Confirm Password
             </label>
-            <input
+            <Input
               type="password"
-              className=" mt-1 block w-full xl:w-[100%] px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-    focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500
-    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+              className=" mt-1 block w-full xl:w-[100%] px-3 py-2 rounded-md text-sm shadow-sm"
               placeholder="password"
               name="re_password"
               value={re_password}
