@@ -14,7 +14,7 @@ function ComplaintBlock({title,content}){
     return <Collapsible
         open={open}
         onOpenChange={SetOpen}
-        className={cn("w-full md:w-8/12")}
+        className={cn("w-full md:w-8/12 font-sans")}
         >
         <CollapsibleTrigger
         className={cn("w-full")}
@@ -24,7 +24,7 @@ function ComplaintBlock({title,content}){
             rounded-2xl flex justify-between
             ">
                 <p className="">
-                    My complaint 
+                    {title}
                 </p> 
                 {open?<FaChevronUp/>:<FaChevronDown/>}
             </div>
@@ -32,7 +32,7 @@ function ComplaintBlock({title,content}){
         
         <CollapsibleContent className={cn("w-full")}>
         <Card className=" mx-4">
-            <CardTitle className="m-2 text-lg">
+            <CardTitle className="m-2 font-semibold text-base">
                 {title}
             </CardTitle>
             <CardContent>
