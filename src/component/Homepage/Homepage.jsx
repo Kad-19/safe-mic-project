@@ -4,7 +4,6 @@ import GetCons from "./Component/GetCons";
 import Hero from "./Component/Hero";
 import Ready from "./Component/Ready";
 import Service from "./Component/Service";
-import Footer from "./Component/Footer";
 import AdviceCarousel from "./Component/AdviceCarousel";
 import Chatbot from "../ChatBox/Chatbot";
 function Homepage() {
@@ -27,9 +26,6 @@ function Homepage() {
         <div>
           <GetCons />
         </div>
-      </div>
-      <div>
-        <Footer />
       </div>
     </>
   );
