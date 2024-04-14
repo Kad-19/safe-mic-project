@@ -43,10 +43,10 @@ function Complaint(){
     <h1 className="text-3xl">
         What do you want to report?
     </h1>
-    <div className="flex flex-wrap justify-around overflow-wrap"> 
-        <Circles title={"Assault"} detail={" this will be the text inside the circleand another text and another"}/>
-        <Circles title={"Assault"} detail={" this will be the text inside the circleand another text and another"}/>
-        <Circles title={"Assault"} detail={" this will be the text inside the circleand another text and another"}/>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"> 
+        <Circles title={"Grade"} detail={" If you feel like the grade you got doesn't reflect on work you have done. And there be  another motive behind it"}/>
+        <Circles title={"Services"} detail={"If you are dissatisfied with the service you are receiving and there is clear violation of policies or standards"}/>
+        <span className='md:hidden lg:flex'><Circles title={"Harrasment"} detail={" If you are being harassed by students or teachers"}/></span>
     </div>
     <div className="h-screem grid grid-cols-1 place-items-center">
         {
