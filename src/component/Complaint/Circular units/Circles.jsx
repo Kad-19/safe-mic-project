@@ -1,7 +1,7 @@
 import {motion} from 'framer-motion'
 function Circles({title, detail}){
     return <motion.div 
-    className="flex flex-wrap bg-gradient-to-r from-background to-zinc-300 
+    className="flex flex-wrap bg-gradient-to-r from-background to-muted-foreground 
     aspect-square sm:w-52  lg:w-72 rounded-full p-2 m-8 items-center 
     justify-center shadow-md " 
     whileInView={{
@@ -22,7 +22,9 @@ function Circles({title, detail}){
                 {title}
             </h1>
             <br />
+            <p className='text-light'>
             {detail}
+            </p>
         </span>
     
     </motion.div>

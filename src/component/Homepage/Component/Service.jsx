@@ -1,27 +1,32 @@
 import React from 'react'
-
+import Circles from '@/component/Complaint/Circular units/Circles'
 function Service() {
-  return (
-    <div>
-        <div className="self-stretch mt-44 w-full border border-solid bg-neutral-700 border-neutral-700 min-h-[1px] max-md:mt-10 max-md:max-w-full" />
-    <div className="mt-36 text-4xl font-medium text-center text-black max-md:mt-10">
-      Our services
+  const complaint='Effortlessly lodge your grievances online,With our user-friendly complaint filing web form design.'
+  const  appointment='Book your path to clarity and peace of mind, With our counselor appointment scheduler, solutions you\'ll find.'
+  const chat='Engage in insightful conversations anytime, anywhere, Whether with AI or counselor, support is always there.'
+  return <div className='flex gap-2'>
+    {/* <div className='aspect-square w-8 bg-foreground'>
+
     </div>
-    <div className="px-5 mt-16 w-full max-w-[1076px] max-md:mt-10 max-md:max-w-full">
-      <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-        <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
-          <div className="shrink-0 mx-auto rounded-full aspect-square bg-zinc-300 h-[300px] w-[300px] max-md:mt-5" />
-        </div>
-        <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-          <div className="shrink-0 mx-auto rounded-full aspect-square bg-zinc-300 h-[300px] w-[300px] max-md:mt-5" />
-        </div>
-        <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-          <div className="shrink-0 mx-auto rounded-full aspect-square bg-zinc-300 h-[300px] w-[300px] max-md:mt-5" />
-        </div>
-      </div>
+    <div className='aspect-square w-8 bg-secondary'>
+
     </div>
+    <div className='aspect-square w-8 bg-primary-foreground'>
+
     </div>
-  )
+    <div className='aspect-square w-8 bg-secondary-foreground'>
+
+    </div>
+    <div className='aspect-square w-8 bg-muted-foreground'>
+
+    </div>
+    <div className='aspect-square w-8 bg-accent-foreground'>
+
+    </div> */}
+  <Circles title={'Filing a Complaint'} detail={complaint}/>
+  <Circles title={'Schedule your appointment'} detail={appointment}/>
+  <Circles title={'Chat'} detail={chat}/>
+  </div>
 }
 
 export default Service
