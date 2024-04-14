@@ -2,7 +2,7 @@ import {motion} from 'framer-motion'
 function Circles({title, detail}){
     return <motion.div 
     className="flex flex-wrap bg-gradient-to-r from-background to-muted-foreground 
-    aspect-square sm:w-52  lg:w-72 rounded-full p-2 m-8 items-center 
+    aspect-square max-w-md rounded-full p-2 m-8 items-center 
     justify-center shadow-md " 
     whileInView={{
         scaleX:[0,0.65,0.8,1],

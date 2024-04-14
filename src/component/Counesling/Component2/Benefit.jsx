@@ -1,60 +1,52 @@
 import React from 'react'
-
+import { Card,CardContent,CardDescription,CardTitle } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 function Benefit() {
   return (
-    <div>
-        <div className="self-end mt-60 max-w-full rounded-2xl border border-solid border-neutral-400 w-[940px] max-md:pr-5 max-md:mt-10 max-md:mr-1.5">
-          <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-            <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
+          <div className='flex items-center'>
+              <Card className={cn('p-8 m-4 basis-1/3 w-fit h-fit hidden lg:inline')}>
               <img
                 loading="lazy"
                 srcSet="..."
-                className="grow w-full aspect-[0.74] max-md:mt-4 max-md:max-w-full"
+                className=""
               />
-            </div>
-            <div className="flex flex-col py-12 ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col  text-black max-md:mt-10">
-                <b>What are the benefits?</b>
-                <div className="p-4 max-md:mt-10">
-                <p className=' font-light'>Online counseling offers several benefits, including:
-                  </p>
-<ol type='1' className='list-decimal'>
-<li>
-<b>Accessibility:
-  </b> It enables individuals to access counseling services from anywhere with an internet connection, overcoming geographical barriers.
-</li>
+              </Card>
+            <Card className={cn('leading-8 p-8 m-4 lg:basis-2/3 w-full ')}>
+            <CardTitle>What are the benefits?</CardTitle>
+            <CardDescription className=' font-light'>Online counseling offers several benefits, including:</CardDescription>
+            <ol type='1' className='list-decimal'>
+            <li>
+            <b className='font-semibold '>Accessibility:
+              </b>Access counseling from anywhere, overcoming distance.
+            </li>
 
-<li>
-  <b>
-    Convenience:
-  </b>
-  Clients can schedule sessions at times that are convenient for them, eliminating the need for travel and reducing time constraints.
-</li>
-<li>
-  <b>
-    Anonymity and Privacy:
-  </b>
-  Some individuals may feel more comfortable discussing sensitive issues online, as it provides a level of anonymity and privacy that may be lacking in face-to-face counseling.
-</li>
-<li>
-<b>
-  Cost-Effectiveness:
-</b>
-  Online counseling may be more affordable than traditional in-person counseling, as it eliminates travel expenses and may offer lower session fees.
-</li>
-<li>
-  <b>
-    Flexibility:
-  </b>
-  Online counseling platforms often offer a variety of communication options, allowing clients to choose the format that best suits their preferences and needs.
-</li>
-</ol>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
+            <li>
+              <b className='font-semibold '>
+                Convenience:
+              </b>
+              Schedule sessions at your convenience, saving time and travel.
+            </li>
+            <li>
+              <b className='font-semibold '>
+                Anonymity and Privacy:
+              </b>
+              Discuss sensitive issues online, with added privacy.
+            </li>
+            <li>
+            <b className='font-semibold '>
+              Cost-Effectiveness:
+            </b>
+            Save on travel expenses, potentially lower fees.
+            </li>
+            <li>
+              <b className='font-semibold '>
+                Flexibility:
+              </b>
+              Choose communication formats to suit your needs.
+            </li>
+            </ol>
+            </Card>
+</div>
   )
 }
 

@@ -4,7 +4,7 @@ function Service() {
   const complaint='Effortlessly lodge your grievances online,With our user-friendly complaint filing web form design.'
   const  appointment='Book your path to clarity and peace of mind, With our counselor appointment scheduler, solutions you\'ll find.'
   const chat='Engage in insightful conversations anytime, anywhere, Whether with AI or counselor, support is always there.'
-  return <div className='flex gap-2'>
+  return <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
     {/* <div className='aspect-square w-8 bg-foreground'>
 
     </div>
@@ -25,7 +25,8 @@ function Service() {
     </div> */}
   <Circles title={'Filing a Complaint'} detail={complaint}/>
   <Circles title={'Schedule your appointment'} detail={appointment}/>
-  <Circles title={'Chat'} detail={chat}/>
+  <span className='md:hidden lg:flex'><Circles title={'Chat'} detail={chat}/>
+    </span>
   </div>
 }
 
