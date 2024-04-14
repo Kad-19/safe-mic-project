@@ -63,7 +63,7 @@ const Chatbot = () => {
   return (
     <Drawer direction='left'>
     <DrawerTrigger asChild>
-      <Button className={cn('bg-primary rounded-full fixed bottom-4 right-4')}>
+      <Button className={cn('bg-primary rounded-full fixed bottom-4 left-4')}>
         <FaRobot/>
       </Button>
       </DrawerTrigger>

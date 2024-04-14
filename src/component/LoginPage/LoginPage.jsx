@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-
+import { Input } from "@/components/ui/input";
 const LoginPage = ({ user, login, isAuthenticated, error }) => {
   const navigate = useNavigate();
   const [is_student, setIs_student] = useState(true);
@@ -77,13 +77,10 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
             <label htmlFor="" className="w-[110px] font-medium">
               Email
             </label>
-            <input
+            <Input
               type="email"
-              className="mt-1 block w-full  xl:w-[100%] px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-      "
-              placeholder="email"
+              className="mt-1 block w-full  xl:w-[100%] px-3 py-2 border b rounded-md text-sm shadow-sm"
+              placeholder="Email"
               name="email"
               value={email}
               onChange={(e) => onChange(e)}
@@ -96,11 +93,9 @@ const LoginPage = ({ user, login, isAuthenticated, error }) => {
               {" "}
               Password
             </label>
-            <input
+            <Input
               type="password"
-              className=" mt-1 block xl:w-[100%] w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+              className=" mt-1 block xl:w-[100%] w-full px-3 py-2 border rounded-md text-sm shadow-sm"
               placeholder="password"
               name="password"
               value={password}

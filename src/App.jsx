@@ -12,6 +12,8 @@ import Selector from "./component/ThemeSelector/Selector";
 import { createContext } from "react";
 import DrawerComp from "./component/Customization/DrawerComp";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Footer from "./component/Footer/Footer";
+import Loading from "./component/Animation/Loading/Loading";
 
 
 const queryClient = new QueryClient();
@@ -41,6 +43,7 @@ const App = () => {
     const root = window.document.documentElement
     if(theme.previous!=null)root.classList.remove(theme.previous)
     root.classList.add(theme.current)
+    
   },[theme])
 
   const changeTheme=(i)=>{
@@ -76,8 +79,10 @@ const App = () => {
           <ScrollToTop/>
           <themeContext.Provider value={{changeTheme,darkThemeSwitch,theme}}>
           <Navbar />
+      
           </themeContext.Provider>
           <AllRouting />
+          <Footer/>
           </QueryClientProvider>
       </BrowserRouter>
     </Provider>
