@@ -17,8 +17,6 @@ function Counseling() {
   <div><Science/></div>
 <div><Chordon/></div>
 </div>
-
-<div><Footer/></div>
 </>
   )
 }
