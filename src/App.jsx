@@ -30,7 +30,7 @@ export const themeContext=createContext(null)
 const App = () => {
   
   const [theme,setTheme]=useState({
-    current:'light',
+    current:'slate',
     previous:null,
     dark:false
   })

@@ -7,7 +7,7 @@ function Hero() {
       Welcome to safe mic we are <br />
       here for you
     </p>
-    <motion.div className="justify-center px-14 py-5 mt-11 text-2xl font-bold text-center text-secondary whitespace-nowrap bg-foreground rounded-[44px] max-md:px-5 max-md:mt-10"
+    <motion.div className="justify-center bg-primary px-14 py-5 mt-11 text-2xl font-bold text-center text-secondary whitespace-nowrap rounded-[44px] max-md:px-5 max-md:mt-10"
     initial={{
       x:-100,
       opacity:0.4
