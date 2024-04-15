@@ -1,4 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
+import logo from "/Images/safemic.png";
+
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
@@ -17,11 +19,10 @@ const Navbar = ({ user, logout, isAuthenticated }) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    if(user){
+    if (user) {
       fetchUserData();
     }
   }, [user]);
-
 
   const fetchUserData = async () => {
     if (localStorage.getItem("access")) {
@@ -34,10 +35,7 @@ const Navbar = ({ user, logout, isAuthenticated }) => {
       };
 
       try {
-        const res = await axios.get(
-          `${API_URL}/all/users/${user.id}`,
-          config
-        );
+        const res = await axios.get(`${API_URL}/all/users/${user.id}`, config);
         setUserData(res.data);
       } catch (err) {
         console.log(err);
@@ -49,156 +47,232 @@ const Navbar = ({ user, logout, isAuthenticated }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+
       setIsScrolledDown(scrollTop > lastScrollTop);
       setLastScrollTop(scrollTop);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollTop]);
   const guestLinks = () => (
     <div className="z-0">
-    <header className={` flex bg-background justify-end items-center w-full px-8 py-4 sticky top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
-      <div className="w-2/6">
+      <header
+        className={` flex bg-background justify-evenly items-center w-full px-8 py-4 fixed top-0 z-10 ${
+          isScrolledDown ? "-translate-y-full" : "translate-y-0"
+        } `}
+      >
+        <p className="flex items-center">
+          <img
+            className="aspect-square w-12 mx-2"
+            src={logo}
+            alt="safemic logo"
+          />{" "}
+          Safe Mic
+        </p>
+        <div className="w-2/3 flex justify-evenly">
+          <div>
+            <NavLink
+              to="/"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/counseling"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Counseling
+            </NavLink>
+            <NavLink
+              to="/complaint"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Complaint
+            </NavLink>
+          </div>
 
-        <NavLink to="/" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Home
-        </NavLink>
-        <NavLink to="/counseling" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Counseling
-        </NavLink>
-        <NavLink to="/complaint" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Complaint
-        </NavLink>
-      </div>
-        <div className="px-4">
-          <DrawerComp/>
-
-      
+          <div>
+            <NavLink
+              to="/login"
+              className="rounded-3xl border-2 px-5 p-2 font-bold hover:bg-primary hover:text-secondary duration-300 transition-all"
+            >
+              Login
+            </NavLink>
+          </div>
         </div>
-        <NavLink
-          to="/login"
-          className="rounded-3xl border-2 px-5 p-2 font-bold"
-          >
-          Login
-        </NavLink>
-        
-        
-      
-    </header>
+      </header>
     </div>
   );
   const authLinks = () => (
     <div className="z-0">
-    <header className={` flex bg-background items-center justify-end w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
-      <div className="w-2/3">
-
-    <NavLink to="/" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Home
-        </NavLink>
-        <NavLink to="/counseling" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Counseling
-        </NavLink>
-        <NavLink to="/oneToOneChat" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Chat
-        </NavLink>
-        <NavLink to="/complaint" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Complaint
-        </NavLink>
-        <NavLink to="/appointment" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Appointment
-        </NavLink>
-      </div> 
-        <div className="px-4 flex justify-end  hover:border-b-2 border-primary focus:border-b-2">
-
-    <DrawerComp/>
-      
+      <header
+        className={` flex bg-background items-center justify-evenly w-full px-8 py-4 fixed top-0 z-10 ${
+          isScrolledDown ? "-translate-y-full" : "translate-y-0"
+        } `}
+      >
+        <p className="flex items-center">
+          <img
+            className="aspect-square w-12 mx-2"
+            src={logo}
+            alt="safemic logo"
+          />{" "}
+          Safe Mic
+        </p>
+        <div className="w-2/3 flex justify-around">
+          <div>
+            <NavLink
+              to="/"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/counseling"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Counseling
+            </NavLink>
+            <NavLink
+              to="/oneToOneChat"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Chat
+            </NavLink>
+            <NavLink
+              to="/complaint"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Complaint
+            </NavLink>
+            <NavLink
+              to="/appointment"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Appointment
+            </NavLink>
+          </div>
+          <div className="px-4 flex justify-end  hover:border-b-2 border-primary focus:border-b-2">
+            <DrawerComp />
+          </div>
         </div>
-        
-    </header>
+      </header>
     </div>
   );
   const counselorLinks = () => (
     <div className="z-0">
-    <header className={` flex bg-background items-center justify-end w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
-      <div className="w-2/3">
+      <header
+        className={` flex bg-background items-center justify-evenly w-full px-8 py-4 fixed top-0 z-10 ${
+          isScrolledDown ? "-translate-y-full" : "translate-y-0"
+        } `}
+      >
+        <p className="flex items-center">
+          <img
+            className="aspect-square w-12 mx-2"
+            src={logo}
+            alt="safemic logo"
+          />{" "}
+          Safe Mic
+        </p>
+        <div className="w-2/3 flex justify-evenly">
+          <div>
+            <NavLink
+              to="/counselor/landing-page"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/counselor/all-appointments"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Appointment
+            </NavLink>
+            <NavLink
+              to="/oneToOneChat"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Chat
+            </NavLink>
+          </div>
 
-    <NavLink to="/counselor/landing-page" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Home
-        </NavLink>
-        <NavLink to="/counselor/all-appointments" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Appointment
-        </NavLink>
-        <NavLink to="/oneToOneChat" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Chat
-        </NavLink>
-      </div> 
-        <div className="px-4 flex justify-end  hover:border-b-2 border-primary focus:border-b-2">
-
-    <DrawerComp/>
-      
+          <div className="px-4 flex justify-end  hover:border-b-2 border-primary focus:border-b-2">
+            <DrawerComp />
+          </div>
         </div>
-        
-    </header>
+      </header>
     </div>
   );
   const adminLinks = () => (
     <div className="z-0">
-    <header className={` flex bg-background items-center justify-end w-full px-8 py-4 fixed top-0 z-10 ${isScrolledDown ? '-translate-y-full' : 'translate-y-0'} `}>
-      <div className="w-2/3">
+      <header
+        className={` flex bg-background items-center justify-evenly w-full px-8 py-4 fixed top-0 z-10 ${
+          isScrolledDown ? "-translate-y-full" : "translate-y-0"
+        } `}
+      >
+        <p className="flex items-center">
+          <img
+            className="aspect-square w-12 mx-2"
+            src={logo}
+            alt="safemic logo"
+          />{" "}
+          Safe Mic
+        </p>
+        <div className="w-2/3 flex justify-evenly">
+          <div>
+            <NavLink
+              to="/"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/complaints"
+              className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+              Complaints
+            </NavLink>
+          </div>
 
-    <NavLink to="/" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Home
-        </NavLink>
-        <NavLink to="/complaints" className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2">
-          Complaints
-        </NavLink>
-      </div> 
-        <div className="px-4 flex justify-end  hover:border-b-2 border-primary focus:border-b-2">
-
-    <DrawerComp/>
-      
+          <div className="px-4 flex justify-end  hover:border-b-2 border-primary focus:border-b-2">
+            <DrawerComp />
+          </div>
         </div>
-        
-    </header>
+      </header>
     </div>
   );
 
   const links = () => {
-    if(isAuthenticated){
-      if(userData){
-        if(userData.is_student){
+    if (isAuthenticated) {
+      if (userData) {
+        if (userData.is_student) {
           return authLinks();
-        }
-        else if(userData.is_staff){
+        } else if (userData.is_staff) {
           return adminLinks();
-        }
-        else{
+        } else {
           return counselorLinks();
         }
       }
-    }
-    else{
+    } else {
       return guestLinks();
     }
-  }
+  };
 
-  
   return (
     // <div className={`flex justify-between p-6 bg-gray-50 fixed w-full`}>
     //   <div>
     //     <div>Mic</div>
     //   </div>
     <>
-    {links()}
-    <main>
-      <Outlet/>
-    </main>
+      {links()}
+      <main>
+        <Outlet />
+      </main>
     </>
     // </div>
   );
@@ -206,7 +280,7 @@ const Navbar = ({ user, logout, isAuthenticated }) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user
+  user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);

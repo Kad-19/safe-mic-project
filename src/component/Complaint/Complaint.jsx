@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 import Circles from "./Circular units/Circles";
 import ComplaintBlock from "./Collapsible/ComplaintBlock";
-function Complaint(){
+import { connect } from "react-redux";
+function Complaint({isAuthenticated}){
     const complaints = [
             {
             title: "Poor Service at Cafeteria",
@@ -32,7 +33,7 @@ function Complaint(){
         Have a Concern?
     </h1>
         <button className=" max-w-max border-solid my-4 border-foreground border-2 rounded-3xl px-4 p-1 hover:font-semibold hover:px-8 transition-all duration-300">
-            <NavLink to="/complaint-form">
+            <NavLink to={isAuthenticated? `/complaint-form`: '/login'}>
             File Your Complaint here
 
             </NavLink>
@@ -55,4 +56,10 @@ function Complaint(){
     </div>
 
     </div>
-}export default Complaint;
+}
+
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+  });
+
+export default connect(mapStateToProps)(Complaint);

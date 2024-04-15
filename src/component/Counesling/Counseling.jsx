@@ -7,18 +7,23 @@ import Header from "./Component2/Header";
 import Footer from './Component2/Footer';
 import { BrowserRouter as Route } from 'react-router-dom'
 import Chatbot from '../ChatBox/Chatbot';
-function Counseling() {
+import { connect } from 'react-redux';
+function Counseling({isAuthenticated}) {
   return (<>
   
 <div className="flex flex-col items-center mt-36 md:w-8/12 mx-auto max-md:px-5 max-md:mt-10 max-md:max-w-full">
-  <Chatbot/>
-  <div><Direct/></div>
+  {isAuthenticated? <Chatbot/>: ""}
+  <div><Direct isAuthenticated={isAuthenticated}/></div>
   <div><Benefit/></div>
   <div><Science/></div>
-<div><Chordon/></div>
+<div><Chordon isAuthenticated={isAuthenticated}/></div>
 </div>
 </>
   )
 }
 
-export default Counseling
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Counseling);

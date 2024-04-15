@@ -22,9 +22,9 @@ function Circles({title, detail}){
                 {title}
             </h1>
             <br />
-            <motion.p className=''
+            <motion.p className='text-xs'
             initial={{
-                y:60,
+                y:20,
                 opacity:0
             }}
             whileInView={{

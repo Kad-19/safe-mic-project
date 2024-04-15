@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
-function Direct() {
+function Direct({isAuthenticated}) {
   return (
     <div className="mt-16 mx-8">
           <motion.div className="self-stretch text-8xl font-bold max-sm:mr-1.5 max-sm:max-w-full max-sm:text-4xl"
@@ -23,7 +23,7 @@ function Direct() {
       <span id='section1' className='flex flex-col h-[60vh]  items-center'>
           Get Online Counseling Service
         <Button className="self-start my-12 rounded-3xl p-6 text-lg font-semibold">
-        <NavLink to="/chooseCounselor">
+        <NavLink to={isAuthenticated?"/chooseCounselor":"\login"}>
           Chat with a counselor
         </NavLink>
         </Button>
@@ -55,7 +55,7 @@ function Direct() {
 
           </div>
         <Button className="self-start my-8 p-6 rounded-3xl ">
-          <NavLink to='/appointment'>
+          <NavLink to={isAuthenticated?'/appointment':'/login'}>
             
           Book Appointment
           </NavLink>

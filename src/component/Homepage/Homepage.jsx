@@ -6,12 +6,14 @@ import Ready from "./Component/Ready";
 import Service from "./Component/Service";
 import AdviceCarousel from "./Component/AdviceCarousel";
 import Chatbot from "../ChatBox/Chatbot";
-function Homepage() {
+import { connect } from "react-redux";
+function Homepage({isAuthenticated}) {
   return (<>
-      <div className="flex flex-col items-center  md:w-8/12 mx-auto max-md:px-5 max-md:mt-10 max-md:max-w-full">
+      <div className="flex flex-col items-center  md:w-8/12 mx-auto max-md:px-5 max-md:mt-10 max-md:max-w-full pt-36">
         <div>
           <Hero />
-          <Chatbot/>
+          {isAuthenticated? <Chatbot/>: ""}
+          
         </div>
         <div>
           <AdviceCarousel/>
@@ -24,11 +26,15 @@ function Homepage() {
           <Ready />
         </div>
         <div>
-          <GetCons />
+          <GetCons isAuthenticated={isAuthenticated} />
         </div>
       </div>
     </>
   );
 }
 
-export default Homepage;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Homepage);
