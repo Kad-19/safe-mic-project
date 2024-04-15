@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 function Chordon({isAuthenticated}) {
   return (
-    <div><div className="mt-36 text-2xl font-bold text-center max-md:mt-10 max-md:max-w-full">
+    <div><div className="mt-12 text-2xl font-bold text-center max-md:mt-10 max-md:max-w-full">
     “Nothing ever goes away until it has taught us what we need to know.”
   </div>
   <div className="shrink-0 mt-8 w-px border border-solid  h-[66px] mx-auto"></div>

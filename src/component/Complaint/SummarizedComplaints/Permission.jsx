@@ -13,10 +13,10 @@ export const Permission=(props)=>{
       console.log(data);
     }
     return(
-        <>
+        <div className="h-[100vh]">
         {
         data?.data.is_staff?<><Fetcher/><PopUp/></>:"you must be an admin to access this"
         }
-        </>
+        </div>
     ) 
 }

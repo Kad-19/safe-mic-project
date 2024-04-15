@@ -112,7 +112,7 @@ const Navbar = ({ user, logout, isAuthenticated }) => {
   const authLinks = () => (
     <div className="z-0">
       <header
-        className={` flex bg-background items-center justify-evenly w-full px-8 py-4 fixed top-0 z-10 ${
+        className={` flex bg-background items-center justify-evenly w-full px-8 py-1 fixed top-0 z-10 ${
           isScrolledDown ? "-translate-y-full" : "translate-y-0"
         } `}
       >
@@ -167,7 +167,7 @@ const Navbar = ({ user, logout, isAuthenticated }) => {
   const counselorLinks = () => (
     <div className="z-0">
       <header
-        className={` flex bg-background items-center justify-evenly w-full px-8 py-4 fixed top-0 z-10 ${
+        className={` flex bg-background items-center justify-evenly w-full px-8 py-1 fixed top-0 z-10 ${
           isScrolledDown ? "-translate-y-full" : "translate-y-0"
         } `}
       >
@@ -211,7 +211,7 @@ const Navbar = ({ user, logout, isAuthenticated }) => {
   const adminLinks = () => (
     <div className="z-0">
       <header
-        className={` flex bg-background items-center justify-evenly w-full px-8 py-4 fixed top-0 z-10 ${
+        className={` flex bg-background items-center justify-evenly w-full px-8 py-1 fixed top-0 z-10 ${
           isScrolledDown ? "-translate-y-full" : "translate-y-0"
         } `}
       >

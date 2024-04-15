@@ -242,7 +242,7 @@ const ChatArea = ({ user }) => {
     if (chatSocket) {
       chatSocket.close();
     }
-    setChatSocket(new WebSocket(`wss://${WEBSOCKET_URL}/ws/chat/` + room + "/"));
+    setChatSocket(new WebSocket(`ws://${WEBSOCKET_URL}/ws/chat/` + room + "/"));
   }
   useEffect(() => {
     if (!chatSocket) {

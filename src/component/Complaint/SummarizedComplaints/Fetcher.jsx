@@ -21,7 +21,7 @@ export const Fetcher = () => {
 
   return (
     <>
-    <div style={{flexWrap:'wrap'}} className='flex justify-center p-4 mt-12'>
+    <div style={{flexWrap:'wrap'}} className='flex justify-center p-4 mt-12 '>
       {data?.data.map(val => <CompaintTag key={val.id} tag={tags[val.tag]} body={val.body} />)}
     </div>
     </>

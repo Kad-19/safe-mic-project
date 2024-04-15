@@ -7,7 +7,7 @@ export const Complaints=()=>{
     const { isLoading, data } = useFetch('auth/users/me/', true);
 
     if (isLoading) {
-      return <div className="flex w-full justify-center"><Loading/>
+      return <div className="flex w-full justify-center !h-[100vh]"><Loading/>
             </div>
     }
     return <Permission id={data?.data.id} />
