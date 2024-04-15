@@ -30,7 +30,7 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
 
   return (
     <div className="flex justify-center items-center rounded md my-20 w-full">
-      <div className="flex bg-slate-300 border-slate-500 rounded-lg pt-20 pl-5 pr-5 pb-32 shadow-lg bg-opacity-50 text-sm/[40px] xl:w-[40%] xl:min-w-[600px] w-[100%] sm:w-[80%]">
+      <div className="flex bg-accent border-slate-500 rounded-lg pt-20 pl-5 pr-5 pb-32 shadow-lg bg-opacity-50 text-sm/[40px] xl:w-[40%] xl:min-w-[600px] w-[100%] sm:w-[80%]">
         <form
           onSubmit={(e) => onSubmit(e)}
           className="mx-auto sm:w-[60%] w-[80%]"
@@ -72,7 +72,7 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
           </div>
           <div className="flex gap-4 text-[18px] align-middle py-3 flex-col">
 
-          <button className="w-full rounded-lg bg-purple-600 text-white hover:bg-purple-800 py-1 transition-colors duration-200 font-medium" type="submit">
+          <button className="w-full rounded-lg bg-primary text-secondary py-1 transition-colors duration-200 font-medium" type="submit">
             Reset Password
           </button>
           </div>

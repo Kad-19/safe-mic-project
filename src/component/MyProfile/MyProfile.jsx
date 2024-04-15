@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { FiLogOut } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const MyProfile = ({ user, delete_user, logout }) => {
   const navigate = useNavigate();
@@ -39,7 +39,10 @@ const MyProfile = ({ user, delete_user, logout }) => {
               type="submit"
               className="h-12 w-60 object-cover rounded-full py- transition-colors duration-200"
             >
+              <NavLink to="/reset-password">
               Reset Password
+
+              </NavLink>
             </Button>
             <Button onClick={log_out} className="h-12 w-60 object-cover rounded-full py- transition-colors duration-200">
               <FiLogOut className="mx-2" /> Logout
