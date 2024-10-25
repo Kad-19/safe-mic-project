@@ -14,7 +14,7 @@ import DrawerComp from "./component/Customization/DrawerComp";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Footer from "./component/Footer/Footer";
 import Loading from "./component/Animation/Loading/Loading";
-
+import Chatbot from "./component/ChatBox/Chatbot";
 
 const queryClient = new QueryClient();
 
@@ -82,6 +82,7 @@ const App = () => {
       
           </themeContext.Provider>
           <AllRouting />
+          <Chatbot/>
           <Footer/>
           </QueryClientProvider>
       </BrowserRouter>

@@ -95,6 +95,11 @@ const Navbar = ({ user, logout, isAuthenticated }) => {
             >
               Complaint
             </NavLink>
+            <NavLink
+            className="font-semibold px-4 hover:border-b-2 border-primary focus:border-b-2"
+            >
+            <Selector/>
+            </NavLink>
           </div>
 
           <div>

@@ -35,7 +35,7 @@ const AllRouting = () => {
       <Route path="/counselor-info" element={<CounseInfo/>}/>
       <Route path="/complaint-form" element={<ComplaintForm/>}/>
       <Route path="/chooseCounselor" element={<ChooseCounselor/>}/>
-      <Route path="/chatbot" element={<Chatbot/>}/>
+    
       <Route
         path="/password/reset/confirm/:uid/:token"
         element={<ResetPasswordConfirm />}
